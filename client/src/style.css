@@ -229,6 +229,7 @@ a {
   background: linear-gradient(-50deg, #4169e1, blue, #4169e1);
   height: 16.5rem;
   width: 100%;
+  height: 100%;
 }
 
 .dialog_alert {
@@ -1119,4 +1120,70 @@ footer .business_nfo .nfo {
 
 .delbtn {
   margin-left: 20px;
+}
+
+/* breeeders */
+
+.testimonial {
+  font-size: 1.2rem;
+}
+
+.testimonial__image-container {
+  width: 100%;
+  max-width: 20rem;
+  box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial__image {
+  width: 100%;
+  vertical-align: top;
+}
+
+.testimonial__info {
+  text-align: right;
+  padding: 0.9rem;
+}
+
+.testimonial__name {
+  margin: 0.2rem;
+  color: #ff5454;
+  font-size: 2rem;
+}
+
+.testimonial__subtitle {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.testimonial__subtitle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.testimonial__subtitle a:hover,
+.testimonial__subtitle a:active {
+  color: #7a7a7a;
+}
+
+.testimonial__text {
+  margin: 0.2rem;
+}
+
+@media (min-width: 40rem) {
+  .testimonial {
+    display: flex;
+    margin: 3rem auto;
+    max-width: 90rem;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .testimonial__image-container {
+    width: 66%;
+  }
+
+  .testimonial__info {
+    width: 50%;
+  }
 }

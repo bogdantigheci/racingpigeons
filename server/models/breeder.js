@@ -10,6 +10,15 @@ const breederSchema = mongoose.Schema({
     required: true,
     type: String,
     maxlength: 1000
+  },
+  club: {
+    required: true,
+    type: String,
+    maxlength: 1000
+  },
+  images: {
+    type: Array,
+    default: []
   }
 });
 

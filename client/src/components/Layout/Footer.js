@@ -54,9 +54,9 @@ const Footer = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="copyr">
-          Copyright &copy; {new Date().getFullYear()} Racing Pigeons
-        </div>
+      </div>
+      <div className="copyr">
+        Copyright &copy; {new Date().getFullYear()} Racing Pigeons
       </div>
     </footer>
   ) : null;

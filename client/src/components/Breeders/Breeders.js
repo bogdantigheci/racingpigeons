@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getBreeders } from '../../actions/product';
+import Breeder from './Breeder';
+import _ from 'lodash';
 
 class Breeders extends Component {
   componentDidMount() {
@@ -8,13 +10,9 @@ class Breeders extends Component {
   }
 
   render() {
-    const products = this.props.products;
-
     return (
       <div>
-        {products.breeders.map((breeder, i) => (
-          <div key={breeder._id}>{breeder.name}</div>
-        ))}
+        <Breeder breeders={_.get(this.props.products, 'breeders', [])} />
       </div>
     );
   }

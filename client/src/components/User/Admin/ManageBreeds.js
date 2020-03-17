@@ -10,6 +10,7 @@ import {
 
 import { connect } from 'react-redux';
 import { getBreeds, addBreed } from '../../../actions/product';
+import FileUpload from '../../utils/FileUpload';
 
 class ManageBreeds extends Component {
   state = {
@@ -47,13 +48,23 @@ class ManageBreeds extends Component {
         touched: false,
         validationMessage: '',
         showlabel: true
+      },
+      images: {
+        value: [],
+        validation: {
+          required: false
+        },
+        valid: true,
+        touched: false,
+        validationMessage: '',
+        showlabel: false
       }
     }
   };
 
   showCategoryItems = () =>
-    this.props.products.breeds
-      ? this.props.products.breeds.map((item, i) => (
+    this.props.products && this.props.products.breeds
+      ? this.props.products.breeds.map(item => (
           <div className="category_item" key={item._id}>
             {item.name}
           </div>
@@ -92,13 +103,24 @@ class ManageBreeds extends Component {
           this.setState({ formError: true });
         }
       });
-      //console.log(dataToSubmit);
-      console.log('adsdasd', this.state.formdata);
     } else {
       this.setState({
         formError: true
       });
     }
+  };
+
+  imagesHandler = images => {
+    const newFormData = {
+      ...this.state.formdata
+    };
+
+    newFormData['images'].value = images;
+    newFormData['images'].valid = true;
+
+    this.setState({
+      formdata: newFormData
+    });
   };
 
   componentDidMount() {
@@ -115,6 +137,10 @@ class ManageBreeds extends Component {
           </div>
           <div className="right">
             <form onSubmit={event => this.submitForm(event)}>
+              <FileUpload
+                imagesHandler={images => this.imagesHandler(images)}
+                reset={this.state.formSuccess}
+              />
               <FormField
                 id={'name'}
                 formdata={this.state.formdata.name}

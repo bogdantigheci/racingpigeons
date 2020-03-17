@@ -11,6 +11,10 @@ const breedSchema = mongoose.Schema({
     required: true,
     type: String,
     maxlength: 10000
+  },
+  images: {
+    type: Array,
+    default: []
   }
 });
 

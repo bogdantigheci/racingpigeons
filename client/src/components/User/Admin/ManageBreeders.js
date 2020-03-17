@@ -10,6 +10,7 @@ import {
 
 import { connect } from 'react-redux';
 import { getBreeders, addBreeder } from '../../../actions/product';
+import FileUpload from '../../utils/FileUpload';
 
 class ManageBreeders extends Component {
   state = {
@@ -22,7 +23,7 @@ class ManageBreeders extends Component {
         config: {
           name: 'name_input',
           type: 'text',
-          placeholder: 'Enter the wood'
+          placeholder: 'Enter the breeder'
         },
         validation: {
           required: true
@@ -31,14 +32,29 @@ class ManageBreeders extends Component {
         touched: false,
         validationMessage: ''
       },
-      description: {
+      club: {
+        element: 'input',
+        value: '',
+        config: {
+          name: 'club_input',
+          type: 'text',
+          placeholder: 'Enter the club'
+        },
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false,
+        validationMessage: ''
+      },
+      bio: {
         element: 'textarea',
         value: '',
         config: {
-          label: 'Product description',
-          name: 'description_input',
+          label: 'Product bio',
+          name: 'bio_input',
           type: 'text',
-          placeholder: 'Enter your description'
+          placeholder: 'Enter your bio'
         },
         validation: {
           required: true
@@ -47,15 +63,25 @@ class ManageBreeders extends Component {
         touched: false,
         validationMessage: '',
         showlabel: true
+      },
+      images: {
+        value: [],
+        validation: {
+          required: false
+        },
+        valid: true,
+        touched: false,
+        validationMessage: '',
+        showlabel: false
       }
     }
   };
 
   showCategoryItems = () =>
-    this.props.products.breeders
+    this.props.products && this.props.products.breeders
       ? this.props.products.breeders.map((item, i) => (
-          <div className="category_item" key={item._id}>
-            {item.name}
+          <div className="category_item" key={i}>
+            {item && item.name}
           </div>
         ))
       : null;
@@ -85,24 +111,34 @@ class ManageBreeders extends Component {
     let existingBreeders = this.props.products.breeders;
 
     if (formIsValid) {
-      this.props
-        .dispatch(addBreeder(dataToSubmit, existingBreeders))
-        .then(response => {
-          if (response.payload.success) {
-            this.resetFieldsHandler();
-          } else {
-            this.setState({ formError: true });
-          }
-        });
+      this.props.addBreeder(dataToSubmit, existingBreeders).then(response => {
+        if (response.payload.success) {
+          this.resetFieldsHandler();
+        } else {
+          this.setState({ formError: true });
+        }
+      });
     } else {
       this.setState({
         formError: true
       });
     }
   };
+  imagesHandler = images => {
+    const newFormData = {
+      ...this.state.formdata
+    };
+
+    newFormData['images'].value = images;
+    newFormData['images'].valid = true;
+
+    this.setState({
+      formdata: newFormData
+    });
+  };
 
   componentDidMount() {
-    this.props.dispatch(getBreeders());
+    this.props.getBreeders();
   }
 
   render() {
@@ -115,14 +151,23 @@ class ManageBreeders extends Component {
           </div>
           <div className="right">
             <form onSubmit={event => this.submitForm(event)}>
+              <FileUpload
+                imagesHandler={images => this.imagesHandler(images)}
+                reset={this.state.formSuccess}
+              />
               <FormField
                 id={'name'}
                 formdata={this.state.formdata.name}
                 change={element => this.updateForm(element)}
               />
               <FormField
-                id={'description'}
-                formdata={this.state.formdata.description}
+                id={'club'}
+                formdata={this.state.formdata.club}
+                change={element => this.updateForm(element)}
+              />
+              <FormField
+                id={'bio'}
+                formdata={this.state.formdata.bio}
                 change={element => this.updateForm(element)}
               />
 
@@ -145,5 +190,12 @@ const mapStateToProps = state => {
     products: state.product
   };
 };
+const mapDispatchToProps = dispatch => {
+  return {
+    getBreeders: () => dispatch(getBreeders()),
+    addBreeder: (dataToSubmit, existingBreeds) =>
+      dispatch(addBreeder(dataToSubmit, existingBreeds))
+  };
+};
 
-export default connect(mapStateToProps)(ManageBreeders);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageBreeders);

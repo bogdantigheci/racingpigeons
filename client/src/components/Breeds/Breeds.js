@@ -15,7 +15,12 @@ class Breeds extends Component {
         {products &&
           products.breeds &&
           products.breeds.map((breed, i) => (
-            <div key={breed._id}>{breed.name}</div>
+            <div key={breed._id}>
+              <div>{breed.name}</div>
+              <div>
+                <img src="/images/image_not_available.png" />
+              </div>
+            </div>
           ))}
       </div>
     );
