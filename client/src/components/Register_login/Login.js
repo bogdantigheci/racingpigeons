@@ -104,7 +104,7 @@ class Login extends Component {
           </button>
         </form>
         <button
-          style={{ marginLeft: '10px' }}
+          style={{ marginLeft: '5px' }}
           className="link_default"
           onClick={() => this.props.history.push('/reset_user')}
         >

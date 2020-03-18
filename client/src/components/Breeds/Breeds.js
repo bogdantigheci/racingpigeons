@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getBreeds } from '../../actions/product';
+import _ from 'lodash';
 
 class Breeds extends Component {
   componentDidMount() {
@@ -18,7 +19,14 @@ class Breeds extends Component {
             <div key={breed._id}>
               <div>{breed.name}</div>
               <div>
-                <img src="/images/image_not_available.png" />
+                <img
+                  src={_.get(
+                    breed,
+                    'images[0].url',
+                    `/images/image_not_available.png`
+                  )}
+                  alt={breed.name}
+                />
               </div>
             </div>
           ))}

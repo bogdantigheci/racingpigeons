@@ -8,7 +8,9 @@ const PageNotFound = () => {
     <div className="container">
       <div className="not_found_container">
         <FontAwesomeIcon icon={faExclamationCircle} />
-        <div>Oops !! page not found</div>
+        <div>
+          <span>Oops !!</span> page not found
+        </div>
       </div>
     </div>
   );

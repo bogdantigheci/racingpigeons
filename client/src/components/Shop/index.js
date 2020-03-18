@@ -96,7 +96,7 @@ class Shop extends Component {
     return (
       <div>
         <ShopHeader title="Browse Products" />
-        <div className="container">
+        <div className="container-fluid">
           <div className="shop_wrapper">
             <div className="left">
               <CollapseCheckbox

@@ -51,10 +51,10 @@ class ManageBreeders extends Component {
         element: 'textarea',
         value: '',
         config: {
-          label: 'Product bio',
+          label: 'Breeder bio',
           name: 'bio_input',
           type: 'text',
-          placeholder: 'Enter your bio'
+          placeholder: 'Enter breeder bio'
         },
         validation: {
           required: true
