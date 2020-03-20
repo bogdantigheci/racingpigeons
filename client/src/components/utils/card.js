@@ -3,6 +3,7 @@ import MyButton from './button';
 import { connect } from 'react-redux';
 import { addToCart } from '../../actions/user';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
   renderCardImage(images) {
@@ -25,18 +26,25 @@ class Card extends Component {
   render() {
     const props = this.props;
     return (
-      <div className={`card_item_wrapper ${props.grid}`}>
-        <div
+      <div className={`card_item_wrapper  ${props.grid}`}>
+        {/* <div
           className="image"
           style={{
-            background: `url(${this.renderCardImage(props.images)}) no-repeat`
+            background: `url(${this.renderCardImage(props.images)}) no-repeat `
           }}
-        ></div>
+        ></div> */}
+        <Link to={`/product_detail/${props._id}`}>
+          <img
+            className="image"
+            src={`${this.renderCardImage(props.images)}`}
+            alt="pigeon"
+          />
+        </Link>
         <div className="action_container">
           <div className="tags">
-            <div className="brand">{props.breed.name}</div>
-            <div className="name">{props.name}</div>
-            <div className="name">${props.price}</div>
+            <div className="breed">{props.breed.name}</div>
+            <div className="name">Ring ID: {props.ringId}</div>
+            <div className="price">${props.price}</div>
           </div>
 
           {props.grid ? (
@@ -45,7 +53,7 @@ class Card extends Component {
             </div>
           ) : null}
           <div className="actions">
-            <div className="button_wrapp">
+            <span className="button_wrapp">
               <MyButton
                 type="default"
                 altClass="card_link"
@@ -55,8 +63,6 @@ class Card extends Component {
                   margin: '10px 0 0 0'
                 }}
               />
-            </div>
-            <div className="button_wrapp">
               <MyButton
                 type="bag_link"
                 runAction={() => {
@@ -65,7 +71,7 @@ class Card extends Component {
                     : console.log('you need to log in');
                 }}
               />
-            </div>
+            </span>
           </div>
         </div>
       </div>

@@ -83,7 +83,7 @@ class PostItem extends Component {
                       this.props.post._id
                     )}
                     type="button"
-                    className="btn btn-danger mr-1"
+                    className="btn btn-danger mr-1 mt-0"
                   >
                     <i className="fas fa-times" />
                   </button>

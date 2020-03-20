@@ -12,7 +12,7 @@ const Footer = ({ data }) => {
         <div className="logo">Racing Pigeons</div>
         <div className="wrapper">
           <div className="left">
-            <h2>Contact information</h2>
+            <h3>Contact information</h3>
             <div className="business_nfo">
               <div className="tag">
                 <FontAwesomeIcon icon={faCompass} className="icon" />
@@ -45,7 +45,7 @@ const Footer = ({ data }) => {
             </div>
           </div>
           <div className="left">
-            <h2>Be the first to know</h2>
+            <h3>Be the first to know</h3>
             <div>
               <div>
                 Get all the latest information on events, sales and offers.You

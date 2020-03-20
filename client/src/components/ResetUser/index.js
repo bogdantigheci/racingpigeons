@@ -58,8 +58,8 @@ class ResetUser extends Component {
   render() {
     return (
       <div className="container">
-        <h1>Reset password</h1>
-        <form onSubmit={event => this.submitForm(event)}>
+        <h1 className="reset_pass_h">Reset password</h1>
+        <form className="reset_pass" onSubmit={event => this.submitForm(event)}>
           <FormField
             id={'email'}
             formdata={this.state.formdata.email}
@@ -74,7 +74,7 @@ class ResetUser extends Component {
             <div className="error_label">Please check your data</div>
           ) : null}
           <button onClick={event => this.submitForm(event)}>
-            Send email to reset password
+            Send request
           </button>
         </form>
       </div>

@@ -662,7 +662,7 @@ app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
 
       post
         .save()
-        .then(post => res.json({ success: true }))
+        .then(post => res.json(post))
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));

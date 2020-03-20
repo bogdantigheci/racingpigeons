@@ -44,7 +44,7 @@ class PostForm extends Component {
                   onChange={this.onChange}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
+              <button type="submit" className="btn btn-primary">
                 Submit
               </button>
             </form>

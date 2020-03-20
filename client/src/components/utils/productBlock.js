@@ -43,7 +43,7 @@ const ProductBlock = ({ products, removeItem }) => {
                 className="cart_remove_btn"
                 onClick={() => removeItem(product._id)}
               >
-                Remove
+                X
               </div>
             </div>
           </div>

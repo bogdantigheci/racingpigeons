@@ -147,7 +147,7 @@ class ManageBreeders extends Component {
         <h1>Breeders</h1>
         <div className="admin_two_column">
           <div className="left">
-            <div className="brands_container">{this.showCategoryItems()}</div>
+            <div className="breeds_container">{this.showCategoryItems()}</div>
           </div>
           <div className="right">
             <form onSubmit={event => this.submitForm(event)}>

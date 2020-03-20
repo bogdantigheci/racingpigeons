@@ -99,45 +99,49 @@ class Shop extends Component {
         <div className="container-fluid">
           <div className="shop_wrapper">
             <div className="left">
-              <CollapseCheckbox
-                initState={true}
-                title="Breeders"
-                list={products.breeders}
-                handleFilters={filters =>
-                  this.handleFilters(filters, 'breeder')
-                }
-              />
-              <CollapseCheckbox
-                initState={true}
-                title="Breeds"
-                list={products.breeds}
-                handleFilters={filters => this.handleFilters(filters, 'breed')}
-              />
-              <CollapseRadio
-                initState={true}
-                title="Price"
-                list={price}
-                handleFilters={filters => this.handleFilters(filters, 'price')}
-              />
-            </div>
-            <div className="right">
               <div className="shop_options">
                 <div className="shop_grids clear">
-                  <div
+                  <span
                     className={`grid_btn ${this.state.grid ? '' : 'active'}`}
                     onClick={() => this.handleGrid()}
                   >
                     <FontAwesomeIcon icon={faTh} />
-                  </div>
-                  <div
+                  </span>
+                  <span
                     className={`grid_btn ${!this.state.grid ? '' : 'active'}`}
                     onClick={() => this.handleGrid()}
                   >
                     <FontAwesomeIcon icon={faBars} />
-                  </div>
+                  </span>
+                </div>
+                <div className="large_left">
+                  <CollapseCheckbox
+                    initState={false}
+                    title="Breeders"
+                    list={products.breeders}
+                    handleFilters={filters =>
+                      this.handleFilters(filters, 'breeder')
+                    }
+                  />
+                  <CollapseCheckbox
+                    initState={false}
+                    title="Breeds"
+                    list={products.breeds}
+                    handleFilters={filters =>
+                      this.handleFilters(filters, 'breed')
+                    }
+                  />
+                  <CollapseRadio
+                    initState={false}
+                    title="Price"
+                    list={price}
+                    handleFilters={filters =>
+                      this.handleFilters(filters, 'price')
+                    }
+                  />
                 </div>
               </div>
-              <div style={{ clear: 'both' }}>
+              <div className="large_right d-flex">
                 <LoadMoreCards
                   grid={this.state.grid}
                   limit={this.state.limit}

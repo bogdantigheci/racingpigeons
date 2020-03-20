@@ -73,7 +73,7 @@ const ProductInfo = props => {
 
   const detail = props.detail;
 
-  return (
+  return (  
     <div>
       <h1>
         {detail.breed.name} {detail.name}

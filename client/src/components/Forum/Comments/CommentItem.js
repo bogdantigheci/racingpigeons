@@ -72,7 +72,7 @@ class CommentItem extends Component {
                     this.props.comment._id
                   )}
                   type="button"
-                  className="btn btn-danger mr-1"
+                  className="btn btn-danger mr-1 mt-0"
                 >
                   <i className="fas fa-times" />
                 </button>

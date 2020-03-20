@@ -46,7 +46,7 @@ class ProductDetail extends Component {
           {this.props.products.prodDetail ? (
             <div className="product_detail_wrapper">
               <div className="left">
-                <div style={{ width: '500px' }}>
+                <div>
                   <ProductImages detail={this.props.products.prodDetail} />
                 </div>
               </div>

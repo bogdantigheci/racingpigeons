@@ -74,6 +74,12 @@ class ProdImg extends Component {
             }}
             onClick={() => this.handleLightBoxOpen(0)}
           ></div>
+          {/* <img
+            className="image"
+            src={`${this.renderCardImage(this.props.images)}`}
+            alt="pigeon"
+            onClick={() => this.handleLightBoxOpen(0)}
+          /> */}
         </div>
         <div className="main_thumbs">{this.showThumbs(detail)}</div>
         {this.state.lightbox ? (
