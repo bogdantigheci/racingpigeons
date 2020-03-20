@@ -8,7 +8,7 @@ const Dashboard = ({ user }) => {
     <UserLayout>
       <div>
         <div className="user_nfo_panel">
-          <h1>User information</h1>
+          <h1 style={{ textAlign: 'center' }}>User information</h1>
           <div>
             <span>{user.userData.name}</span>
             <span>{user.userData.lastname}</span>
@@ -22,7 +22,7 @@ const Dashboard = ({ user }) => {
         </div>
         {user.userData.history ? (
           <div className="user_nfo_panel">
-            <h1>Purchase history</h1>
+            <h1 style={{ textAlign: 'center' }}>Purchase history</h1>
             <div className="user_product_block_wrapper">
               <PurchaseHistory products={user.userData.history} />
             </div>
