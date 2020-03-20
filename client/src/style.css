@@ -570,10 +570,10 @@ select {
 
 .action_button {
   text-transform: uppercase;
-  padding: 10px;
+  padding: 0.5rem;
   display: table;
   background: #e1ddc3;
-  margin-top: 10px;
+  margin-top: 0.7rem;
 }
 
 /* register-login */
@@ -773,7 +773,7 @@ select {
 .card_item_wrapper .tags .name,
 .card_item_wrapper .tags .price {
   text-align: center;
-  margin: 5px;
+  margin: 0.2rem;
 }
 
 .card_item_wrapper .tags .breed {
@@ -783,13 +783,12 @@ select {
 }
 
 .card_item_wrapper .tags .name {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 0.8rem;
 }
 
 .card_item_wrapper .tags .price {
-  font-weight: 300;
-  font-size: 1.2rem;
+  font-weight: 600;
+  font-size: 1rem;
   font-weight: 800;
 }
 
@@ -829,12 +828,12 @@ select {
 .card_item_wrapper.grid_bars .description {
   clear: both;
   text-align: center;
-  padding: 0px 25px;
+  padding: 0px 1rem;
 }
 
 .card_item_wrapper.grid_bars .tags {
   border-bottom: 0px;
-  padding: 5px 20px;
+  padding: 0.4rem 1rem;
 }
 
 .card_item_wrapper.grid_bars .tags .breed {
@@ -855,7 +854,7 @@ select {
 }
 
 .grid_btn {
-  padding: 10px 10px;
+  padding: 0.6rem 0.6rem;
   font-size: 1.25rem;
   color: #ccc;
 }
@@ -1154,6 +1153,25 @@ select {
     font-size: 2rem;
   }
 
+  .card_link,
+  .bag_link,
+  .add_to_cart_link {
+    width: 100%;
+    box-shadow: 2px 2px 2px #ccc;
+    border-radius: 2px;
+    border: 2px solid #4169e1;
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #ffff;
+    background: #4169e1;
+    transition: all 200ms ease-in;
+    cursor: pointer;
+  }
+
   .clear:after {
     content: '';
     display: block;
@@ -1244,7 +1262,7 @@ select {
   .card_item_wrapper .tags .name,
   .card_item_wrapper .tags .price {
     text-align: center;
-    margin: 5px;
+    margin: 0.2rem;
   }
 
   .card_item_wrapper .tags .breed {
@@ -1254,13 +1272,12 @@ select {
   }
 
   .card_item_wrapper .tags .name {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 0.8rem;
   }
 
   .card_item_wrapper .tags .price {
-    font-weight: 300;
-    font-size: 1.25rem;
+    font-weight: 600;
+    font-size: 1rem;
   }
 
   .card_item_wrapper .actions {
@@ -1276,7 +1293,7 @@ select {
   .card_item_wrapper.grid_bars {
     width: 100%;
     height: 100%;
-    max-width: 48%;
+    max-width: 45%;
     display: flex;
     border: 0.1rem solid #ccc;
     margin-right: 0.5rem;
@@ -1300,6 +1317,7 @@ select {
   .card_item_wrapper.grid_bars .description {
     clear: both;
     text-align: center;
+    font-size: 0.8rem;
   }
 
   .card_item_wrapper.grid_bars .tags {
