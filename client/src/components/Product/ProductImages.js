@@ -66,20 +66,20 @@ class ProdImg extends Component {
     return (
       <div className="product_image_container">
         <div className="main_pic">
-          <div
+          {/* <div
             style={{
               background: `url(${this.renderCardImage(
                 detail.images
               )}) no-repeat`
             }}
             onClick={() => this.handleLightBoxOpen(0)}
-          ></div>
-          {/* <img
-            className="image"
-            src={`${this.renderCardImage(this.props.images)}`}
+          ></div> */}
+          <img
+            className="image_prod_detail"
+            src={`${this.renderCardImage(detail.images)}`}
             alt="pigeon"
             onClick={() => this.handleLightBoxOpen(0)}
-          /> */}
+          />
         </div>
         <div className="main_thumbs">{this.showThumbs(detail)}</div>
         {this.state.lightbox ? (

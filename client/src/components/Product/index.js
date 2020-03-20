@@ -5,6 +5,7 @@ import ProductInfo from './ProductInfo';
 import ProductImages from './ProductImages';
 import { getProductDetail, clearProductDetail } from '../../actions/product';
 import { addToCart } from '../../actions/user';
+import ProdComments from './ProdComments/ProdComments';
 import _ from 'lodash';
 
 class ProductDetail extends Component {
@@ -44,23 +45,29 @@ class ProductDetail extends Component {
         <ShopHeader title="Product detail" />
         <div className="container">
           {this.props.products.prodDetail ? (
-            <div className="product_detail_wrapper">
-              <div className="left">
-                <div>
-                  <ProductImages detail={this.props.products.prodDetail} />
+            <div>
+              <div className="product_detail_wrapper prod_details_comments">
+                <div className="left">
+                  <div>
+                    <ProductImages detail={this.props.products.prodDetail} />
+                  </div>
+                </div>
+                <div className="right">
+                  <ProductInfo
+                    addToCart={id => this.addToCartHandler(id)}
+                    detail={this.props.products.prodDetail}
+                    comments={_.get(
+                      this.props.products,
+                      'prodDetail.comments',
+                      []
+                    )}
+                  />
                 </div>
               </div>
-              <div className="right">
-                <ProductInfo
-                  addToCart={id => this.addToCartHandler(id)}
-                  detail={this.props.products.prodDetail}
-                  comments={_.get(
-                    this.props.products,
-                    'prodDetail.comments',
-                    []
-                  )}
-                />
-              </div>
+              <ProdComments
+                comments={this.props.products.prodDetail.comments}
+                prodId={this.props.products.prodDetail._id}
+              />
             </div>
           ) : (
             'Loading'

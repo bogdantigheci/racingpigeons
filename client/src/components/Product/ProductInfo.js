@@ -82,7 +82,7 @@ const ProductInfo = props => {
         {showProdActions(detail)}
         {showProdSpecifications(detail)}
       </h1>
-      <ProdComments comments={props.comments} prodId={props.detail._id} />
+      {/* <ProdComments comments={props.comments} prodId={props.detail._id} /> */}
     </div>
   );
 };
