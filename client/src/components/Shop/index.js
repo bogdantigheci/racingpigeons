@@ -116,7 +116,7 @@ class Shop extends Component {
                 </div>
                 <div className="large_left">
                   <CollapseCheckbox
-                    initState={false}
+                    initState={window.innerWidth > 768 ? true : false}
                     title="Breeders"
                     list={products.breeders}
                     handleFilters={filters =>
@@ -124,7 +124,7 @@ class Shop extends Component {
                     }
                   />
                   <CollapseCheckbox
-                    initState={false}
+                    initState={window.innerWidth > 768 ? true : false}
                     title="Breeds"
                     list={products.breeds}
                     handleFilters={filters =>
@@ -132,7 +132,7 @@ class Shop extends Component {
                     }
                   />
                   <CollapseRadio
-                    initState={false}
+                    initState={window.innerWidth > 768 ? true : false}
                     title="Price"
                     list={price}
                     handleFilters={filters =>
