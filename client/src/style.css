@@ -824,14 +824,12 @@ select {
 
 .card_item_wrapper.grid_bars .action_container {
   flex-grow: 1;
-  border: 1px solid #ccc;
 }
 
 .card_item_wrapper.grid_bars .description {
   clear: both;
   text-align: center;
   padding: 0px 25px;
-  border-top: 1px solid #eeeeee;
 }
 
 .card_item_wrapper.grid_bars .tags {
@@ -1280,7 +1278,11 @@ select {
     height: 100%;
     max-width: 48%;
     display: flex;
-    border: 3px solid #ccc;
+    border: 0.1rem solid #ccc;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    box-sizing: border-box;
+    box-shadow: 0.1rem 0.1rem 0.1rem #cccc;
   }
   .card_item_wrapper.grid_bars .image {
     min-width: 6rem;
@@ -1293,14 +1295,11 @@ select {
 
   .card_item_wrapper.grid_bars .action_container {
     flex-grow: 1;
-    border: 1px solid #ccc;
   }
 
   .card_item_wrapper.grid_bars .description {
     clear: both;
     text-align: center;
-
-    border-top: 1px solid #eeeeee;
   }
 
   .card_item_wrapper.grid_bars .tags {
