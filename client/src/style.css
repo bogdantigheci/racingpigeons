@@ -47,7 +47,8 @@ body {
 .side-drawer a {
   color: white;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .side-drawer a:hover,
@@ -230,11 +231,15 @@ header .cart_link span {
   padding: 0px 7px 2px 7px;
   font-size: 0.7rem;
 }
+
+.side-drawer .cart_link a {
+  vertical-align: middle;
+}
 header .log_out_link {
   color: white;
   cursor: pointer;
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 1rem;
 }
 header .log_out_link:hover,
 header .log_out_link:active {
@@ -244,7 +249,8 @@ header .log_out_link:active {
 .side-drawer .log_out_link {
   color: white;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  padding-top: 0.5rem;
   cursor: pointer;
 }
 .side-drawer .log_out_link:hover,
