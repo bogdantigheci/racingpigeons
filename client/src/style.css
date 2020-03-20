@@ -262,14 +262,29 @@ header .log_out_link:active {
           FOOTER
 ==============================*/
 
+footer .social_links {
+  font-size: 3rem;
+  padding: 1rem;
+}
+
+footer .social_links .social_link {
+  padding-right: 1.2rem;
+  color: #ffff;
+}
+
 footer .logo {
   text-align: center;
   font-family: 'Monoton', cursive;
   color: #ffffff;
-  font-size: 30px;
-  padding: 11px 0px;
+  font-size: 2rem;
+  padding: 0.8rem 0px;
   border-bottom: 1px solid #4d4d4d;
 }
+
+footer h3 {
+  font-family: 'Monoton', cursive;
+}
+
 .copyr {
   text-align: center;
   color: #ffffff;
@@ -296,15 +311,16 @@ footer .business_nfo .tag {
   flex-grow: 1;
   position: relative;
   width: 50%;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
+  margin-right: 0.2rem;
 }
 footer .business_nfo .icon {
   position: absolute;
-  font-size: 26px;
+  font-size: 1.8rem;
   top: 10px;
 }
 footer .business_nfo .nfo {
-  padding-left: 40px;
+  padding-left: 2.5rem;
 }
 
 .bck_b_dark {

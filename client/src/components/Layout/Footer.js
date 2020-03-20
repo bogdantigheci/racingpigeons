@@ -4,6 +4,7 @@ import { faCompass } from '@fortawesome/free-solid-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const Footer = ({ data }) => {
   return data.siteData ? (
@@ -45,11 +46,31 @@ const Footer = ({ data }) => {
             </div>
           </div>
           <div className="left">
-            <h3>Be the first to know</h3>
+            <h3>Follow us on Social Media</h3>
             <div>
               <div>
-                Get all the latest information on events, sales and offers.You
+                Get all the latest information on events, sales and offers. You
                 can miss out.
+                <div className="social_links">
+                  <Link
+                    className="social_link"
+                    to="https://www.facebook.com/bogdantigheci"
+                  >
+                    <i className="fab fa-facebook"></i>
+                  </Link>
+                  <Link
+                    className="social_link"
+                    to="https://twitter.com/Retailgamers"
+                  >
+                    <i className="fab fa-twitter"></i>
+                  </Link>
+                  <Link
+                    className="social_link"
+                    to="https://www.instagram.com/bogdantigheci"
+                  >
+                    <i className="fab fa-instagram"></i>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
