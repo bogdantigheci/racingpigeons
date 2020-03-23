@@ -578,7 +578,7 @@ select {
 .card_link:hover,
 .bag_link:hover,
 .add_to_cart_link:hover {
-  background: #aaaaaa;
+  background: blue;
   color: #ffff;
 }
 .add_to_cart_link {
@@ -708,7 +708,7 @@ select {
 .testimonial__subtitle {
   margin: 0;
   font-size: 1.1rem;
-  color: #ccc;
+  color: 4169e1;
 }
 
 .testimonial__subtitle a {
@@ -1176,6 +1176,7 @@ select {
 @media (min-width: 768px) {
   .large_left {
     float: left;
+    margin-right: 5%;
   }
 
   .dialog_alert {
@@ -1299,6 +1300,7 @@ select {
     font-size: 1rem;
     font-weight: 700;
     color: #2196f3;
+    min-height: 3rem;
   }
 
   .card_item_wrapper .tags .name {
@@ -1480,14 +1482,14 @@ select {
   }
 
   .product_detail_wrapper .product_specifications .item {
-    font-size: 15px;
+    font-size: 1rem;
     text-transform: uppercase;
     color: #4169e1;
   }
 
   .product_detail_wrapper .product_image_container {
-    margin-top: 30px;
-    padding-right: 70px;
+    margin-top: 2rem;
+    padding-right: 5rem;
   }
 
   .product_detail_wrapper .main_pic {

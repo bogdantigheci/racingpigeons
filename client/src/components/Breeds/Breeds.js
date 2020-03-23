@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getBreeds } from '../../actions/product';
+import Breed from './Breed';
 import _ from 'lodash';
 
 class Breeds extends Component {
@@ -9,27 +10,9 @@ class Breeds extends Component {
   }
 
   render() {
-    const products = this.props.products;
-
     return (
       <div>
-        {products &&
-          products.breeds &&
-          products.breeds.map((breed, i) => (
-            <div key={breed._id}>
-              <div>{breed.name}</div>
-              <div>
-                <img
-                  src={_.get(
-                    breed,
-                    'images[0].url',
-                    `/images/image_not_available.png`
-                  )}
-                  alt={breed.name}
-                />
-              </div>
-            </div>
-          ))}
+        <Breed breeds={_.get(this.props.products, 'breeds', [])} />
       </div>
     );
   }

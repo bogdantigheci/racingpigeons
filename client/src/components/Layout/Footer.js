@@ -4,7 +4,6 @@ import { faCompass } from '@fortawesome/free-solid-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 const Footer = ({ data }) => {
   return data.siteData ? (
@@ -52,24 +51,27 @@ const Footer = ({ data }) => {
                 Get all the latest information on events, sales and offers. You
                 can miss out.
                 <div className="social_links">
-                  <Link
+                  <a
+                    href="https://www.facebook.com/bogdantigheci"
                     className="social_link"
-                    to="https://www.facebook.com/bogdantigheci"
+                    target="_blank"
                   >
                     <i className="fab fa-facebook"></i>
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     className="social_link"
-                    to="https://twitter.com/Retailgamers"
+                    href="https://twitter.com/Retailgamers"
+                    target="_blank"
                   >
                     <i className="fab fa-twitter"></i>
-                  </Link>
-                  <Link
+                  </a>
+                  <a
                     className="social_link"
-                    to="https://www.instagram.com/bogdantigheci"
+                    href="https://www.instagram.com/bogdantigheci"
+                    target="_blank"
                   >
                     <i className="fab fa-instagram"></i>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
