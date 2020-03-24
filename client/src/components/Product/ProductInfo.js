@@ -2,7 +2,6 @@ import React from 'react';
 import MyButton from '../utils/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import ProdComments from './ProdComments/ProdComments';
 
 const ProductInfo = props => {
   //console.log('Prodinfo coomments', props.comments);
@@ -73,7 +72,7 @@ const ProductInfo = props => {
 
   const detail = props.detail;
 
-  return (  
+  return (
     <div>
       <h1>
         {detail.breed.name} {detail.name}
@@ -82,7 +81,6 @@ const ProductInfo = props => {
         {showProdActions(detail)}
         {showProdSpecifications(detail)}
       </h1>
-      {/* <ProdComments comments={props.comments} prodId={props.detail._id} /> */}
     </div>
   );
 };

@@ -55,6 +55,7 @@ const Footer = ({ data }) => {
                     href="https://www.facebook.com/bogdantigheci"
                     className="social_link"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <i className="fab fa-facebook"></i>
                   </a>
@@ -62,6 +63,7 @@ const Footer = ({ data }) => {
                     className="social_link"
                     href="https://twitter.com/Retailgamers"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <i className="fab fa-twitter"></i>
                   </a>
@@ -69,6 +71,7 @@ const Footer = ({ data }) => {
                     className="social_link"
                     href="https://www.instagram.com/bogdantigheci"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <i className="fab fa-instagram"></i>
                   </a>

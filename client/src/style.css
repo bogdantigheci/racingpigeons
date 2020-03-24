@@ -725,7 +725,214 @@ select {
   margin: 0.2rem;
 }
 
-@media (min-width: 40rem) {
+/* breeds */
+
+.social-card-header {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 96px;
+}
+.social-card-header i {
+  font-size: 32px;
+  color: #fff;
+}
+.bg-facebook {
+  background-color: #3b5998;
+}
+.text-facebook {
+  color: #3b5998;
+}
+.bg-google-plus {
+  background-color: #dd4b39;
+}
+.text-google-plus {
+  color: #dd4b39;
+}
+.bg-twitter {
+  background-color: #1da1f2;
+}
+.text-twitter {
+  color: #1da1f2;
+}
+.bg-pinterest {
+  background-color: #bd081c;
+}
+.text-pinterest {
+  color: #bd081c;
+}
+.share:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+/* end of breeds */
+
+/* breeders */
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #587ff3;
+  border-color: #587ff3;
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #587ff3;
+  border-color: #587ff3;
+}
+
+.breeders_display {
+  display: flex;
+}
+
+.section-title {
+  text-align: center;
+  color: #587ff3;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+.card_footer {
+  padding: 0;
+  margin-top: 10px;
+}
+
+.cardrow {
+  width: 100%;
+  margin-right: 2rem;
+}
+
+#breeder_card_layout .card {
+  background: #ffffff;
+  width: 20rem;
+  box-shadow: 0.2rem 0.2rem 0.2rem #ccc;
+}
+#breeder_card_layout .card .breeder_bio {
+  max-height: 10.5rem;
+  overflow: hidden;
+}
+
+.image-flip:hover .backside,
+.image-flip.hover .backside {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  border-radius: 0.25rem;
+}
+
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.mainflip {
+  -webkit-transition: 1s;
+  -webkit-transform-style: preserve-3d;
+  -ms-transition: 1s;
+  -moz-transition: 1s;
+  -moz-transform: perspective(1000px);
+  transform: perspective(1000px);
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transition: 1s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.frontside {
+  position: relative;
+  -webkit-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  z-index: 2;
+  margin-bottom: 30px;
+}
+
+.backside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+  -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+
+.frontside,
+.backside {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: 1s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transition: 1s;
+  -moz-transform-style: preserve-3d;
+  -o-transition: 1s;
+  -o-transform-style: preserve-3d;
+  -ms-transition: 1s;
+  -ms-transform-style: preserve-3d;
+  transition: 1s;
+  transform-style: preserve-3d;
+}
+
+.frontside .card,
+.backside .card {
+  min-height: 20rem;
+  max-height: 20rem;
+  overflow: hidden;
+}
+
+.backside .card a {
+  font-size: 1rem;
+  color: #587ff3 !important;
+}
+
+.frontside .card .card-title,
+.backside .card .card-title {
+  color: #587ff3 !important;
+}
+
+.frontside .card .card-body img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+@media (max-width: 48rem) {
+  .backside .card {
+    overflow: scroll;
+  }
+  .breeders_display {
+    display: block;
+    width: 20rem;
+    margin: auto;
+  }
+  #breeder_card_layout .row {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* end of breeders */
+
+@media (min-width: 48rem) {
   .testimonial {
     display: flex;
     margin: 3rem auto;
