@@ -38,11 +38,6 @@ class ImageLightBox extends Component {
   };
 
   render() {
-    console.log('this.props', this.props);
-    console.log('this.state', this.state);
-    console.log('imagesL', this.state.images);
-    console.log('currentimage', this.state.currentImage);
-
     return (
       <Lightbox
         currentImage={this.state.currentImage}

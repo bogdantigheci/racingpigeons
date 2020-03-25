@@ -86,7 +86,6 @@ class UserCart extends Component {
             showTotal: false,
             showSuccess: true
           });
-          // console.log('sold');
         }
       });
   };

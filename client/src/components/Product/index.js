@@ -32,14 +32,7 @@ class ProductDetail extends Component {
   };
 
   render() {
-    // console.log(
-    //   '2222222222222222222222this.props.match.params.id',
-    //   this.props.products.prodPosts
-    // );
-    // console.log(
-    //   'sadasdasdadsadad',
-    //   _.get(this.props.products, 'prodDetail._id')
-    // );
+   
     return (
       <div>
         <ShopHeader title="Product detail" />

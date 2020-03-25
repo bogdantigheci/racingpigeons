@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const ProductInfo = props => {
-  //console.log('Prodinfo coomments', props.comments);
   const showProdTags = detail => (
     <div className="product_tags">
       {detail.shipping ? (

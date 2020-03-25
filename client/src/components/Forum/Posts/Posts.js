@@ -15,7 +15,6 @@ class Posts extends Component {
     if (this.props.posts === null) {
       postContent = <Spinner />;
     } else {
-      // console.log('pooosts', this.props.posts);
       postContent = <PostFeed posts={this.props.posts} />;
     }
     return (

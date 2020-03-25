@@ -6,7 +6,6 @@ const { resetPass } = require('./resetpass_template');
 
 const getEmailData = (to, name, token, template, actionData) => {
   let data = null;
-  // console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', actionData);
   switch (template) {
     case 'welcome':
       data = {

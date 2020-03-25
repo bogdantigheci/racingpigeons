@@ -13,8 +13,6 @@ class BreederInfo extends Component {
     });
   }
   render() {
-    console.log('prooooooooooops', this.props);
-
     return this.props.products && this.props.products.breeder ? (
       <div className="container">
         <img

@@ -19,21 +19,8 @@ class PostItem extends Component {
     console.log('rliked');
   }
 
-  // findUserLikes(likes) {
-  //   if (
-  //     likes.filter(like => like.user === this.props.user.userData.id).length > 0
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
   render() {
-    //console.log('this.props.post.likes', this.props.post.likes);
-    // console.log('this.props.user.userData.id', this.props.user.userData.id);
-    // console.log('this.props.post.name', this.props.post.post.name);
-    // console.log('this.props.post.text', this.props.post.post.text);
+    
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -53,11 +40,6 @@ class PostItem extends Component {
                     className="fas fa-thumbs-up
                       text-info"
                   />
-                  {/* <i
-                    className={classnames('fas fa-thumbs-up', {
-                      'text-info': this.findUserLike(this.props.post.post.likes)
-                    })}
-                  /> */}
                   <span className="badge badge-light">
                     {this.props.post.likes.length}
                   </span>

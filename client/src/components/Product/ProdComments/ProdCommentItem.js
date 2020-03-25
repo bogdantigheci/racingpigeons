@@ -34,10 +34,6 @@ class ProdCommentItem extends Component {
   }
 
   render() {
-    //console.log('comment item props', this.props);
-    // console.log('11111111111111111', this.props.comment.user);
-    // console.log('222222222222222222', this.props.user.userData.id);
-
     return (
       <div className="card card-body mb-3">
         <div className="row">

@@ -19,7 +19,6 @@ class ProdImg extends Component {
       this.setState({
         lightboxImages
       });
-      //console.log('lightboxImages', lightboxImages);
     }
   }
 
@@ -52,7 +51,6 @@ class ProdImg extends Component {
 
   renderCardImage = images => {
     if (images.length > 0) {
-      // console.log(' images[0].url', images[0].url);
       return images[0].url;
     } else {
       return `/images/image_not_available.png`;
@@ -61,19 +59,10 @@ class ProdImg extends Component {
 
   render() {
     const { detail } = this.props;
-    // console.log('detail', detail.images[0].url);
-    // console.log('deetaaail', detail);
+   
     return (
       <div className="product_image_container">
         <div className="main_pic">
-          {/* <div
-            style={{
-              background: `url(${this.renderCardImage(
-                detail.images
-              )}) no-repeat`
-            }}
-            onClick={() => this.handleLightBoxOpen(0)}
-          ></div> */}
           <img
             className="image_prod_detail"
             src={`${this.renderCardImage(detail.images)}`}

@@ -31,7 +31,6 @@ class ProdCommentForm extends Component {
   }
 
   render() {
-    //console.log('prodcomeform props id', this.props.product.prodDetail._id);
     return (
       <div className="post-form mb-3">
         <div className="card card-info">

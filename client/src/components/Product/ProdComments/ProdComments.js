@@ -5,7 +5,6 @@ import ProdCommentForm from './ProdCommentForm';
 
 class ProdComments extends Component {
   render() {
-    // console.log('@@@@@@@@@@@@@@@@@@', this.props.user);
     return (
       <div>
         <hr></hr>
