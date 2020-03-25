@@ -25,6 +25,16 @@ class BreederInfo extends Component {
           )}
           alt="name"
         />
+        <div>Name: {_.get(this.props.products.breeder, 'name', '')}</div>
+        <div>
+          Placements:
+          {_.get(this.props.products.breeder, 'placements', '').map(
+            (placement, i) => (
+              <div>{placement}</div>
+            )
+          )}
+        </div>
+        <div>Bio: {_.get(this.props.products.breeder, 'bio', '')}</div>
       </div>
     ) : null;
   }
