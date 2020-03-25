@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   GET_PRODUCTS_BY_ARRIVAL,
   GET_BREEDERS,
+  GET_BREEDER,
   GET_BREEDS,
   GET_PRODUCTS_TO_SHOP,
   ADD_PRODUCT,
@@ -131,6 +132,18 @@ export function getProductDetail(id) {
     });
   return {
     type: GET_PRODUCT_DETAIL,
+    payload: request
+  };
+}
+
+export function getBreeder(id) {
+  const request = axios
+    .get(`${PRODUCT_SERVER}/breeders/${id}`)
+    .then(response => {
+      return response.data;
+    });
+  return {
+    type: GET_BREEDER,
     payload: request
   };
 }

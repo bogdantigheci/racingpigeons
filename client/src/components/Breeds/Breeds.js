@@ -12,7 +12,7 @@ class Breeds extends Component {
   render() {
     return (
       <div>
-        <h5 className="section-title h1">Breeds</h5>
+        <h5 className="page-title h1">Breeds</h5>
         <Breed breeds={_.get(this.props.products, 'breeds', [])} />
       </div>
     );

@@ -1,6 +1,7 @@
 import {
   GET_PRODUCTS_BY_ARRIVAL,
   GET_BREEDERS,
+  GET_BREEDER,
   GET_BREEDS,
   GET_PRODUCTS_TO_SHOP,
   ADD_PRODUCT,
@@ -24,6 +25,11 @@ const product = (state = { breeders: [] }, action) => {
       return {
         ...state,
         ...action.payload
+      };
+    case GET_BREEDER:
+      return {
+        ...state,
+        breeder: action.payload
       };
     case GET_BREEDS:
       return {

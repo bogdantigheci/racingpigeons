@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 const Breeder = props => {
   return (
@@ -27,7 +28,9 @@ const Breeder = props => {
                                 />
                               </p>
                               <h4 className="card-title">{breeder.name}</h4>
-                              <p className="card-text">{breeder.club}</p>
+                              <p className="card-text breeder_club_name">
+                                {breeder.club}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -39,13 +42,12 @@ const Breeder = props => {
                                 {breeder.bio}
                               </p>
                               <div className="card_footer">
-                                <a
+                                <Link
+                                  to={`/product/breeders/${breeder._id}`}
                                   className="text-xs-center"
-                                  target="_blank"
-                                  href="/"
                                 >
                                   Read more
-                                </a>
+                                </Link>
                               </div>
                             </div>
                           </div>

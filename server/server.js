@@ -200,6 +200,14 @@ app.get('/api/product/breeders', (req, res) => {
   });
 });
 
+app.get('/api/product/breeders/:id', (req, res) => {
+  Breeder.findById(req.params.id)
+    .then(breeder => res.json(breeder))
+    .catch(err =>
+      res.status(404).json({ nopostfound: 'No post found with that ID' })
+    );
+});
+
 //////////////////////////////////////
 //     USERS
 /////////////////////////////////////

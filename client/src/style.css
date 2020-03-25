@@ -737,8 +737,14 @@ select {
 .breeders_display {
   display: flex;
 }
+.breeder_club_name {
+  font-family: 'Monoton', cursive;
+  color: #587ff3;
+  font-weight: 700;
+  font-size: 2rem;
+}
 
-.section-title {
+.page-title {
   text-align: center;
   color: blue;
   margin-bottom: 3rem;

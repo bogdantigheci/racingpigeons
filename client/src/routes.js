@@ -21,6 +21,7 @@ import ResetPassword from './components/ResetUser/ResetPassword';
 import Forum from './components/Forum/Posts/Posts';
 import Post from './components/Forum/Comments/Post';
 import Club from './components/Club/Club';
+import BreederInfo from './components/Breeders/BreederInfo';
 
 const Routes = () => {
   return (
@@ -58,6 +59,11 @@ const Routes = () => {
           path="/product_detail/:id"
           exact
           component={Auth(ProductDetail, null)}
+        />
+        <Route
+          path="/product/breeders/:id"
+          exact
+          component={Auth(BreederInfo, null)}
         />
         <Route path="/register" exact component={Auth(Register, false)} />
         <Route
