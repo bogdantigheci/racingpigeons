@@ -76,7 +76,7 @@ class ManageBreeders extends Component {
       },
       placements: {
         element: 'input',
-        value: [],
+        value: '',
         config: {
           name: 'placements_input',
           type: 'text',
@@ -124,15 +124,17 @@ class ManageBreeders extends Component {
     let dataToSubmit = generateData(this.state.formdata, 'breeders');
     let formIsValid = isFormValid(this.state.formdata, 'breeders');
     let existingBreeders = this.props.products.breeders;
-
+    const placements = dataToSubmit.placements.split(',');
     if (formIsValid) {
-      this.props.addBreeder(dataToSubmit, existingBreeders).then(response => {
-        if (response.payload.success) {
-          this.resetFieldsHandler();
-        } else {
-          this.setState({ formError: true });
-        }
-      });
+      this.props
+        .addBreeder({ ...dataToSubmit, placements }, existingBreeders)
+        .then(response => {
+          if (response.payload.success) {
+            this.resetFieldsHandler();
+          } else {
+            this.setState({ formError: true });
+          }
+        });
     } else {
       this.setState({
         formError: true

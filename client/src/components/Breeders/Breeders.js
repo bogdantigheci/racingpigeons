@@ -9,6 +9,11 @@ class Breeders extends Component {
     this.props.getBreeders();
   }
 
+  handlePlacements = placements => {
+    placements = placements.split(',');
+    return placements;
+  };
+
   render() {
     return (
       <div>

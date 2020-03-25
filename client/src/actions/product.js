@@ -110,7 +110,7 @@ export function addBreeder(dataToSubmit, existingBreeders) {
     .post(`${PRODUCT_SERVER}/breeders`, dataToSubmit)
     .then(response => {
       let breeders = [...existingBreeders, response.data.breeder];
-      console.log('breeeeders', existingBreeders, response.data);
+      //console.log('breeeeders', existingBreeders, response.data);
       return {
         success: response.data.success,
         breeders
