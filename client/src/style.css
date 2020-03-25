@@ -740,9 +740,10 @@ select {
 
 .section-title {
   text-align: center;
-  color: #587ff3;
+  color: blue;
   margin-bottom: 3rem;
   text-transform: uppercase;
+  font-family: 'Monoton', cursive;
 }
 
 .card_footer {

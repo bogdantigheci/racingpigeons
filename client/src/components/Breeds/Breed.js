@@ -23,23 +23,23 @@ const Breed = props => {
                     'images[0].url',
                     `/images/image_not_available.png`
                   )}
-                  alt="Card image cap"
+                  alt={breed.name}
                 />
               </div>
 
               <div className="card-body">
                 <div className="collapse-content">
-                  <p className="card-text collapse" id="collapseContent">
+                  <p className="card-text collapse" id={`id${i}`}>
                     {breed.description}
                   </p>
                   <a
                     className="btn btn-flat red-text p-1 my-1 mr-0 mml-1 collapsed breed_read_more"
                     data-toggle="collapse"
-                    href="#collapseContent"
+                    href={`#id${i}`}
                     aria-expanded="false"
-                    aria-controls="collapseContent"
+                    aria-controls={`id${i}`}
                   >
-                    Read more
+                    Description
                   </a>
                 </div>
               </div>
