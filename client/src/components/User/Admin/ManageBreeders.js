@@ -73,6 +73,21 @@ class ManageBreeders extends Component {
         touched: false,
         validationMessage: '',
         showlabel: false
+      },
+      placements: {
+        element: 'input',
+        value: [],
+        config: {
+          name: 'placements_input',
+          type: 'text',
+          placeholder: 'Enter placements'
+        },
+        validation: {
+          required: true
+        },
+        valid: false,
+        touched: false,
+        validationMessage: ''
       }
     }
   };
@@ -163,6 +178,11 @@ class ManageBreeders extends Component {
               <FormField
                 id={'club'}
                 formdata={this.state.formdata.club}
+                change={element => this.updateForm(element)}
+              />
+              <FormField
+                id={'placements'}
+                formdata={this.state.formdata.placements}
                 change={element => this.updateForm(element)}
               />
               <FormField

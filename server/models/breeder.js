@@ -19,6 +19,10 @@ const breederSchema = mongoose.Schema({
   images: {
     type: Array,
     default: []
+  },
+  placements: {
+    type: Array,
+    default: []
   }
 });
 
