@@ -737,6 +737,11 @@ select {
   justify-content: center;
   height: 96px;
 }
+
+.breed_card_description {
+  max-height: 7.5rem;
+}
+
 .social-card-header i {
   font-size: 32px;
   color: #fff;

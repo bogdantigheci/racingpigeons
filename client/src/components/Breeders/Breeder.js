@@ -4,31 +4,60 @@ import _ from 'lodash';
 const Breeder = props => {
   return (
     <div>
-      {props.breeders
-        ? props.breeders.map((breeder, i) => (
-            <div key={i} className="testimonial" id="customer">
-              <div className="testimonial__image-container">
-                <img
-                  src={_.get(
-                    breeder,
-                    'images[0].url',
-                    `/images/image_not_available.png`
-                  )}
-                  alt={breeder.name}
-                  className="testimonial__image"
-                />
-              </div>
-              <div className="testimonial__info">
-                <h1 className="testimonial__name">{breeder.name}</h1>
-                <h2 className="testimonial__subtitle">
-                  Member of
-                  <a href="/"> {breeder.club}</a>
-                </h2>
-                <p className="testimonial__text">{breeder.bio}</p>
-              </div>
-            </div>
-          ))
-        : null}
+      <div className="container d-flex">
+        <div className="breeders_display flex-wrap">
+          {props.breeders
+            ? props.breeders.map((breeder, i) => (
+                <div key={i} id="breeder_card_layout">
+                  <div className="cardrow">
+                    <div className="image-flip">
+                      <div className="mainflip">
+                        <div className="frontside">
+                          <div className="card">
+                            <div className="card-body text-center">
+                              <p>
+                                <img
+                                  className=" img-fluid"
+                                  src={_.get(
+                                    breeder,
+                                    'images[0].url',
+                                    `/images/image_not_available.png`
+                                  )}
+                                  alt={breeder.name}
+                                />
+                              </p>
+                              <h4 className="card-title">{breeder.name}</h4>
+                              <p className="card-text">{breeder.club}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="backside">
+                          <div className="card">
+                            <div className="card-body text-center mt-4">
+                              <h4 className="card-title">{breeder.name}</h4>
+                              <p className="card-text breeder_bio">
+                                {breeder.bio}
+                              </p>
+                              <div className="card_footer">
+                                <a
+                                  className="text-xs-center"
+                                  target="_blank"
+                                  href="/"
+                                >
+                                  Read more
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            : null}
+        </div>
+      </div>
     </div>
   );
 };

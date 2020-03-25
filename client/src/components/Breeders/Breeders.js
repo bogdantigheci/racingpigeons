@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getBreeders } from '../../actions/product';
-import BreederTest from './BreederTest';
+import Breeder from './Breeder';
 import _ from 'lodash';
 
 class Breeders extends Component {
@@ -12,7 +12,8 @@ class Breeders extends Component {
   render() {
     return (
       <div>
-        <BreederTest breeders={_.get(this.props.products, 'breeders', [])} />
+        <h5 className="section-title h1">Breeders</h5>
+        <Breeder breeders={_.get(this.props.products, 'breeders', [])} />
       </div>
     );
   }
