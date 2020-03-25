@@ -6,7 +6,7 @@ const Breed = props => {
     <div className="container d-flex flex-wrap">
       {props.breeds
         ? props.breeds.map((breed, i) => (
-            <div className="card promoting-card breeds_display">
+            <div key={i} className="card promoting-card breeds_display">
               <div className="card-body d-flex flex-row">
                 <div className="mx-auto">
                   <h4 className="card-title font-weight-bold mb-2 breed_card_title">
