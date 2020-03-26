@@ -756,6 +756,7 @@ select {
 
 .bio {
   color: #587ff3;
+  margin-bottom: 1rem;
 }
 
 .breeder_info_image {
@@ -971,7 +972,7 @@ select {
 
 .card_item_wrapper .image {
   width: 100%;
-  min-height: 18rem;
+  min-height: 15rem;
   background-size: contain !important;
   background-position: center !important;
   border: 1px solid #f0f0f0;
