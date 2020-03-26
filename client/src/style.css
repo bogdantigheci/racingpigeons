@@ -733,6 +733,35 @@ select {
   background-color: #587ff3;
   border-color: #587ff3;
 }
+.breeder_info_image_container {
+  width: 20rem;
+  height: 20rem;
+  margin-right: 3rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0.3rem 0.3rem 0.3rem #ccc;
+}
+.breeder_placements {
+  color: #587ff3;
+}
+
+.breeder_info_container {
+  width: 100%;
+}
+
+.bio_title {
+  text-align: center;
+  color: #587ff3;
+}
+
+.bio {
+  color: #587ff3;
+}
+
+.breeder_info_image {
+  width: 100%;
+  height: 100%;
+}
 
 .breeders_display {
   display: flex;
@@ -868,6 +897,16 @@ select {
   height: 120px;
   border-radius: 50%;
 }
+.placements-title {
+  color: #587ff3;
+  font-family: 'Monoton', cursive;
+  text-align: center;
+}
+.placements_detail {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
 @media (max-width: 48rem) {
   .backside .card {
@@ -881,6 +920,19 @@ select {
   #breeder_card_layout .row {
     width: 100%;
     margin: 0;
+  }
+  .breeder_info_image_container {
+    margin-right: 0;
+  }
+  .placements-title {
+    color: #587ff3;
+    font-family: 'Monoton', cursive;
+    text-align: center;
+  }
+  .placements_detail {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 }
 

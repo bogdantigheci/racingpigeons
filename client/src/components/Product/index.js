@@ -32,13 +32,12 @@ class ProductDetail extends Component {
   };
 
   render() {
-   
     return (
       <div>
         <ShopHeader title="Product detail" />
-        <div className="container">
+        <div className="container d-flex">
           {this.props.products.prodDetail ? (
-            <div>
+            <div style={{ width: '100%' }}>
               <div className="product_detail_wrapper prod_details_comments">
                 <div className="left">
                   <div>
