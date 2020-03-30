@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getBreeder } from '../../actions/product';
 import _ from 'lodash';
-import ShopHeader from '../utils/shopHeader';
 
 class BreederInfo extends Component {
   componentDidMount() {
