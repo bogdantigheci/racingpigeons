@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ProdCommentItem from './ProdCommentItem';
 
 const ProdCommentFeed = props => {
@@ -8,7 +9,11 @@ const ProdCommentFeed = props => {
     ))
   ) : (
     <div className="product_no_reviews">
-      There are no reviews yet, log in to add one!
+      There are no reviews yet, to add one please
+      <Link to="/register_login" style={{ fontSize: '1.2rem' }}>
+        {' '}
+        Log in
+      </Link>
     </div>
   );
 };
