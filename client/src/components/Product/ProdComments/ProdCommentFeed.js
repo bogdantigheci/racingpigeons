@@ -7,7 +7,7 @@ const ProdCommentFeed = props => {
     props.comments.map((comment, i) => (
       <ProdCommentItem key={i} comment={comment} prodId={props.prodId} />
     ))
-  ) : (
+  ) : !props.auth ? (
     <div className="product_no_reviews">
       There are no reviews yet, to add one please
       <Link to="/register_login" style={{ fontSize: '1.2rem' }}>
@@ -15,7 +15,7 @@ const ProdCommentFeed = props => {
         Log in
       </Link>
     </div>
-  );
+  ) : null;
 };
 
 export default ProdCommentFeed;

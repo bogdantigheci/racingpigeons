@@ -8,13 +8,14 @@ class ProdComments extends Component {
     return (
       <div>
         <hr></hr>
-        <h3 className='reviews_title'>Reviews</h3>
+        <h3 className="reviews_title">Reviews</h3>
         {this.props.user.userData.isAuth ? (
           <ProdCommentForm prodId={this.props.prodId} />
         ) : null}
         <ProdCommentFeed
           comments={this.props.comments}
           prodId={this.props.prodId}
+          auth={this.props.user.userData.isAuth}
         />
       </div>
     );

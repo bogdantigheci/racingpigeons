@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const formidable = require('express-formidable');
 const cloudinary = require('cloudinary');
 const SHA1 = require('crypto-js/sha1');
-// const multer = require('multer');
 const moment = require('moment');
 
 const app = express();
@@ -36,6 +35,8 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET
 });
 
+/////socket.io
+
 ////Models
 
 const { User } = require('./models/user');
@@ -45,7 +46,6 @@ const { Product } = require('./models/product');
 const { Payment } = require('./models/payment');
 const { Site } = require('./models/site');
 const { Post } = require('./models/post');
-
 ///Validation
 
 const validatePostInput = require('../server/utils/validation/post');
