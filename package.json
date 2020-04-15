@@ -36,13 +36,16 @@
     "moment": "^2.24.0",
     "mongoose": "^5.8.11",
     "multer": "^1.4.2",
+    "node-sass": "^4.13.1",
     "nodemailer": "^6.4.3",
+    "pusher": "^3.0.1",
+    "pusher-js": "^5.1.1",
     "react-dropzone": "^4.3.0",
     "react-images": "^1.1.0-beta.3",
     "react-paypal-express-checkout": "^1.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "validator": "^12.2.0"
+    "validator": "^12.2.0",
+    "ws": "^7.2.3"
   }
 }

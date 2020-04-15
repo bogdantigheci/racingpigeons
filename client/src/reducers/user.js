@@ -8,7 +8,7 @@ import {
   REMOVE_CART_ITEM,
   ON_SUCCESS_BUY,
   UPDATE_USER_DATA,
-  CLEAR_UPDATE_USER_DATA
+  CLEAR_UPDATE_USER_DATA,
 } from '../constants/types';
 
 const user = (state = {}, action) => {
@@ -16,35 +16,35 @@ const user = (state = {}, action) => {
     case LOGIN_USER:
       return {
         ...state,
-        loginSuccess: action.payload
+        loginSuccess: action.payload,
       };
     case REGISTER_USER:
       return {
         ...state,
-        register: action.payload
+        register: action.payload,
       };
     case AUTH_USER:
       return {
         ...state,
-        userData: action.payload
+        userData: action.payload,
       };
     case LOGOUT_USER:
       return { ...state };
     case ADD_TO_CART:
       return {
         ...state,
-        userData: { ...state.userData, cart: action.payload }
+        userData: { ...state.userData, cart: action.payload },
       };
     case GET_CART_ITEMS:
       return {
         ...state,
-        cartDetail: action.payload
+        cartDetail: action.payload,
       };
     case REMOVE_CART_ITEM:
       return {
         ...state,
         cartDetail: action.payload.cartDetail,
-        userData: { ...state.userData, cart: action.payload.cart }
+        userData: { ...state.userData, cart: action.payload.cart },
       };
     case ON_SUCCESS_BUY:
       return {
@@ -52,9 +52,9 @@ const user = (state = {}, action) => {
         successBuy: action.payload.success,
         userData: {
           ...state.userData,
-          cart: action.payload.cart
+          cart: action.payload.cart,
         },
-        cartDetail: action.payload.cartDetail
+        cartDetail: action.payload.cartDetail,
       };
     case UPDATE_USER_DATA:
       return { ...state, updateUser: action.payload };

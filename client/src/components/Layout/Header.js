@@ -12,63 +12,63 @@ class Header extends Component {
       {
         name: 'Home',
         linkTo: '/',
-        public: true
+        public: true,
       },
       {
         name: 'Shop',
         linkTo: '/shop',
-        public: true
+        public: true,
       },
       {
         name: 'Club',
         linkTo: '/club',
-        public: true
+        public: true,
       },
 
       {
         name: 'Breeders',
         linkTo: '/breeders',
-        public: true
+        public: true,
       },
 
       {
         name: 'Breeds',
         linkTo: '/breeds',
-        public: true
+        public: true,
       },
       {
         name: 'Forum',
         linkTo: '/forum',
-        public: false
-      }
+        public: false,
+      },
     ],
     user: [
       {
         name: 'My Account',
         linkTo: '/user/dashboard',
-        public: false
+        public: false,
       },
       {
         name: 'My Cart',
         linkTo: '/user/cart',
-        public: false
+        public: false,
       },
 
       {
         name: 'Log in',
         linkTo: '/register_login',
-        public: true
+        public: true,
       },
       {
         name: 'Log out',
         linkTo: '/user/logout',
-        public: false
-      }
-    ]
+        public: false,
+      },
+    ],
   };
 
   logoutHandler = () => {
-    this.props.dispatch(logoutUser()).then(response => {
+    this.props.dispatch(logoutUser()).then((response) => {
       if (response.payload.success) {
         this.props.history.push('/');
       }
@@ -101,11 +101,11 @@ class Header extends Component {
       </Link>
     );
 
-  showLinks = type => {
+  showLinks = (type) => {
     let list = [];
 
     if (this.props.user.userData) {
-      type.forEach(item => {
+      type.forEach((item) => {
         if (!this.props.user.userData.isAuth) {
           if (item.public === true) {
             list.push(item);
@@ -154,7 +154,7 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { user: state.user };
 };
 

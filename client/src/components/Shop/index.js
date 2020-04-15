@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   getBreeders,
   getBreeds,
-  getProductsToShop
+  getProductsToShop,
 } from '../../actions/product';
 import CollapseCheckbox from '../utils/collapseCheckbox';
 import CollapseRadio from '../utils/collapseRadio';
@@ -22,8 +22,8 @@ class Shop extends Component {
     filters: {
       breed: [],
       breeder: [],
-      price: []
-    }
+      price: [],
+    },
   };
   componentDidMount() {
     this.props.getBreeders();
@@ -34,7 +34,7 @@ class Shop extends Component {
       this.state.filters
     );
   }
-  handlePrice = value => {
+  handlePrice = (value) => {
     const data = price;
     let array = [];
     for (let key in data) {
@@ -56,14 +56,14 @@ class Shop extends Component {
 
     this.showFilteredResults(newFilters);
     this.setState({
-      filters: newFilters
+      filters: newFilters,
     });
   };
 
-  showFilteredResults = filters => {
+  showFilteredResults = (filters) => {
     this.props.getProductsToShop(0, this.state.limit, filters).then(() => {
       this.setState({
-        skip: 0
+        skip: 0,
       });
     });
   };
@@ -80,13 +80,13 @@ class Shop extends Component {
       )
       .then(() => {
         this.setState({
-          skip
+          skip,
         });
       });
   };
   handleGrid = () => {
     this.setState({
-      grid: !this.state.grid ? 'grid_bars' : ''
+      grid: !this.state.grid ? 'grid_bars' : '',
     });
   };
 
@@ -119,7 +119,7 @@ class Shop extends Component {
                     initState={window.innerWidth > 768 ? true : false}
                     title="Breeders"
                     list={products.breeders}
-                    handleFilters={filters =>
+                    handleFilters={(filters) =>
                       this.handleFilters(filters, 'breeder')
                     }
                   />
@@ -127,7 +127,7 @@ class Shop extends Component {
                     initState={window.innerWidth > 768 ? true : false}
                     title="Breeds"
                     list={products.breeds}
-                    handleFilters={filters =>
+                    handleFilters={(filters) =>
                       this.handleFilters(filters, 'breed')
                     }
                   />
@@ -135,7 +135,7 @@ class Shop extends Component {
                     initState={window.innerWidth > 768 ? true : false}
                     title="Price"
                     list={price}
-                    handleFilters={filters =>
+                    handleFilters={(filters) =>
                       this.handleFilters(filters, 'price')
                     }
                   />
@@ -158,15 +158,15 @@ class Shop extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { products: state.product };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getBreeders: () => dispatch(getBreeders()),
     getBreeds: () => dispatch(getBreeds()),
     getProductsToShop: (skip, limit, filters = [], previousState = []) =>
-      dispatch(getProductsToShop(skip, limit, filters, previousState))
+      dispatch(getProductsToShop(skip, limit, filters, previousState)),
   };
 };
 

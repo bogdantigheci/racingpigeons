@@ -5,6 +5,8 @@ const formidable = require('express-formidable');
 const cloudinary = require('cloudinary');
 const SHA1 = require('crypto-js/sha1');
 const moment = require('moment');
+const cors = require('cors');
+const Pusher = require('pusher');
 
 const app = express();
 
@@ -16,12 +18,20 @@ mongoose.Promise = global.Promise;
 mongoose.connect(`${process.env.MONGODB_URI}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true
+  useCreateIndex: true,
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors());
+var pusher = new Pusher({
+  appId: process.env.PUSHER_APP_ID,
+  key: process.env.PUSHER_APP_KEY,
+  secret: process.env.PUSHER_APP_SECRET,
+  cluster: 'eu',
+  useTLS: true,
+});
 
 //for heroku
 
@@ -32,10 +42,8 @@ app.use(express.static('client/build'));
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET
+  api_secret: process.env.CLOUD_API_SECRET,
 });
-
-/////socket.io
 
 ////Models
 
@@ -46,6 +54,7 @@ const { Product } = require('./models/product');
 const { Payment } = require('./models/payment');
 const { Site } = require('./models/site');
 const { Post } = require('./models/post');
+const { Message } = require('./models/message');
 ///Validation
 
 const validatePostInput = require('../server/utils/validation/post');
@@ -58,6 +67,42 @@ const { admin } = require('./middleware/admin');
 ///Utils
 
 const { sendEmail } = require('./utils/mail/index');
+
+///////////////////////////////////
+//Chat
+///////////////////////////////////
+
+app.post('/message', (req, res) => {
+  const payload = req.body;
+  pusher.trigger('chat', 'message', payload);
+  res.send(payload);
+});
+
+// app.post('/api/chat/messages', auth, (req, res) => {
+//   const { errors, isValid } = validatePostInput(req.body);
+
+//   // Check Validation
+//   if (!isValid) {
+//     // If any errors, send 400 with errors object
+//     return res.status(400).json(errors);
+//   }
+
+//   const newMessage = new Message({
+//     text: req.body.text,
+//     name: req.body.name,
+//     user: req.user._id,
+//   });
+
+//   newMessage.save().then((message) => res.json(message));
+// });
+
+app.get('/api/chat/messages', (req, res) => {
+  Message.find({}, (err, messages) => {
+    if (err) return res.status(400).send(err);
+
+    res.status(200).send({ messages });
+  });
+});
 
 //////////////////////////////////////
 //    PRODUCTS - PIGEONS
@@ -75,7 +120,7 @@ app.post('/api/product/shop', (req, res) => {
       if (key === 'price') {
         findArgs[key] = {
           $gte: req.body.filters[key][0],
-          $lte: req.body.filters[key][1]
+          $lte: req.body.filters[key][1],
         };
       } else {
         findArgs[key] = req.body.filters[key];
@@ -95,7 +140,7 @@ app.post('/api/product/shop', (req, res) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({
         size: articles.length,
-        articles
+        articles,
       });
     });
 });
@@ -127,7 +172,7 @@ app.get('/api/product/articles_by_id', (req, res) => {
   if (type === 'array') {
     let ids = req.query.id.split(',');
     items = [];
-    items = ids.map(item => {
+    items = ids.map((item) => {
       return mongoose.Types.ObjectId(item);
     });
   }
@@ -147,7 +192,7 @@ app.post('/api/product/article', auth, admin, (req, res) => {
     if (err) return res.json({ success: false, err });
     res.status(200).json({
       success: true,
-      article: doc
+      article: doc,
     });
   });
 });
@@ -163,7 +208,7 @@ app.post('/api/product/breeds', auth, admin, (req, res) => {
     if (err) return res.json({ success: false, err });
     res.status(200).json({
       success: true,
-      breed: doc
+      breed: doc,
     });
   });
 });
@@ -188,7 +233,7 @@ app.post('/api/product/breeders', auth, admin, (req, res) => {
 
     res.status(200).json({
       success: true,
-      breeder: doc
+      breeder: doc,
     });
   });
 });
@@ -202,8 +247,8 @@ app.get('/api/product/breeders', (req, res) => {
 
 app.get('/api/product/breeders/:id', (req, res) => {
   Breeder.findById(req.params.id)
-    .then(breeder => res.json(breeder))
-    .catch(err =>
+    .then((breeder) => res.json(breeder))
+    .catch((err) =>
       res.status(404).json({ nopostfound: 'No post found with that ID' })
     );
 });
@@ -222,7 +267,7 @@ app.get('/api/users/auth', auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     cart: req.user.cart,
-    history: req.user.history
+    history: req.user.history,
   });
 });
 
@@ -235,7 +280,7 @@ app.post('/api/users/register', (req, res) => {
     sendEmail(doc.email, doc.name, null, 'welcome');
 
     res.status(200).json({
-      success: true
+      success: true,
     });
   });
 });
@@ -245,7 +290,7 @@ app.post('/api/users/login', (req, res) => {
     if (!user)
       return res.json({
         loginSuccess: false,
-        message: 'Auth failed, email not found'
+        message: 'Auth failed, email not found',
       });
 
     user.comparePassword(req.body.password, (err, isMatch) => {
@@ -254,12 +299,9 @@ app.post('/api/users/login', (req, res) => {
 
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        res
-          .cookie('w_auth', user.token)
-          .status(200)
-          .json({
-            loginSuccess: true
-          });
+        res.cookie('w_auth', user.token).status(200).json({
+          loginSuccess: true,
+        });
       });
     });
   });
@@ -275,16 +317,16 @@ app.get('/api/users/logout', auth, (req, res) => {
 app.post('/api/users/uploadimage', auth, admin, formidable(), (req, res) => {
   cloudinary.uploader.upload(
     req.files.file.path,
-    result => {
+    (result) => {
       // console.log(result);
       res.status(200).send({
         public_id: result.public_id,
-        url: result.url
+        url: result.url,
       });
     },
     {
       public_id: `${Date.now()}`,
-      resource_type: 'auto'
+      resource_type: 'auto',
     }
   );
 });
@@ -302,7 +344,7 @@ app.post('/api/users/addToCart', auth, (req, res) => {
   User.findOne({ _id: req.user._id }, (err, doc) => {
     let duplicate = false;
 
-    doc.cart.forEach(item => {
+    doc.cart.forEach((item) => {
       if (item.id == req.query.productId) {
         duplicate = true;
       }
@@ -312,7 +354,7 @@ app.post('/api/users/addToCart', auth, (req, res) => {
       User.findOneAndUpdate(
         {
           _id: req.user._id,
-          'cart.id': mongoose.Types.ObjectId(req.query.productId)
+          'cart.id': mongoose.Types.ObjectId(req.query.productId),
         },
         { $inc: { 'cart.$.quantity': 1 } },
         { new: true },
@@ -329,9 +371,9 @@ app.post('/api/users/addToCart', auth, (req, res) => {
             cart: {
               id: mongoose.Types.ObjectId(req.query.productId),
               quantity: 1,
-              date: Date.now()
-            }
-          }
+              date: Date.now(),
+            },
+          },
         },
         { new: true },
         (err, doc) => {
@@ -350,7 +392,7 @@ app.get('/api/users/removeFromCart', auth, (req, res) => {
     { new: true },
     (err, doc) => {
       let cart = doc.cart;
-      let array = cart.map(item => {
+      let array = cart.map((item) => {
         return mongoose.Types.ObjectId(item.id);
       });
 
@@ -360,7 +402,7 @@ app.get('/api/users/removeFromCart', auth, (req, res) => {
         .exec((err, cartDetail) => {
           return res.status(200).json({
             cartDetail,
-            cart
+            cart,
           });
         });
     }
@@ -378,7 +420,7 @@ app.post('/api/users/successBuy', auth, (req, res) => {
     .substring(0, 8)}`;
 
   // user history
-  req.body.cartDetail.forEach(item => {
+  req.body.cartDetail.forEach((item) => {
     history.push({
       porder: po,
       dateOfPurchase: Date.now(),
@@ -387,7 +429,7 @@ app.post('/api/users/successBuy', auth, (req, res) => {
       id: item._id,
       price: item.price,
       quantity: item.quantity,
-      paymentId: req.body.paymentData.paymentID
+      paymentId: req.body.paymentData.paymentID,
     });
   });
 
@@ -396,11 +438,11 @@ app.post('/api/users/successBuy', auth, (req, res) => {
     id: req.user._id,
     name: req.user.name,
     lastname: req.user.lastname,
-    email: req.user.email
+    email: req.user.email,
   };
   transactionData.data = {
     ...req.body.paymentData,
-    porder: po
+    porder: po,
   };
   transactionData.product = history;
 
@@ -415,7 +457,7 @@ app.post('/api/users/successBuy', auth, (req, res) => {
       payment.save((err, doc) => {
         if (err) return res.json({ success: false, err });
         let products = [];
-        doc.product.forEach(item => {
+        doc.product.forEach((item) => {
           products.push({ id: item.id, quantity: item.quantity });
         });
 
@@ -426,20 +468,20 @@ app.post('/api/users/successBuy', auth, (req, res) => {
               { _id: item.id },
               {
                 $inc: {
-                  sold: item.quantity
-                }
+                  sold: item.quantity,
+                },
               },
               { new: false },
               callback
             );
           },
-          err => {
+          (err) => {
             if (err) return res.json({ success: false, err });
             sendEmail(user.email, user.name, null, 'purchase', transactionData);
             res.status(200).json({
               success: true,
               cart: user.cart,
-              cartDetail: []
+              cartDetail: [],
             });
           }
         );
@@ -452,13 +494,13 @@ app.post('/api/users/update_profile', auth, (req, res) => {
   User.findOneAndUpdate(
     { _id: req.user._id },
     {
-      $set: req.body
+      $set: req.body,
     },
     { new: true },
     (err, doc) => {
       if (err) return res.json({ success: false, err });
       return res.status(200).send({
-        success: true
+        success: true,
       });
     }
   );
@@ -467,7 +509,7 @@ app.post('/api/users/update_profile', auth, (req, res) => {
 app.post('/api/users/reset_user', (req, res) => {
   User.findOne(
     {
-      email: req.body.email
+      email: req.body.email,
     },
     (err, user) => {
       user.generateResetToken((err, user) => {
@@ -480,22 +522,20 @@ app.post('/api/users/reset_user', (req, res) => {
 });
 
 app.post('/api/users/reset_password', (req, res) => {
-  var today = moment()
-    .startOf('day')
-    .valueOf();
+  var today = moment().startOf('day').valueOf();
 
   User.findOne(
     {
       resetToken: req.body.resetToken,
       resetTokenExp: {
-        $gte: today
-      }
+        $gte: today,
+      },
     },
     (err, user) => {
       if (!user)
         return res.json({
           success: false,
-          message: 'Sorry, token bad, generate a new one.'
+          message: 'Sorry, token bad, generate a new one.',
         });
 
       user.password = req.body.password;
@@ -505,7 +545,7 @@ app.post('/api/users/reset_password', (req, res) => {
       user.save((err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).json({
-          success: true
+          success: true,
         });
       });
     }
@@ -532,7 +572,7 @@ app.post('/api/site/site_data', auth, admin, (req, res) => {
       if (err) return res.json({ success: false, err });
       return res.status(200).send({
         success: true,
-        siteInfo: doc.siteInfo
+        siteInfo: doc.siteInfo,
       });
     }
   );
@@ -556,10 +596,10 @@ app.post('/api/forum/posts', auth, (req, res) => {
   const newPost = new Post({
     text: req.body.text,
     name: req.body.name,
-    user: req.user._id
+    user: req.user._id,
   });
 
-  newPost.save().then(post => res.json(post));
+  newPost.save().then((post) => res.json(post));
 });
 
 // @desc    Get posts
@@ -567,25 +607,25 @@ app.post('/api/forum/posts', auth, (req, res) => {
 app.get('/api/forum/posts', (req, res) => {
   Post.find()
     .sort({ date: -1 })
-    .then(posts => res.json(posts))
-    .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+    .then((posts) => res.json(posts))
+    .catch((err) => res.status(404).json({ nopostsfound: 'No posts found' }));
 });
 
 //Get post by id
 
 app.get('/api/forum/posts/:id', (req, res) => {
   Post.findById(req.params.id)
-    .then(post => res.json(post))
-    .catch(err =>
+    .then((post) => res.json(post))
+    .catch((err) =>
       res.status(404).json({ nopostfound: 'No post found with that ID' })
     );
 });
 
 // // // @desc    remove post
 
-app.get('/api/forum/posts/remove/:id', auth, admin, function(req, res, next) {
+app.get('/api/forum/posts/remove/:id', auth, admin, function (req, res, next) {
   Post.findById(req.params.id)
-    .then(post => {
+    .then((post) => {
       // Check for post owner
       if (post.user.toString() !== req.user.id) {
         return res.status(401).json({ notauthorized: 'User not authorized' });
@@ -594,7 +634,7 @@ app.get('/api/forum/posts/remove/:id', auth, admin, function(req, res, next) {
       // Delete
       post.remove().then(() => res.json({ success: true }));
     })
-    .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+    .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
 
 // @route   POST api/posts/like/:id
@@ -603,10 +643,10 @@ app.get('/api/forum/posts/remove/:id', auth, admin, function(req, res, next) {
 
 app.get('/api/forum/posts/like/:id', auth, (req, res) => {
   Post.findById(req.params.id)
-    .then(post => {
+    .then((post) => {
       if (
-        post.likes.filter(like => like.user.toString() === req.user.id).length >
-        0
+        post.likes.filter((like) => like.user.toString() === req.user.id)
+          .length > 0
       ) {
         return res
           .status(400)
@@ -616,9 +656,9 @@ app.get('/api/forum/posts/like/:id', auth, (req, res) => {
       // Add user id to likes array
       post.likes.unshift({ user: req.user.id });
 
-      post.save().then(post => res.json({ success: true }));
+      post.save().then((post) => res.json({ success: true }));
     })
-    .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+    .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
 
 // // @route   POST api/posts/unlike/:id
@@ -627,9 +667,9 @@ app.get('/api/forum/posts/like/:id', auth, (req, res) => {
 
 app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
   Post.findById(req.params.id)
-    .then(post => {
+    .then((post) => {
       if (
-        post.likes.filter(like => like.user.toString() === req.user.id)
+        post.likes.filter((like) => like.user.toString() === req.user.id)
           .length === 0
       ) {
         return res
@@ -639,16 +679,16 @@ app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
 
       // Get remove index
       const removeIndex = post.likes
-        .map(item => item.user.toString())
+        .map((item) => item.user.toString())
         .indexOf(req.user.id);
 
       // Splice out of array
       post.likes.splice(removeIndex, 1);
 
       // Save
-      post.save().then(post => res.json({ success: true }));
+      post.save().then((post) => res.json({ success: true }));
     })
-    .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+    .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
 
 // @route   POST api/posts/comment/:id
@@ -660,20 +700,20 @@ app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
   if (!isValid) return res.status(400).json(errors);
 
   Post.findOne({ _id: req.params.id })
-    .then(post => {
+    .then((post) => {
       const newComment = {
         text: req.body.text,
-        user: req.user._id
+        user: req.user._id,
       };
 
       post.comments.unshift(newComment);
 
       post
         .save()
-        .then(post => res.json(post))
-        .catch(err => console.log(err));
+        .then((post) => res.json(post))
+        .catch((err) => console.log(err));
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 
 // @route   DELETE api/posts/comment/:id/:comment_id
@@ -681,11 +721,11 @@ app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
 // @access  Private
 app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
   Post.findOne({ _id: req.params.id })
-    .then(post => {
+    .then((post) => {
       // Check to see if comment exists
       if (
         post.comments.filter(
-          comment => comment._id.toString() === req.params.comment_id
+          (comment) => comment._id.toString() === req.params.comment_id
         ).length === 0
       ) {
         return res
@@ -695,15 +735,15 @@ app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
 
       // Get remove index
       const removeIndex = post.comments
-        .map(item => item._id.toString())
+        .map((item) => item._id.toString())
         .indexOf(req.params.comment_id);
 
       // Splice comment out of array
       post.comments.splice(removeIndex, 1);
 
-      post.save().then(post => res.json({ success: true }));
+      post.save().then((post) => res.json({ success: true }));
     })
-    .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+    .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
 
 // @route   PRODUCT api/posts/comment/:id
@@ -715,21 +755,21 @@ app.post('/api/product/comment/:id', auth, (req, res) => {
   if (!isValid) return res.status(400).json(errors);
 
   Product.findOne({ _id: req.params.id })
-    .then(product => {
+    .then((product) => {
       const newComment = {
         text: req.body.text,
         name: req.user.name,
-        user: req.user._id
+        user: req.user._id,
       };
 
       product.comments.unshift(newComment);
 
       product
         .save()
-        .then(product => res.json(product))
-        .catch(err => console.log(err));
+        .then((product) => res.json(product))
+        .catch((err) => console.log(err));
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 
 // @route   DELETE api/product/comment/:id/:comment_id
@@ -737,11 +777,11 @@ app.post('/api/product/comment/:id', auth, (req, res) => {
 // @access  Private
 app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
   Product.findOne({ _id: req.params.id })
-    .then(product => {
+    .then((product) => {
       // Check to see if comment exists
       if (
         product.comments.filter(
-          comment => comment._id.toString() === req.params.comment_id
+          (comment) => comment._id.toString() === req.params.comment_id
         ).length === 0
       ) {
         return res
@@ -751,15 +791,15 @@ app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
 
       // Get remove index
       const removeIndex = product.comments
-        .map(item => item._id.toString())
+        .map((item) => item._id.toString())
         .indexOf(req.params.comment_id);
 
       // Splice comment out of array
       product.comments.splice(removeIndex, 1);
 
-      product.save().then(product => res.json(product));
+      product.save().then((product) => res.json(product));
     })
-    .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+    .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
 
 // // @route   EDIT api/product/comment/:id/:comment_id/edit
@@ -771,11 +811,11 @@ app.post(
   admin,
   (req, res) => {
     Product.findOne({ _id: req.params.id })
-      .then(product => {
+      .then((product) => {
         // Check to see if comment exists
         if (
           product.comments.filter(
-            comment => comment._id.toString() === req.params.comment_id
+            (comment) => comment._id.toString() === req.params.comment_id
           ).length === 0
         ) {
           return res
@@ -783,14 +823,14 @@ app.post(
             .json({ commentnotexists: 'Comment does not exist' });
         }
         const editIndex = product.comments
-          .map(item => item._id.toString())
+          .map((item) => item._id.toString())
           .indexOf(req.params.comment_id);
 
         product.comments[editIndex] = req.body;
 
-        product.save().then(product => res.json(product));
+        product.save().then((product) => res.json(product));
       })
-      .catch(err =>
+      .catch((err) =>
         res.status(404).json({ productnotfound: 'No product found' })
       );
   }
@@ -805,11 +845,11 @@ app.post(
   admin,
   (req, res) => {
     Post.findOne({ _id: req.params.id })
-      .then(post => {
+      .then((post) => {
         // Check to see if comment exists
         if (
           post.comments.filter(
-            comment => comment._id.toString() === req.params.comment_id
+            (comment) => comment._id.toString() === req.params.comment_id
           ).length === 0
         ) {
           return res
@@ -819,15 +859,15 @@ app.post(
 
         // Get remove index
         const editIndex = post.comments
-          .map(item => item._id.toString())
+          .map((item) => item._id.toString())
           .indexOf(req.params.comment_id);
 
         // Splice comment out of array
         post.comments[editIndex] = req.body;
 
-        post.save().then(post => res.json(post));
+        post.save().then((post) => res.json(post));
       })
-      .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+      .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
 

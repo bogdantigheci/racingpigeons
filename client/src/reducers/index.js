@@ -8,7 +8,7 @@ const reducer = combineReducers({
   user,
   product,
   site,
-  post
+  post,
 });
 
 export default reducer;

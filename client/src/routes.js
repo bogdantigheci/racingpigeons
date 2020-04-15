@@ -22,6 +22,8 @@ import Forum from './components/Forum/Posts/Posts';
 import Post from './components/Forum/Comments/Post';
 import Club from './components/Club/Club';
 import BreederInfo from './components/Breeders/BreederInfo';
+import Chat from './components/Chat/Chat';
+import Weather from './components/Weather/Weather';
 
 const Routes = () => {
   return (
@@ -74,7 +76,9 @@ const Routes = () => {
 
         <Route path="/forum/post/:id" exact component={Auth(Post, true)} />
         <Route path="/forum" exact component={Auth(Forum, true)} />
+        <Route path="/chat" exact component={Auth(Chat, true)} />
         <Route path="/breeds" exact component={Auth(Breeds, null)} />
+        <Route path="/weather" exact component={Auth(Weather, null)} />
         <Route path="/breeders" exact component={Auth(Breeders, null)} />
         <Route path="/club" exact component={Auth(Club, null)} />
         <Route path="/shop" exact component={Auth(Shop, null)} />
