@@ -17,6 +17,7 @@ body {
 .search-box {
   width: 100%;
   margin: 0 0 75px;
+  color: #fff;
 }
 
 .search-box .search-bar {
@@ -29,20 +30,23 @@ body {
   border: none;
   outline: none;
 
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #4169e1;
   border-radius: 0px 0px 16px 16px;
   margin-top: -5px;
 
   box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
 
-  color: #313131;
-  font-size: 20px;
+  color: #ffff;
+  font-size: 1rem;
 
   transition: 0.4s ease;
 }
 
 .search-box .search-bar:focus {
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: #587ff3;
+}
+.search-box .search-bar::placeholder {
+  color: #fff;
 }
 
 .location-box .location {

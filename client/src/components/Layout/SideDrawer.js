@@ -40,6 +40,11 @@ class sideDrawer extends Component {
         linkTo: '/forum',
         public: false,
       },
+      {
+        name: 'Weather',
+        linkTo: '/weather',
+        public: true,
+      },
     ],
     user: [
       {
