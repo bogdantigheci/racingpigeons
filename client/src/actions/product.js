@@ -11,38 +11,40 @@ import {
   ADD_BREED,
   ADD_BREEDER,
   GET_PRODUCT_DETAIL,
-  CLEAR_PRODUCT_DETAIL
+  CLEAR_PRODUCT_DETAIL,
+  CLEAR_ERRORS,
+  GET_ERRORS,
 } from '../constants/types';
 import { PRODUCT_SERVER } from '../components/utils/misc';
 
 export function getProductsByArrival() {
   const request = axios
     .get(`${PRODUCT_SERVER}/articles?sortBy=createdAt&order=desc&limit=4`)
-    .then(response => response.data);
+    .then((response) => response.data);
 
   return {
     type: GET_PRODUCTS_BY_ARRIVAL,
-    payload: request
+    payload: request,
   };
 }
 
 export function getBreeders() {
   const request = axios
     .get(`${PRODUCT_SERVER}/breeders`)
-    .then(response => response.data);
+    .then((response) => response.data);
   return {
     type: GET_BREEDERS,
-    payload: request
+    payload: request,
   };
 }
 
 export function getBreeds() {
   const request = axios
     .get(`${PRODUCT_SERVER}/breeds`)
-    .then(response => response.data);
+    .then((response) => response.data);
   return {
     type: GET_BREEDS,
-    payload: request
+    payload: request,
   };
 }
 
@@ -55,135 +57,157 @@ export function getProductsToShop(
   const data = {
     limit,
     skip,
-    filters
+    filters,
   };
 
-  const request = axios.post(`${PRODUCT_SERVER}/shop`, data).then(response => {
-    let newState = [...previousState, ...response.data.articles];
+  const request = axios
+    .post(`${PRODUCT_SERVER}/shop`, data)
+    .then((response) => {
+      let newState = [...previousState, ...response.data.articles];
 
-    return {
-      size: response.data.size,
-      articles: newState
-    };
-  });
+      return {
+        size: response.data.size,
+        articles: newState,
+      };
+    });
 
   return {
     type: GET_PRODUCTS_TO_SHOP,
-    payload: request
+    payload: request,
   };
 }
 
 export function addProduct(dataToSubmit) {
   const request = axios
     .post(`${PRODUCT_SERVER}/article`, dataToSubmit)
-    .then(response => response.data);
+    .then((response) => response.data);
   return {
     type: ADD_PRODUCT,
-    payload: request
+    payload: request,
   };
 }
 
 export const clearProduct = () => {
   return {
     type: CLEAR_PRODUCT,
-    payload: ''
+    payload: '',
   };
 };
 
 export function addBreed(dataToSubmit, existingBreeds) {
   const request = axios
     .post(`${PRODUCT_SERVER}/breeds`, dataToSubmit)
-    .then(response => {
+    .then((response) => {
       let breeds = [...existingBreeds, response.data.breed];
       return {
         success: response.data.success,
-        breeds
+        breeds,
       };
     });
   return {
     type: ADD_BREED,
-    payload: request
+    payload: request,
   };
 }
 
 export function addBreeder(dataToSubmit, existingBreeders) {
   const request = axios
     .post(`${PRODUCT_SERVER}/breeders`, dataToSubmit)
-    .then(response => {
+    .then((response) => {
       let breeders = [...existingBreeders, response.data.breeder];
       return {
         success: response.data.success,
-        breeders
+        breeders,
       };
     });
   return {
     type: ADD_BREEDER,
-    payload: request
+    payload: request,
   };
 }
 
 export function getProductDetail(id) {
   const request = axios
     .get(`${PRODUCT_SERVER}/articles_by_id?id=${id}&type=single`)
-    .then(response => {
+    .then((response) => {
       return response.data[0];
     });
   return {
     type: GET_PRODUCT_DETAIL,
-    payload: request
+    payload: request,
   };
 }
 
 export function getBreeder(id) {
   const request = axios
     .get(`${PRODUCT_SERVER}/breeders/${id}`)
-    .then(response => {
+    .then((response) => {
       return response.data;
     });
   return {
     type: GET_BREEDER,
-    payload: request
+    payload: request,
   };
 }
 
 export function clearProductDetail() {
   return {
     type: CLEAR_PRODUCT_DETAIL,
-    payload: ''
+    payload: '',
   };
 }
 
-export const addCommentToProduct = (prodId, commentData) => dispatch => {
-  axios.post(`${PRODUCT_SERVER}/comment/${prodId}`, commentData).then(res =>
-    dispatch({
-      type: GET_PRODUCT_DETAIL,
-      payload: res.data
-    })
-  );
+export const addCommentToProduct = (prodId, commentData) => (dispatch) => {
+  axios
+    .post(`${PRODUCT_SERVER}/comment/${prodId}`, commentData)
+    .then((res) =>
+      dispatch({
+        type: GET_PRODUCT_DETAIL,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
 };
 
-export const deleteCommentFromProduct = (prodId, commentId) => dispatch => {
-  axios.get(`${PRODUCT_SERVER}/comment/${prodId}/${commentId}`).then(res =>
-    dispatch({
-      type: GET_PRODUCT_DETAIL,
-      payload: res.data
-    })
-  );
+export const deleteCommentFromProduct = (prodId, commentId) => (dispatch) => {
+  axios
+    .get(`${PRODUCT_SERVER}/comment/${prodId}/${commentId}`)
+    .then((res) =>
+      dispatch({
+        type: GET_PRODUCT_DETAIL,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
 };
-export const editCommentFromProduct = (
-  prodId,
-  commentId,
-  editCommentData
-) => dispatch => {
+export const editCommentFromProduct = (prodId, commentId, editCommentData) => (
+  dispatch
+) => {
   axios
     .post(
       `${PRODUCT_SERVER}/comment/${prodId}/${commentId}/edit`,
       editCommentData
     )
-    .then(res =>
+    .then((res) =>
       dispatch({
         type: GET_PRODUCT_DETAIL,
-        payload: res.data
+        payload: res.data,
       })
     );
+};
+
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS,
+  };
 };

@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../../utils/Forum/TextAreaFieldGroup';
 import {
   deleteCommentFromProduct,
-  editCommentFromProduct
+  editCommentFromProduct,
 } from '../../../actions/product';
 
 class ProdCommentItem extends Component {
   state = {
     text: this.props.comment.text,
-    edit: false
+    edit: false,
   };
 
   handleDeleteCommentFromProduct(productId, commentId) {
@@ -19,7 +19,7 @@ class ProdCommentItem extends Component {
     editCommentData = {
       text: this.state.text,
       user: this.props.user.userData.id,
-      name: this.props.user.userData.name
+      name: this.props.user.userData.name,
     };
 
     this.props.editCommentFromProduct(productId, commentId, editCommentData);
@@ -97,14 +97,15 @@ class ProdCommentItem extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+  user: state.user,
+  product: state.product,
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   deleteCommentFromProduct: (productId, commentId) =>
     dispatch(deleteCommentFromProduct(productId, commentId)),
   editCommentFromProduct: (productId, commentId, editCommentData) =>
-    dispatch(editCommentFromProduct(productId, commentId, editCommentData))
+    dispatch(editCommentFromProduct(productId, commentId, editCommentData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProdCommentItem);

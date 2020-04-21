@@ -10,7 +10,6 @@ import {
   DELETE_POST,
 } from '../constants/types';
 
-
 export const addPost = (postData) => (dispatch) => {
   dispatch(clearErrors());
   axios

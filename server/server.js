@@ -59,6 +59,7 @@ const { Message } = require('./models/message');
 ///Validation
 
 const validatePostInput = require('../server/utils/validation/post');
+const validateCommentInput = require('../server/utils/validation/comment');
 
 ///Middlewares
 
@@ -715,9 +716,9 @@ app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
 // @desc    Add comment to product
 
 app.post('/api/product/comment/:id', auth, (req, res) => {
-  // const { errors, isValid } = validatePostInput(req.body);
+  const { errors, isValid } = validateCommentInput(req.body);
 
-  // if (!isValid) return res.status(400).json(errors);
+  if (!isValid) return res.status(400).json(errors);
 
   Product.findOne({ _id: req.params.id })
     .then((product) => {

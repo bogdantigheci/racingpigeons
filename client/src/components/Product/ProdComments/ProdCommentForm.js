@@ -46,6 +46,13 @@ class ProdCommentForm extends Component {
                   value={this.state.text}
                   onChange={this.onChange}
                 />
+                {this.props.product && this.props.product.errors
+                  ? this.props.product.errors.map((error, i) => (
+                      <div className="form_error" key={i}>
+                        {error.text}
+                      </div>
+                    ))
+                  : null}
               </div>
               <button type="submit" className="btn btn-primary">
                 Submit

@@ -10,6 +10,8 @@ import {
   ADD_BREEDER,
   GET_PRODUCT_DETAIL,
   CLEAR_PRODUCT_DETAIL,
+  CLEAR_ERRORS,
+  GET_ERRORS,
 } from '../constants/types';
 
 ///rename to products for better fit
@@ -74,6 +76,10 @@ const product = (state = { breeders: [] }, action) => {
         ...state,
         prodDetail: action.payload,
       };
+    case GET_ERRORS:
+      return { ...state, errors: [action.payload] };
+    case CLEAR_ERRORS:
+      return {};
     default:
       return state;
   }
