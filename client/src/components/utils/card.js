@@ -49,7 +49,7 @@ class Card extends Component {
           <div className="tags">
             <div className="breed">{props.breed.name}</div>
             <div className="name">Ring ID: {props.ringId}</div>
-            <div className="price">${props.price}</div>
+            <div className="price">€{props.price}</div>
           </div>
           <ShopModal
             show={this.state.modalShow}

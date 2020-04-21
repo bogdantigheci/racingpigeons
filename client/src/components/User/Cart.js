@@ -15,7 +15,7 @@ class UserCart extends Component {
     loading: true,
     total: 0,
     showTotal: false,
-    showSuccess: false
+    showSuccess: false,
   };
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class UserCart extends Component {
 
     if (user.userData.cart) {
       if (user.userData.cart.length > 0) {
-        user.userData.cart.forEach(item => {
+        user.userData.cart.forEach((item) => {
           cartItems.push(item.id);
         });
         this.props.getCartItems(cartItems, user.userData.cart).then(() => {
@@ -36,24 +36,24 @@ class UserCart extends Component {
     }
   }
 
-  calculateTotal = cartDetail => {
+  calculateTotal = (cartDetail) => {
     let total = 0;
 
-    cartDetail.forEach(item => {
+    cartDetail.forEach((item) => {
       total += parseInt(item.price, 10) * item.quantity;
     });
 
     this.setState({
       total,
-      showTotal: true
+      showTotal: true,
     });
   };
 
-  removeFromCart = id => {
+  removeFromCart = (id) => {
     this.props.removeCartItem(id).then(() => {
       if (this.props.user.cartDetail.length <= 0) {
         this.setState({
-          showTotal: false
+          showTotal: false,
         });
       } else {
         this.calculateTotal(this.props.user.cartDetail);
@@ -68,23 +68,23 @@ class UserCart extends Component {
     </div>
   );
 
-  transactionError = data => {
+  transactionError = (data) => {
     console.log('Paypal error');
   };
-  transactionCancel = data => {
+  transactionCancel = (data) => {
     console.log('Transaction cancelled');
   };
-  transactionSuccess = data => {
+  transactionSuccess = (data) => {
     this.props
       .onSuccessBuy({
         cartDetail: this.props.user.cartDetail,
-        paymentData: data
+        paymentData: data,
       })
       .then(() => {
         if (this.props.user.successBuy) {
           this.setState({
             showTotal: false,
-            showSuccess: true
+            showSuccess: true,
           });
         }
       });
@@ -99,12 +99,14 @@ class UserCart extends Component {
             <ProductBlock
               products={this.props.user}
               type="cart"
-              removeItem={id => this.removeFromCart(id)}
+              removeItem={(id) => this.removeFromCart(id)}
             />
             {this.state.showTotal ? (
               <div>
                 <div className="user_cart_sum">
-                  <div>Total amount: $ {this.state.total}</div>
+                  <div className="total_amount">
+                    Total amount: € {this.state.total}
+                  </div>
                 </div>
               </div>
             ) : this.state.showSuccess ? (
@@ -127,9 +129,9 @@ class UserCart extends Component {
           >
             <Paypal
               toPay={this.state.total}
-              transactionError={data => this.transactionError(data)}
-              transactionCancel={data => this.transactionCancel(data)}
-              onSuccess={data => this.transactionSuccess(data)}
+              transactionError={(data) => this.transactionError(data)}
+              transactionCancel={(data) => this.transactionCancel(data)}
+              onSuccess={(data) => this.transactionSuccess(data)}
             />
           </div>
         </div>
@@ -138,18 +140,18 @@ class UserCart extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     getCartItems: (cartItems, userCart) =>
       dispatch(getCartItems(cartItems, userCart)),
-    removeCartItem: id => dispatch(removeCartItem(id)),
-    onSuccessBuy: data => dispatch(onSuccessBuy(data))
+    removeCartItem: (id) => dispatch(removeCartItem(id)),
+    onSuccessBuy: (data) => dispatch(onSuccessBuy(data)),
   };
 };
 

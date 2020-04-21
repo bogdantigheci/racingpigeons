@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProductBlock = ({ products, removeItem }) => {
-  const renderCartImage = images => {
+  const renderCartImage = (images) => {
     if (images.length > 0) {
       return images[0].url;
     } else {
@@ -11,17 +11,13 @@ const ProductBlock = ({ products, removeItem }) => {
 
   const renderItems = () =>
     products.cartDetail
-      ? products.cartDetail.map(product => (
+      ? products.cartDetail.map((product) => (
           <div className="user_product_block" key={product._id}>
             <div className="item">
-              <div
+              <img
                 className="image"
-                style={{
-                  background: `url(${renderCartImage(
-                    product.images
-                  )}) no-repeat`
-                }}
-              ></div>
+                src={`${renderCartImage(product.images)}`}
+              />
             </div>
             <div className="item">
               <h4>Product name</h4>
@@ -36,7 +32,7 @@ const ProductBlock = ({ products, removeItem }) => {
             </div>
             <div className="item">
               <h4>Price</h4>
-              <div>$ {product.price}</div>
+              <div>€ {product.price}</div>
             </div>
             <div className="item btn">
               <div

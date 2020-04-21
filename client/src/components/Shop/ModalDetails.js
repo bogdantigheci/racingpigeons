@@ -72,7 +72,9 @@ class ModalDetails extends Component {
           {this.state.showTotal ? (
             <div>
               <div className="user_cart_sum">
-                <div>Total amount: $ {this.state.total}</div>
+                <div className="total_amount">
+                  Total amount: € {this.state.total}
+                </div>
               </div>
             </div>
           ) : null}

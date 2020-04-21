@@ -1438,6 +1438,7 @@ select {
 
 .user_product_block .item .image {
   height: 7rem;
+  width: 10rem;
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center center !important;
@@ -1446,6 +1447,10 @@ select {
 
 .user_product_block .item.btn {
   width: 0;
+}
+
+.total_amount {
+  font-weight: bold;
 }
 
 .user_product_block .cart_remove_btn {
