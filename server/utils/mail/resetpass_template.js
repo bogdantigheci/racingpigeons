@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const resetPass = data => {
+const resetPass = (data) => {
   const URL =
     process.env.NODE_ENV === 'production'
       ? process.env.ROOT_URL
@@ -10,7 +10,7 @@ const resetPass = data => {
   <html style="margin: 0; padding: 0;">
   
       <head>
-          <title>One | Email template!</title>
+          <title>Reset Password Email template!</title>
       </head>
   
           <body style="margin: 0; padding: 0;">
@@ -28,7 +28,7 @@ const resetPass = data => {
                   <tr>
                        <td style="background-color: #999592; margin: 0 auto;">
                                <p style="box-sizing: border-box; color: white; font-family: Helvetica, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding: 15px 25px; text-align: center; text-transform: uppercase;font-size:10px">
-                                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                      If you did not request a password reset, please make sure you contact us. If you did, please follow the instructions to reset your password.
                                </p></td>
                   </tr>
               </table>

@@ -69,16 +69,6 @@ const { admin } = require('./middleware/admin');
 
 const { sendEmail } = require('./utils/mail/index');
 
-///////////////////////////////////
-//Chat
-///////////////////////////////////
-
-app.post('/message', auth, (req, res) => {
-  const payload = req.body;
-  pusher.trigger('chat', 'message', payload);
-  res.send(payload);
-});
-
 //////////////////////////////////////
 //    PRODUCTS - PIGEONS
 //////////////////////////////////////

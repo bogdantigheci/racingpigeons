@@ -3,8 +3,8 @@ import MyButton from '../utils/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const ProductInfo = props => {
-  const showProdTags = detail => (
+const ProductInfo = (props) => {
+  const showProdTags = (detail) => (
     <div className="product_tags">
       {detail.shipping ? (
         <div className="tag">
@@ -41,9 +41,9 @@ const ProductInfo = props => {
     </div>
   );
 
-  const showProdActions = detail => (
+  const showProdActions = (detail) => (
     <div className="product_actions">
-      <div className="price">$ {detail.price}</div>
+      <div className="price">€ {detail.price}</div>
       <div className="cart">
         <MyButton
           type="add_to_cart_link"
@@ -55,7 +55,7 @@ const ProductInfo = props => {
     </div>
   );
 
-  const showProdSpecifications = detail => (
+  const showProdSpecifications = (detail) => (
     <div className="product_specifications">
       <h2>Specifics</h2>
       <div>
