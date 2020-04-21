@@ -5,6 +5,7 @@ body {
 .form_error {
   color: red;
 }
+
 /* weather */
 .weatherapp {
   background-image: url('/images/cold-bg.jpg');

@@ -18,14 +18,31 @@ const ShopModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ModalDetails />
+        {props.prodauth || props.cardauth ? (
+          <ModalDetails />
+        ) : (
+          <div>
+            You need to
+            <Link to="/register_login"> Login</Link> before adding an item to
+            cart!
+          </div>
+        )}
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Continue</Button>
-        <Link to="/user/cart">
-          <Button>Checkout</Button>
-        </Link>
-      </Modal.Footer>
+      {props.prodauth || props.cardauth ? (
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Continue</Button>
+          <Link to="/user/cart">
+            <Button>Checkout</Button>
+          </Link>
+        </Modal.Footer>
+      ) : (
+        <Modal.Footer>
+          <div>
+            Don't have an account yet?
+            <Link to="/register"> Register!</Link>
+          </div>
+        </Modal.Footer>
+      )}
     </Modal>
   );
 };

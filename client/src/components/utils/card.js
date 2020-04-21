@@ -23,8 +23,8 @@ class Card extends Component {
     );
     if (!isInCart) {
       this.props.addToCart(id);
-      this.setModalShow();
     }
+    this.setModalShow();
   };
 
   setModalShow = () => {
@@ -32,8 +32,6 @@ class Card extends Component {
       modalShow: !this.state.modalShow,
     });
   };
-
-  youNeedToLogin = () => {};
 
   render() {
     const props = this.props;
@@ -55,7 +53,8 @@ class Card extends Component {
           </div>
           <ShopModal
             show={this.state.modalShow}
-            onHide={() => this.setModalShow(false)}
+            onHide={() => this.setModalShow()}
+            cardauth={this.props.user.userData.isAuth ? 1 : 0}
           />
 
           {props.grid ? (
@@ -79,7 +78,7 @@ class Card extends Component {
                 runAction={() => {
                   props.user.userData.isAuth
                     ? this.addToCartHandler(props._id)
-                    : this.youNeedToLogin();
+                    : this.setModalShow();
                 }}
               />
             </span>

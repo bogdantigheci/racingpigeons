@@ -19,6 +19,7 @@ mongoose.connect(`${process.env.MONGODB_URI}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: false,
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -72,36 +73,10 @@ const { sendEmail } = require('./utils/mail/index');
 //Chat
 ///////////////////////////////////
 
-app.post('/message', (req, res) => {
+app.post('/message', auth, (req, res) => {
   const payload = req.body;
   pusher.trigger('chat', 'message', payload);
   res.send(payload);
-});
-
-// app.post('/api/chat/messages', auth, (req, res) => {
-//   const { errors, isValid } = validatePostInput(req.body);
-
-//   // Check Validation
-//   if (!isValid) {
-//     // If any errors, send 400 with errors object
-//     return res.status(400).json(errors);
-//   }
-
-//   const newMessage = new Message({
-//     text: req.body.text,
-//     name: req.body.name,
-//     user: req.user._id,
-//   });
-
-//   newMessage.save().then((message) => res.json(message));
-// });
-
-app.get('/api/chat/messages', (req, res) => {
-  Message.find({}, (err, messages) => {
-    if (err) return res.status(400).send(err);
-
-    res.status(200).send({ messages });
-  });
 });
 
 //////////////////////////////////////
@@ -695,9 +670,9 @@ app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
 // @desc    Add comment to post
 
 app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
-  const { errors, isValid } = validatePostInput(req.body);
+  // const { errors, isValid } = validatePostInput(req.body);
 
-  if (!isValid) return res.status(400).json(errors);
+  // if (!isValid) return res.status(400).json(errors);
 
   Post.findOne({ _id: req.params.id })
     .then((post) => {
@@ -750,9 +725,9 @@ app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
 // @desc    Add comment to product
 
 app.post('/api/product/comment/:id', auth, (req, res) => {
-  const { errors, isValid } = validatePostInput(req.body);
+  // const { errors, isValid } = validatePostInput(req.body);
 
-  if (!isValid) return res.status(400).json(errors);
+  // if (!isValid) return res.status(400).json(errors);
 
   Product.findOne({ _id: req.params.id })
     .then((product) => {

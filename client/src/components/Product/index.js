@@ -47,12 +47,11 @@ class ProductDetail extends Component {
     return (
       <div>
         <ShopHeader title="Product detail" />
-
         <ShopModal
           show={this.state.modalShow}
-          onHide={() => this.setModalShow(false)}
+          onHide={() => this.setModalShow()}
+          prodauth={this.props.auth ? 1 : 0}
         />
-
         <div className="container d-flex">
           {this.props.products.prodDetail ? (
             <div style={{ width: '100%' }}>
@@ -89,7 +88,11 @@ class ProductDetail extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { products: state.product, cartDetail: state.user.userData.cart };
+  return {
+    products: state.product,
+    cartDetail: state.user.userData.cart,
+    auth: state.user.userData.isAuth,
+  };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
