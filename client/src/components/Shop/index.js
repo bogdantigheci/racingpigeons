@@ -34,6 +34,7 @@ class Shop extends Component {
       this.state.filters
     );
   }
+
   handlePrice = (value) => {
     const data = price;
     let array = [];
@@ -91,7 +92,6 @@ class Shop extends Component {
   };
 
   render() {
-    // console.log('asdasdasdad', this.state.filters);
     const products = this.props.products;
     return (
       <div>

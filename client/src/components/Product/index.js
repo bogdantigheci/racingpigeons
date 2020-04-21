@@ -7,11 +7,16 @@ import { getProductDetail, clearProductDetail } from '../../actions/product';
 import { addToCart } from '../../actions/user';
 import ProdComments from './ProdComments/ProdComments';
 import _ from 'lodash';
+import ShopModal from '../Shop/Modal';
 
 class ProductDetail extends Component {
+  state = {
+    modalShow: false,
+  };
+
   componentDidMount() {
     const id = this.props.match.params.id;
-    this.props.getProductDetail(id).then(response => {
+    this.props.getProductDetail(id).then((response) => {
       if (!this.props.products.prodDetail) {
         this.props.history.push('/page_not_found');
       }
@@ -22,19 +27,32 @@ class ProductDetail extends Component {
     this.props.clearProductDetail();
   }
   //don't add duplicate pigeon in cart
-  addToCartHandler = id => {
+  addToCartHandler = (id) => {
     const isInCart = _.find(
-      _.map(this.props.cartDetail, item => item.id === id)
+      _.map(this.props.cartDetail, (item) => item.id === id)
     );
     if (!isInCart) {
       this.props.addToCart(id);
     }
+    this.setModalShow();
+  };
+
+  setModalShow = () => {
+    this.setState({
+      modalShow: !this.state.modalShow,
+    });
   };
 
   render() {
     return (
       <div>
         <ShopHeader title="Product detail" />
+
+        <ShopModal
+          show={this.state.modalShow}
+          onHide={() => this.setModalShow(false)}
+        />
+
         <div className="container d-flex">
           {this.props.products.prodDetail ? (
             <div style={{ width: '100%' }}>
@@ -46,7 +64,7 @@ class ProductDetail extends Component {
                 </div>
                 <div className="right">
                   <ProductInfo
-                    addToCart={id => this.addToCartHandler(id)}
+                    addToCart={(id) => this.addToCartHandler(id)}
                     detail={this.props.products.prodDetail}
                     comments={_.get(
                       this.props.products,
@@ -70,14 +88,14 @@ class ProductDetail extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { products: state.product, cartDetail: state.user.userData.cart };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getProductDetail: id => dispatch(getProductDetail(id)),
+    getProductDetail: (id) => dispatch(getProductDetail(id)),
     clearProductDetail: () => dispatch(clearProductDetail()),
-    addToCart: id => dispatch(addToCart(id))
+    addToCart: (id) => dispatch(addToCart(id)),
   };
 };
 

@@ -4,8 +4,11 @@ import { connect } from 'react-redux';
 import { addToCart } from '../../actions/user';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import ShopModal from '../Shop/Modal';
 
 class Card extends Component {
+  state = { modalShow: false };
+
   renderCardImage(images) {
     if (images.length > 0) {
       return images[0].url;
@@ -14,25 +17,29 @@ class Card extends Component {
     }
   }
 
-  addToCartHandler = id => {
+  addToCartHandler = (id) => {
     const isInCart = _.find(
-      _.map(this.props.user.userData.cart, item => item.id === id)
+      _.map(this.props.user.userData.cart, (item) => item.id === id)
     );
     if (!isInCart) {
       this.props.addToCart(id);
+      this.setModalShow();
     }
   };
 
+  setModalShow = () => {
+    this.setState({
+      modalShow: !this.state.modalShow,
+    });
+  };
+
+  youNeedToLogin = () => {};
+
   render() {
     const props = this.props;
+
     return (
       <div className={`card_item_wrapper  ${props.grid}`}>
-        {/* <div
-          className="image"
-          style={{
-            background: `url(${this.renderCardImage(props.images)}) no-repeat `
-          }}
-        ></div> */}
         <Link to={`/product_detail/${props._id}`}>
           <img
             className="image"
@@ -46,6 +53,10 @@ class Card extends Component {
             <div className="name">Ring ID: {props.ringId}</div>
             <div className="price">${props.price}</div>
           </div>
+          <ShopModal
+            show={this.state.modalShow}
+            onHide={() => this.setModalShow(false)}
+          />
 
           {props.grid ? (
             <div className="description">
@@ -60,7 +71,7 @@ class Card extends Component {
                 title="Details"
                 linkTo={`/product_detail/${props._id}`}
                 addStyles={{
-                  margin: '10px 0 0 0'
+                  margin: '10px 0 0 0',
                 }}
               />
               <MyButton
@@ -68,7 +79,7 @@ class Card extends Component {
                 runAction={() => {
                   props.user.userData.isAuth
                     ? this.addToCartHandler(props._id)
-                    : console.log('you need to log in');
+                    : this.youNeedToLogin();
                 }}
               />
             </span>
@@ -79,13 +90,13 @@ class Card extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { user: state.user };
+const mapStateToProps = (state) => {
+  return { user: state.user, products: state.product };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: _id => dispatch(addToCart(_id))
+    addToCart: (_id) => dispatch(addToCart(_id)),
   };
 };
 

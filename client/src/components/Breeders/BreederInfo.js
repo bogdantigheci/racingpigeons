@@ -6,7 +6,7 @@ import _ from 'lodash';
 class BreederInfo extends Component {
   componentDidMount() {
     const id = this.props.match.params.id;
-    this.props.getBreeder(id).then(response => {
+    this.props.getBreeder(id).then((response) => {
       if (!this.props.products.breeder) {
         this.props.history.push('/page_not_found');
       }
@@ -64,8 +64,8 @@ class BreederInfo extends Component {
   }
 }
 
-const mapStateToProps = state => ({ products: state.product });
-const mapDispatchToProps = dispatch => ({
-  getBreeder: id => dispatch(getBreeder(id))
+const mapStateToProps = (state) => ({ products: state.product });
+const mapDispatchToProps = (dispatch) => ({
+  getBreeder: (id) => dispatch(getBreeder(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(BreederInfo);

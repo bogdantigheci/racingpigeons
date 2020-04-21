@@ -10,18 +10,24 @@ import {
   DELETE_POST,
 } from '../constants/types';
 
-// Add Post
-export const addPost = (postData) => {
-  clearErrors();
-  const request = axios
-    .post(`${FORUM_SERVER}/posts`, postData)
-    .then((res) => res.data);
-  return {
-    type: ADD_POST,
-    payload: request,
-  };
-};
 
+export const addPost = (postData) => (dispatch) => {
+  dispatch(clearErrors());
+  axios
+    .post(`${FORUM_SERVER}/posts`, postData)
+    .then((res) =>
+      dispatch({
+        type: ADD_POST,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
 // Get Posts
 export const getPosts = () => (dispatch) => {
   dispatch(setPostLoading());
@@ -35,8 +41,8 @@ export const getPosts = () => (dispatch) => {
     )
     .catch((err) =>
       dispatch({
-        type: GET_POSTS,
-        payload: null,
+        type: GET_ERRORS,
+        payload: err.response.data,
       })
     );
 };
@@ -153,6 +159,12 @@ export const editComment = (postId, commentId, editCommentData) => (
       dispatch({
         type: GET_POST,
         payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
       })
     );
 };

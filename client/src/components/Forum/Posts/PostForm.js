@@ -7,7 +7,7 @@ class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
+      text: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,7 +19,7 @@ class PostForm extends Component {
     const newPost = {
       text: this.state.text,
       name: this.props.user.userData.name,
-      user: this.props.user.userData.id
+      user: this.props.user.userData.id,
     };
 
     this.props.addPost(newPost);
@@ -30,6 +30,7 @@ class PostForm extends Component {
   }
 
   render() {
+    console.log('this.propseeeeeeeeeeeeeee', this.props.post.errors);
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
@@ -44,6 +45,15 @@ class PostForm extends Component {
                   onChange={this.onChange}
                 />
               </div>
+              {this.props.post.errors && (
+                <div>
+                  {this.props.post.errors.map((error, i) => (
+                    <p key={i} className="form_error">
+                      {error.text}
+                    </p>
+                  ))}
+                </div>
+              )}
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
@@ -55,12 +65,13 @@ class PostForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+  user: state.user,
+  post: state.post,
 });
 
-const mapDispatchToProps = dispatch => ({
-  addPost: postData => dispatch(addPost(postData))
+const mapDispatchToProps = (dispatch) => ({
+  addPost: (postData) => dispatch(addPost(postData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

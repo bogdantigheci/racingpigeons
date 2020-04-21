@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
+
 const api = {
   key: 'd5f4d6c890cff71e3b4e0f49054d8c72',
   base: 'https://api.openweathermap.org/data/2.5/',
 };
 
 const Weather = () => {
-  const [query, setQuery] = useState('');
+  const [searchParam, setSearchParam] = useState('');
   const [weather, setWeather] = useState({});
 
   const search = (evt) => {
     if (evt.key === 'Enter') {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+      fetch(`${api.base}weather?q=${searchParam}&units=metric&APPID=${api.key}`)
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
-          setQuery('');
-          console.log(result);
+          setSearchParam('');
         });
     }
   };
@@ -69,8 +69,8 @@ const Weather = () => {
             type="text"
             className="search-bar"
             placeholder="Enter location..."
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
+            onChange={(e) => setSearchParam(e.target.value)}
+            value={searchParam}
             onKeyPress={search}
           />
         </div>

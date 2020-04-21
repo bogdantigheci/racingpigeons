@@ -52,7 +52,7 @@ const Footer = ({ data }) => {
                 can miss out.
                 <div className="social_links">
                   <a
-                    href="https://www.facebook.com/bogdantigheci"
+                    href="https://www.facebook.com/Racing-Pigeons-310366422402712"
                     className="social_link"
                     target="_blank"
                     rel="noopener noreferrer"

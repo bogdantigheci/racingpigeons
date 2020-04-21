@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './card';
 
-const CardBlock = props => {
+const CardBlock = (props) => {
   const renderCards = () => {
     return props.list
       ? props.list.map((card, i) => {
@@ -22,7 +22,7 @@ const CardBlock = props => {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
         >
           {renderCards(props.list)}

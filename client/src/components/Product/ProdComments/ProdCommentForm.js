@@ -7,7 +7,7 @@ class ProdCommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: ''
+      text: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -19,7 +19,7 @@ class ProdCommentForm extends Component {
     const newComment = {
       text: this.state.text,
       name: this.props.user.userData.name,
-      user: this.props.user.userData.id
+      user: this.props.user.userData.id,
     };
 
     this.props.addCommentToProduct(this.props.prodId, newComment);
@@ -58,13 +58,13 @@ class ProdCommentForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
-  product: state.product
+  product: state.product,
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   addCommentToProduct: (prodId, newComment) =>
-    dispatch(addCommentToProduct(prodId, newComment))
+    dispatch(addCommentToProduct(prodId, newComment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProdCommentForm);
