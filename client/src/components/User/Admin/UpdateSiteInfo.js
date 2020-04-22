@@ -5,7 +5,7 @@ import {
   update,
   generateData,
   isFormValid,
-  populateFields
+  populateFields,
 } from '../../utils/formActions';
 
 import { connect } from 'react-redux';
@@ -23,15 +23,15 @@ class UpdateSiteNfo extends Component {
           label: 'Adresss',
           name: 'address_input',
           type: 'text',
-          placeholder: 'Enter the site address'
+          placeholder: 'Enter the site address',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       hours: {
         element: 'input',
@@ -40,15 +40,15 @@ class UpdateSiteNfo extends Component {
           label: 'Working hours',
           name: 'hours_input',
           type: 'text',
-          placeholder: 'Enter the site working hours'
+          placeholder: 'Enter the site working hours',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       phone: {
         element: 'input',
@@ -57,15 +57,15 @@ class UpdateSiteNfo extends Component {
           label: 'Phone number',
           name: 'phone_input',
           type: 'text',
-          placeholder: 'Enter the phone number'
+          placeholder: 'Enter the phone number',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       email: {
         element: 'input',
@@ -74,29 +74,29 @@ class UpdateSiteNfo extends Component {
           label: 'Shop email',
           name: 'email_input',
           type: 'email',
-          placeholder: 'Enter your email'
+          placeholder: 'Enter your email',
         },
         validation: {
           required: true,
-          email: true
+          email: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
-      }
-    }
+        showlabel: true,
+      },
+    },
   };
 
-  updateForm = element => {
+  updateForm = (element) => {
     const newFormdata = update(element, this.state.formdata, 'site_info');
     this.setState({
       formError: false,
-      formdata: newFormdata
+      formdata: newFormdata,
     });
   };
 
-  submitForm = event => {
+  submitForm = (event) => {
     event.preventDefault();
 
     let dataToSubmit = generateData(this.state.formdata, 'site_info');
@@ -106,12 +106,12 @@ class UpdateSiteNfo extends Component {
       this.props.updateSiteData(dataToSubmit).then(() => {
         this.setState(
           {
-            formSuccess: true
+            formSuccess: true,
           },
           () => {
             setTimeout(() => {
               this.setState({
-                formSuccess: false
+                formSuccess: false,
               });
             }, 2000);
           }
@@ -119,7 +119,7 @@ class UpdateSiteNfo extends Component {
       });
     } else {
       this.setState({
-        formError: true
+        formError: true,
       });
     }
   };
@@ -131,7 +131,7 @@ class UpdateSiteNfo extends Component {
         this.props.site.siteData[0]
       );
       this.setState({
-        formdata: newFormData
+        formdata: newFormData,
       });
     });
   }
@@ -139,27 +139,27 @@ class UpdateSiteNfo extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={event => this.submitForm(event)}>
+        <form onSubmit={(event) => this.submitForm(event)}>
           <h1>Site info</h1>
           <FormField
             id={'address'}
             formdata={this.state.formdata.address}
-            change={element => this.updateForm(element)}
+            change={(element) => this.updateForm(element)}
           />
           <FormField
             id={'hours'}
             formdata={this.state.formdata.hours}
-            change={element => this.updateForm(element)}
+            change={(element) => this.updateForm(element)}
           />
           <FormField
             id={'phone'}
             formdata={this.state.formdata.phone}
-            change={element => this.updateForm(element)}
+            change={(element) => this.updateForm(element)}
           />
           <FormField
             id={'email'}
             formdata={this.state.formdata.email}
-            change={element => this.updateForm(element)}
+            change={(element) => this.updateForm(element)}
           />
 
           <div>
@@ -169,7 +169,7 @@ class UpdateSiteNfo extends Component {
             {this.state.formError ? (
               <div className="error_label">Please check your data</div>
             ) : null}
-            <button onClick={event => this.submitForm(event)}>Update</button>
+            <button onClick={(event) => this.submitForm(event)}>Update</button>
           </div>
         </form>
       </div>
@@ -177,16 +177,12 @@ class UpdateSiteNfo extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    site: state.site
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    getSiteData: () => dispatch(getSiteData()),
-    updateSiteData: dataToSubmit => dispatch(updateSiteData(dataToSubmit))
-  };
-};
+const mapStateToProps = (state) => ({
+  site: state.site,
+});
+const mapDispatchToProps = (dispatch) => ({
+  getSiteData: () => dispatch(getSiteData()),
+  updateSiteData: (dataToSubmit) => dispatch(updateSiteData(dataToSubmit)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdateSiteNfo);

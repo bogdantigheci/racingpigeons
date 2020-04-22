@@ -55,7 +55,7 @@ const { Product } = require('./models/product');
 const { Payment } = require('./models/payment');
 const { Site } = require('./models/site');
 const { Post } = require('./models/post');
-const { Message } = require('./models/message');
+
 ///Validation
 
 const validatePostInput = require('../server/utils/validation/post');
@@ -553,9 +553,7 @@ app.post('/api/site/site_data', auth, admin, (req, res) => {
 app.post('/api/forum/posts', auth, (req, res) => {
   const { errors, isValid } = validatePostInput(req.body);
 
-  // Check Validation
   if (!isValid) {
-    // If any errors, send 400 with errors object
     return res.status(400).json(errors);
   }
 
@@ -592,12 +590,10 @@ app.get('/api/forum/posts/:id', (req, res) => {
 app.get('/api/forum/posts/remove/:id', auth, admin, function (req, res, next) {
   Post.findById(req.params.id)
     .then((post) => {
-      // Check for post owner
       if (post.user.toString() !== req.user.id) {
         return res.status(401).json({ notauthorized: 'User not authorized' });
       }
 
-      // Delete
       post.remove().then(() => res.json({ success: true }));
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
@@ -619,7 +615,6 @@ app.get('/api/forum/posts/like/:id', auth, (req, res) => {
           .json({ alreadyliked: 'User already liked this post' });
       }
 
-      // Add user id to likes array
       post.likes.unshift({ user: req.user.id });
 
       post.save().then((post) => res.json({ success: true }));
@@ -643,15 +638,12 @@ app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
           .json({ notliked: 'You have not yet liked this post' });
       }
 
-      // Get remove index
       const removeIndex = post.likes
         .map((item) => item.user.toString())
         .indexOf(req.user.id);
 
-      // Splice out of array
       post.likes.splice(removeIndex, 1);
 
-      // Save
       post.save().then((post) => res.json({ success: true }));
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
@@ -661,7 +653,7 @@ app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
 // @desc    Add comment to post
 
 app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
-  // const { errors, isValid } = validatePostInput(req.body);
+  // const { errors, isValid } = validateCommentInput(req.body);
 
   // if (!isValid) return res.status(400).json(errors);
 
@@ -688,7 +680,6 @@ app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
 app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      // Check to see if comment exists
       if (
         post.comments.filter(
           (comment) => comment._id.toString() === req.params.comment_id
@@ -699,12 +690,10 @@ app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
           .json({ commentnotexists: 'Comment does not exist' });
       }
 
-      // Get remove index
       const removeIndex = post.comments
         .map((item) => item._id.toString())
         .indexOf(req.params.comment_id);
 
-      // Splice comment out of array
       post.comments.splice(removeIndex, 1);
 
       post.save().then((post) => res.json({ success: true }));
@@ -744,7 +733,6 @@ app.post('/api/product/comment/:id', auth, (req, res) => {
 app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
   Product.findOne({ _id: req.params.id })
     .then((product) => {
-      // Check to see if comment exists
       if (
         product.comments.filter(
           (comment) => comment._id.toString() === req.params.comment_id
@@ -755,12 +743,10 @@ app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
           .json({ commentnotexists: 'Comment does not exist' });
       }
 
-      // Get remove index
       const removeIndex = product.comments
         .map((item) => item._id.toString())
         .indexOf(req.params.comment_id);
 
-      // Splice comment out of array
       product.comments.splice(removeIndex, 1);
 
       product.save().then((product) => res.json(product));
@@ -778,7 +764,6 @@ app.post(
   (req, res) => {
     Product.findOne({ _id: req.params.id })
       .then((product) => {
-        // Check to see if comment exists
         if (
           product.comments.filter(
             (comment) => comment._id.toString() === req.params.comment_id
@@ -804,7 +789,6 @@ app.post(
 
 // // @route   EDIT api/posts/comment/:id/:comment_id/edit
 // // @desc    Edit comment from post
-// //not working yet
 app.post(
   '/api/forum/posts/comment/:id/:comment_id/edit',
   auth,
@@ -812,7 +796,6 @@ app.post(
   (req, res) => {
     Post.findOne({ _id: req.params.id })
       .then((post) => {
-        // Check to see if comment exists
         if (
           post.comments.filter(
             (comment) => comment._id.toString() === req.params.comment_id
@@ -823,12 +806,10 @@ app.post(
             .json({ commentnotexists: 'Comment does not exist' });
         }
 
-        // Get remove index
         const editIndex = post.comments
           .map((item) => item._id.toString())
           .indexOf(req.params.comment_id);
 
-        // Splice comment out of array
         post.comments[editIndex] = req.body;
 
         post.save().then((post) => res.json(post));

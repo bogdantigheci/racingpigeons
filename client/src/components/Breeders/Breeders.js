@@ -9,7 +9,7 @@ class Breeders extends Component {
     this.props.getBreeders();
   }
 
-  handlePlacements = placements => {
+  handlePlacements = (placements) => {
     placements = placements.split(',');
     return placements;
   };
@@ -24,12 +24,10 @@ class Breeders extends Component {
   }
 }
 
-const mapStateToProps = state => ({ products: state.product });
+const mapStateToProps = (state) => ({ products: state.product });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getBreeders: () => dispatch(getBreeders())
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  getBreeders: () => dispatch(getBreeders()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Breeders);

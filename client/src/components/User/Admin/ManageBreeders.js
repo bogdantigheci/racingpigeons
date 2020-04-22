@@ -5,7 +5,7 @@ import {
   update,
   generateData,
   isFormValid,
-  resetFields
+  resetFields,
 } from '../../utils/formActions';
 
 import { connect } from 'react-redux';
@@ -23,14 +23,14 @@ class ManageBreeders extends Component {
         config: {
           name: 'name_input',
           type: 'text',
-          placeholder: 'Enter the breeder'
+          placeholder: 'Enter the breeder',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       club: {
         element: 'input',
@@ -38,14 +38,14 @@ class ManageBreeders extends Component {
         config: {
           name: 'club_input',
           type: 'text',
-          placeholder: 'Enter the club'
+          placeholder: 'Enter the club',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       bio: {
         element: 'textarea',
@@ -54,25 +54,25 @@ class ManageBreeders extends Component {
           label: 'Breeder bio',
           name: 'bio_input',
           type: 'text',
-          placeholder: 'Enter breeder bio'
+          placeholder: 'Enter breeder bio',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       images: {
         value: [],
         validation: {
-          required: false
+          required: false,
         },
         valid: true,
         touched: false,
         validationMessage: '',
-        showlabel: false
+        showlabel: false,
       },
       placements: {
         element: 'input',
@@ -80,16 +80,16 @@ class ManageBreeders extends Component {
         config: {
           name: 'placements_input',
           type: 'text',
-          placeholder: 'Enter placements'
+          placeholder: 'Enter placements',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
-      }
-    }
+        validationMessage: '',
+      },
+    },
   };
 
   showCategoryItems = () =>
@@ -101,11 +101,11 @@ class ManageBreeders extends Component {
         ))
       : null;
 
-  updateForm = element => {
+  updateForm = (element) => {
     const newFormdata = update(element, this.state.formdata, 'breeders');
     this.setState({
       formError: false,
-      formdata: newFormdata
+      formdata: newFormdata,
     });
   };
 
@@ -114,11 +114,11 @@ class ManageBreeders extends Component {
 
     this.setState({
       formdata: newFormData,
-      formSuccess: true
+      formSuccess: true,
     });
   };
 
-  submitForm = event => {
+  submitForm = (event) => {
     event.preventDefault();
 
     let dataToSubmit = generateData(this.state.formdata, 'breeders');
@@ -128,7 +128,7 @@ class ManageBreeders extends Component {
     if (formIsValid) {
       this.props
         .addBreeder({ ...dataToSubmit, placements }, existingBreeders)
-        .then(response => {
+        .then((response) => {
           if (response.payload.success) {
             this.resetFieldsHandler();
           } else {
@@ -137,20 +137,20 @@ class ManageBreeders extends Component {
         });
     } else {
       this.setState({
-        formError: true
+        formError: true,
       });
     }
   };
-  imagesHandler = images => {
+  imagesHandler = (images) => {
     const newFormData = {
-      ...this.state.formdata
+      ...this.state.formdata,
     };
 
     newFormData['images'].value = images;
     newFormData['images'].valid = true;
 
     this.setState({
-      formdata: newFormData
+      formdata: newFormData,
     });
   };
 
@@ -167,36 +167,36 @@ class ManageBreeders extends Component {
             <div className="breeds_container">{this.showCategoryItems()}</div>
           </div>
           <div className="right">
-            <form onSubmit={event => this.submitForm(event)}>
+            <form onSubmit={(event) => this.submitForm(event)}>
               <FileUpload
-                imagesHandler={images => this.imagesHandler(images)}
+                imagesHandler={(images) => this.imagesHandler(images)}
                 reset={this.state.formSuccess}
               />
               <FormField
                 id={'name'}
                 formdata={this.state.formdata.name}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
               />
               <FormField
                 id={'club'}
                 formdata={this.state.formdata.club}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
               />
               <FormField
                 id={'placements'}
                 formdata={this.state.formdata.placements}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
               />
               <FormField
                 id={'bio'}
                 formdata={this.state.formdata.bio}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
               />
 
               {this.state.formError ? (
                 <div className="error_label">Please check your data</div>
               ) : null}
-              <button onClick={event => this.submitForm(event)}>
+              <button onClick={(event) => this.submitForm(event)}>
                 Add breeder
               </button>
             </form>
@@ -207,17 +207,13 @@ class ManageBreeders extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.product
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    getBreeders: () => dispatch(getBreeders()),
-    addBreeder: (dataToSubmit, existingBreeds) =>
-      dispatch(addBreeder(dataToSubmit, existingBreeds))
-  };
-};
+const mapStateToProps = (state) => ({
+  products: state.product,
+});
+const mapDispatchToProps = (dispatch) => ({
+  getBreeders: () => dispatch(getBreeders()),
+  addBreeder: (dataToSubmit, existingBreeds) =>
+    dispatch(addBreeder(dataToSubmit, existingBreeds)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageBreeders);

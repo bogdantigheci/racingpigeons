@@ -7,13 +7,13 @@ import {
   generateData,
   isFormValid,
   populateOptionFields,
-  resetFields
+  resetFields,
 } from '../../utils/formActions';
 import {
   getBreeds,
   getBreeders,
   addProduct,
-  clearProduct
+  clearProduct,
 } from '../../../actions/product';
 import FileUpload from '../../utils/FileUpload';
 
@@ -29,15 +29,15 @@ class AddProduct extends Component {
           label: 'Ring ID',
           name: 'ringId_input',
           type: 'text',
-          placeholder: 'Enter pigeon ring number'
+          placeholder: 'Enter pigeon ring number',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       description: {
         element: 'textarea',
@@ -46,15 +46,15 @@ class AddProduct extends Component {
           label: 'Product description',
           name: 'description_input',
           type: 'text',
-          placeholder: 'Enter your description'
+          placeholder: 'Enter your description',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       price: {
         element: 'input',
@@ -63,15 +63,15 @@ class AddProduct extends Component {
           label: 'Product price',
           name: 'price_input',
           type: 'number',
-          placeholder: 'Enter your price'
+          placeholder: 'Enter your price',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       breeder: {
         element: 'select',
@@ -79,15 +79,15 @@ class AddProduct extends Component {
         config: {
           label: 'Breeder',
           name: 'breeder_input',
-          options: []
+          options: [],
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       breed: {
         element: 'select',
@@ -95,15 +95,15 @@ class AddProduct extends Component {
         config: {
           label: 'Breed',
           name: 'breed_input',
-          options: []
+          options: [],
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       shipping: {
         element: 'select',
@@ -113,16 +113,16 @@ class AddProduct extends Component {
           name: 'shipping_input',
           options: [
             { key: true, value: 'Yes' },
-            { key: false, value: 'No' }
-          ]
+            { key: false, value: 'No' },
+          ],
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       available: {
         element: 'select',
@@ -132,16 +132,16 @@ class AddProduct extends Component {
           name: 'available_input',
           options: [
             { key: true, value: 'Yes' },
-            { key: false, value: 'No' }
-          ]
+            { key: false, value: 'No' },
+          ],
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
 
       publish: {
@@ -152,39 +152,39 @@ class AddProduct extends Component {
           name: 'publish_input',
           options: [
             { key: true, value: 'Public' },
-            { key: false, value: 'Hidden' }
-          ]
+            { key: false, value: 'Hidden' },
+          ],
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       images: {
         value: [],
         validation: {
-          required: false
+          required: false,
         },
         valid: true,
         touched: false,
         validationMessage: '',
-        showlabel: false
-      }
-    }
+        showlabel: false,
+      },
+    },
   };
 
-  updateFields = newFormData => {
+  updateFields = (newFormData) => {
     this.setState({ formdata: newFormData });
   };
 
-  updateForm = element => {
+  updateForm = (element) => {
     const newFormdata = update(element, this.state.formdata, 'products');
     this.setState({
       formError: false,
-      formdata: newFormdata
+      formdata: newFormdata,
     });
   };
 
@@ -194,7 +194,7 @@ class AddProduct extends Component {
     this.setState(
       {
         formdata: newFormData,
-        formSuccess: true
+        formSuccess: true,
       },
       () => {
         this.props.clearProduct();
@@ -205,7 +205,7 @@ class AddProduct extends Component {
     }, 3000);
   };
 
-  submitForm = event => {
+  submitForm = (event) => {
     event.preventDefault();
 
     let dataToSubmit = generateData(this.state.formdata, 'products');
@@ -222,22 +222,22 @@ class AddProduct extends Component {
     }
   };
 
-  imagesHandler = images => {
+  imagesHandler = (images) => {
     const newFormData = {
-      ...this.state.formdata
+      ...this.state.formdata,
     };
 
     newFormData['images'].value = images;
     newFormData['images'].valid = true;
 
     this.setState({
-      formdata: newFormData
+      formdata: newFormData,
     });
   };
 
   componentDidMount() {
     const formdata = this.state.formdata;
-    this.props.getBreeders().then(response => {
+    this.props.getBreeders().then((response) => {
       const newFormData = populateOptionFields(
         formdata,
         this.props.products.breeders,
@@ -245,7 +245,7 @@ class AddProduct extends Component {
       );
       this.updateFields(newFormData);
     });
-    this.props.getBreeds().then(response => {
+    this.props.getBreeds().then((response) => {
       const newFormData = populateOptionFields(
         formdata,
         this.props.products.breeds,
@@ -260,53 +260,53 @@ class AddProduct extends Component {
       <UserLayout>
         <div>
           <h1>Add product</h1>
-          <form onSubmit={event => this.submitForm(event)}>
+          <form onSubmit={(event) => this.submitForm(event)}>
             <FileUpload
-              imagesHandler={images => this.imagesHandler(images)}
+              imagesHandler={(images) => this.imagesHandler(images)}
               reset={this.state.formSuccess}
             />
             <FormField
               id={'ringId'}
               formdata={this.state.formdata.ringId}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
             <FormField
               id={'description'}
               formdata={this.state.formdata.description}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
             <FormField
               id={'price'}
               formdata={this.state.formdata.price}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
             <div className="form_devider"></div>
             <FormField
               id={'breed'}
               formdata={this.state.formdata.breed}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
             <FormField
               id={'breeder'}
               formdata={this.state.formdata.breeder}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
             <div className="form_devider"></div>
             <FormField
               id={'available'}
               formdata={this.state.formdata.available}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
             <FormField
               id={'shipping'}
               formdata={this.state.formdata.shipping}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
 
             <FormField
               id={'publish'}
               formdata={this.state.formdata.publish}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
 
             {this.state.formSuccess ? (
@@ -316,7 +316,7 @@ class AddProduct extends Component {
             {this.state.formError ? (
               <div className="error_label">Please check your data</div>
             ) : null}
-            <button onClick={event => this.submitForm(event)}>
+            <button onClick={(event) => this.submitForm(event)}>
               Add Product
             </button>
           </form>
@@ -326,15 +326,13 @@ class AddProduct extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { products: state.product };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    getBreeders: () => dispatch(getBreeders()),
-    getBreeds: () => dispatch(getBreeds()),
-    clearProduct: () => dispatch(clearProduct()),
-    addProduct: dataToSubmit => dispatch(addProduct(dataToSubmit))
-  };
-};
+const mapStateToProps = (state) => ({
+  products: state.product,
+});
+const mapDispatchToProps = (dispatch) => ({
+  getBreeders: () => dispatch(getBreeders()),
+  getBreeds: () => dispatch(getBreeds()),
+  clearProduct: () => dispatch(clearProduct()),
+  addProduct: (dataToSubmit) => dispatch(addProduct(dataToSubmit)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(AddProduct);

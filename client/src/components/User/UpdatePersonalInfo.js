@@ -8,7 +8,7 @@ import {
   update,
   generateData,
   isFormValid,
-  populateFields
+  populateFields,
 } from '../utils/formActions';
 
 class UpdatePersonalNfo extends Component {
@@ -22,14 +22,14 @@ class UpdatePersonalNfo extends Component {
         config: {
           name: 'name_input',
           type: 'text',
-          placeholder: 'Enter your name'
+          placeholder: 'Enter your name',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       lastname: {
         element: 'input',
@@ -37,14 +37,14 @@ class UpdatePersonalNfo extends Component {
         config: {
           name: 'lastname_input',
           type: 'text',
-          placeholder: 'Enter your lastname'
+          placeholder: 'Enter your lastname',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       email: {
         element: 'input',
@@ -52,28 +52,28 @@ class UpdatePersonalNfo extends Component {
         config: {
           name: 'email_input',
           type: 'email',
-          placeholder: 'Enter your email'
+          placeholder: 'Enter your email',
         },
         validation: {
           required: true,
-          email: true
+          email: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
-      }
-    }
+        validationMessage: '',
+      },
+    },
   };
 
-  updateForm = element => {
+  updateForm = (element) => {
     const newFormdata = update(element, this.state.formdata, 'update_user');
     this.setState({
       formError: false,
-      formdata: newFormdata
+      formdata: newFormdata,
     });
   };
 
-  submitForm = event => {
+  submitForm = (event) => {
     event.preventDefault();
 
     let dataToSubmit = generateData(this.state.formdata, 'update_user');
@@ -84,13 +84,13 @@ class UpdatePersonalNfo extends Component {
         if (this.props.user.updateUser.success) {
           this.setState(
             {
-              formSuccess: true
+              formSuccess: true,
             },
             () => {
               setTimeout(() => {
                 this.props.clearUpdateUser();
                 this.setState({
-                  formSuccess: false
+                  formSuccess: false,
                 });
               }, 2000);
             }
@@ -99,7 +99,7 @@ class UpdatePersonalNfo extends Component {
       });
     } else {
       this.setState({
-        formError: true
+        formError: true,
       });
     }
   };
@@ -110,28 +110,28 @@ class UpdatePersonalNfo extends Component {
       this.props.user.userData
     );
     this.setState({
-      formdata: newFormData
+      formdata: newFormData,
     });
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={event => this.submitForm(event)}>
+        <form onSubmit={(event) => this.submitForm(event)}>
           <h2>Personal information</h2>
           <div className="form_block_two">
             <div className="block">
               <FormField
                 id={'name'}
                 formdata={this.state.formdata.name}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
               />
             </div>
             <div className="block">
               <FormField
                 id={'lastname'}
                 formdata={this.state.formdata.lastname}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
               />
             </div>
           </div>
@@ -139,7 +139,7 @@ class UpdatePersonalNfo extends Component {
             <FormField
               id={'email'}
               formdata={this.state.formdata.email}
-              change={element => this.updateForm(element)}
+              change={(element) => this.updateForm(element)}
             />
           </div>
           <div>
@@ -149,7 +149,7 @@ class UpdatePersonalNfo extends Component {
             {this.state.formError ? (
               <div className="error_label">Please check your data</div>
             ) : null}
-            <button onClick={event => this.submitForm(event)}>
+            <button onClick={(event) => this.submitForm(event)}>
               Update personal info
             </button>
           </div>
@@ -159,17 +159,13 @@ class UpdatePersonalNfo extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
-};
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateUserData: dataToSubmit => dispatch(updateUserData(dataToSubmit)),
-    clearUpdateUser: () => dispatch(clearUpdateUser())
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateUserData: (dataToSubmit) => dispatch(updateUserData(dataToSubmit)),
+  clearUpdateUser: () => dispatch(clearUpdateUser()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdatePersonalNfo);

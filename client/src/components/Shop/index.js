@@ -158,16 +158,15 @@ class Shop extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { products: state.product };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getBreeders: () => dispatch(getBreeders()),
-    getBreeds: () => dispatch(getBreeds()),
-    getProductsToShop: (skip, limit, filters = [], previousState = []) =>
-      dispatch(getProductsToShop(skip, limit, filters, previousState)),
-  };
-};
+const mapStateToProps = (state) => ({
+  products: state.product,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getBreeders: () => dispatch(getBreeders()),
+  getBreeds: () => dispatch(getBreeds()),
+  getProductsToShop: (skip, limit, filters = [], previousState = []) =>
+    dispatch(getProductsToShop(skip, limit, filters, previousState)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Shop);

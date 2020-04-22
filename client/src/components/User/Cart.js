@@ -140,11 +140,9 @@ class UserCart extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {

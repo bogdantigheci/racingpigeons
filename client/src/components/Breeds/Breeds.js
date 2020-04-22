@@ -19,12 +19,10 @@ class Breeds extends Component {
   }
 }
 
-const mapStateToProps = state => ({ products: state.product });
+const mapStateToProps = (state) => ({ products: state.product });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getBreeds: () => dispatch(getBreeds())
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  getBreeds: () => dispatch(getBreeds()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Breeds);

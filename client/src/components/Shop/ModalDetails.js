@@ -84,18 +84,14 @@ class ModalDetails extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getCartItems: (cartItems, userCart) =>
-      dispatch(getCartItems(cartItems, userCart)),
-    removeCartItem: (id) => dispatch(removeCartItem(id)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  getCartItems: (cartItems, userCart) =>
+    dispatch(getCartItems(cartItems, userCart)),
+  removeCartItem: (id) => dispatch(removeCartItem(id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalDetails);

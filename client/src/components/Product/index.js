@@ -94,12 +94,10 @@ const mapStateToProps = (state) => {
     auth: state.user.userData.isAuth,
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getProductDetail: (id) => dispatch(getProductDetail(id)),
-    clearProductDetail: () => dispatch(clearProductDetail()),
-    addToCart: (id) => dispatch(addToCart(id)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  getProductDetail: (id) => dispatch(getProductDetail(id)),
+  clearProductDetail: () => dispatch(clearProductDetail()),
+  addToCart: (id) => dispatch(addToCart(id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

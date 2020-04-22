@@ -4,7 +4,6 @@ import ModalDetails from './ModalDetails';
 import { Link } from 'react-router-dom';
 
 const ShopModal = (props) => {
-  console.log('modal proooooops', props);
   return (
     <Modal
       {...props}

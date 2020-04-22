@@ -5,7 +5,7 @@ import {
   update,
   generateData,
   isFormValid,
-  resetFields
+  resetFields,
 } from '../../utils/formActions';
 
 import { connect } from 'react-redux';
@@ -23,14 +23,14 @@ class ManageBreeds extends Component {
         config: {
           name: 'name_input',
           type: 'text',
-          placeholder: 'Enter the breed'
+          placeholder: 'Enter the breed',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       description: {
         element: 'textarea',
@@ -39,43 +39,43 @@ class ManageBreeds extends Component {
           label: 'Product description',
           name: 'description_input',
           type: 'text',
-          placeholder: 'Enter your description'
+          placeholder: 'Enter your description',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
         validationMessage: '',
-        showlabel: true
+        showlabel: true,
       },
       images: {
         value: [],
         validation: {
-          required: false
+          required: false,
         },
         valid: true,
         touched: false,
         validationMessage: '',
-        showlabel: false
-      }
-    }
+        showlabel: false,
+      },
+    },
   };
 
   showCategoryItems = () =>
     this.props.products && this.props.products.breeds
-      ? this.props.products.breeds.map(item => (
+      ? this.props.products.breeds.map((item) => (
           <div className="category_item" key={item._id}>
             {item.name}
           </div>
         ))
       : null;
 
-  updateForm = element => {
+  updateForm = (element) => {
     const newFormdata = update(element, this.state.formdata, 'breeds');
     this.setState({
       formError: false,
-      formdata: newFormdata
+      formdata: newFormdata,
     });
   };
 
@@ -84,11 +84,11 @@ class ManageBreeds extends Component {
 
     this.setState({
       formdata: newFormData,
-      formSuccess: true
+      formSuccess: true,
     });
   };
 
-  submitForm = event => {
+  submitForm = (event) => {
     event.preventDefault();
 
     let dataToSubmit = generateData(this.state.formdata, 'breeds');
@@ -96,7 +96,7 @@ class ManageBreeds extends Component {
     let existingBreeds = this.props.products.breeds;
 
     if (formIsValid) {
-      this.props.addBreed(dataToSubmit, existingBreeds).then(response => {
+      this.props.addBreed(dataToSubmit, existingBreeds).then((response) => {
         if (response.payload.success) {
           this.resetFieldsHandler();
         } else {
@@ -105,21 +105,21 @@ class ManageBreeds extends Component {
       });
     } else {
       this.setState({
-        formError: true
+        formError: true,
       });
     }
   };
 
-  imagesHandler = images => {
+  imagesHandler = (images) => {
     const newFormData = {
-      ...this.state.formdata
+      ...this.state.formdata,
     };
 
     newFormData['images'].value = images;
     newFormData['images'].valid = true;
 
     this.setState({
-      formdata: newFormData
+      formdata: newFormData,
     });
   };
 
@@ -136,26 +136,26 @@ class ManageBreeds extends Component {
             <div className="breeds_container">{this.showCategoryItems()}</div>
           </div>
           <div className="right">
-            <form onSubmit={event => this.submitForm(event)}>
+            <form onSubmit={(event) => this.submitForm(event)}>
               <FileUpload
-                imagesHandler={images => this.imagesHandler(images)}
+                imagesHandler={(images) => this.imagesHandler(images)}
                 reset={this.state.formSuccess}
               />
               <FormField
                 id={'name'}
                 formdata={this.state.formdata.name}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
               />
               <FormField
                 id={'description'}
                 formdata={this.state.formdata.description}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
               />
 
               {this.state.formError ? (
                 <div className="error_label">Please check your data</div>
               ) : null}
-              <button onClick={event => this.submitForm(event)}>
+              <button onClick={(event) => this.submitForm(event)}>
                 Add breed
               </button>
             </form>
@@ -166,17 +166,13 @@ class ManageBreeds extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.product
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    getBreeds: () => dispatch(getBreeds()),
-    addBreed: (dataToSubmit, existingBreeds) =>
-      dispatch(addBreed(dataToSubmit, existingBreeds))
-  };
-};
+const mapStateToProps = (state) => ({
+  products: state.product,
+});
+const mapDispatchToProps = (dispatch) => ({
+  getBreeds: () => dispatch(getBreeds()),
+  addBreed: (dataToSubmit, existingBreeds) =>
+    dispatch(addBreed(dataToSubmit, existingBreeds)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageBreeds);

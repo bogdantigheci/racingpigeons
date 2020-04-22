@@ -8,11 +8,11 @@ import { getSiteData } from '../actions/site';
 
 class Layout extends Component {
   state = {
-    sideDrawerOpen: false
+    sideDrawerOpen: false,
   };
 
   drawerToggleClickHandler = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       return { sideDrawerOpen: !prevState.sideDrawerOpen };
     });
   };
@@ -45,14 +45,12 @@ class Layout extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { site: state.site };
-};
+const mapStateToProps = (state) => ({
+  site: state.site,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getSiteData: () => dispatch(getSiteData())
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  getSiteData: () => dispatch(getSiteData()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

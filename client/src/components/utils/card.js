@@ -89,14 +89,13 @@ class Card extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { user: state.user, products: state.product };
-};
+const mapStateToProps = (state) => ({
+  user: state.user,
+  products: state.product,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addToCart: (_id) => dispatch(addToCart(_id)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (_id) => dispatch(addToCart(_id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);
