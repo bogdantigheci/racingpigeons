@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deletePost, addLike, removeLike } from '../../../actions/post';
-// import classnames from 'classnames';
+import {
+  deletePost,
+  addLike,
+  removeLike,
+  getPost,
+} from '../../../actions/post';
 
 class PostItem extends Component {
   handledeletePost(id) {
     this.props.deletePost(id);
-    console.log('deleted');
   }
-
   handleLikePost(id) {
+    this.props.getPost(id);
     this.props.addLike(id);
-    console.log('liked');
   }
   handleUnikePost(id) {
+    this.props.getPost(id);
     this.props.removeLike(id);
-    console.log('rliked');
+  }
+  checkUserLike(likes) {
+    if (
+      likes.filter((like) => like.user === this.props.user.userData.id).length >
+      0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   render() {
-    
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -37,8 +48,13 @@ class PostItem extends Component {
                   className="btn btn-light mr-1"
                 >
                   <i
-                    className="fas fa-thumbs-up
-                      text-info"
+                    className={
+                      this.props.errors &&
+                      this.props.post.likes &&
+                      this.checkUserLike(this.props.post.likes)
+                        ? 'fas fa-thumbs-up text-info no_like_allowed'
+                        : 'fas fa-thumbs-up text-info'
+                    }
                   />
                   <span className="badge badge-light">
                     {this.props.post.likes.length}
@@ -79,16 +95,18 @@ class PostItem extends Component {
   }
 }
 PostItem.defaultProps = {
-  showActions: true
+  showActions: true,
 };
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+  user: state.user,
+  errors: state.post.errors,
 });
 
-const mapDispatchToProps = dispatch => ({
-  deletePost: id => dispatch(deletePost(id)),
-  addLike: id => dispatch(addLike(id)),
-  removeLike: id => dispatch(removeLike(id))
+const mapDispatchToProps = (dispatch) => ({
+  deletePost: (id) => dispatch(deletePost(id)),
+  addLike: (id) => dispatch(addLike(id)),
+  removeLike: (id) => dispatch(removeLike(id)),
+  getPost: (id) => dispatch(getPost(id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(PostItem);

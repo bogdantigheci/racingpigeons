@@ -612,12 +612,12 @@ app.get('/api/forum/posts/like/:id', auth, (req, res) => {
       ) {
         return res
           .status(400)
-          .json({ alreadyliked: 'User already liked this post' });
+          .json({ alreadyliked: 'You already liked this post' });
       }
 
-      post.likes.unshift({ user: req.user.id });
+      post.likes.unshift({ user: req.user.id, post: post.id });
 
-      post.save().then((post) => res.json({ success: true }));
+      post.save().then((post) => res.json(post));
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
@@ -693,7 +693,7 @@ app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
 
       post.comments.splice(removeIndex, 1);
 
-      post.save().then((post) => res.json({ success: true }));
+      post.save().then((post) => res.json(post));
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });

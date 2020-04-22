@@ -65,7 +65,6 @@ export const getPost = (id) => (dispatch) => {
     );
 };
 
-// Delete Post
 export const deletePost = (id) => (dispatch) => {
   axios
     .get(`${FORUM_SERVER}/posts/remove/${id}`)

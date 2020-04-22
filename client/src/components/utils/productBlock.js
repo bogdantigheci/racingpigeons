@@ -17,6 +17,7 @@ const ProductBlock = ({ products, removeItem }) => {
               <img
                 className="image"
                 src={`${renderCartImage(product.images)}`}
+                alt="product"
               />
             </div>
             <div className="item">

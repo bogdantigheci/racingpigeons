@@ -6,6 +6,23 @@ body {
   color: red;
 }
 
+/* club */
+
+.club_race_card {
+  box-sizing: border-box;
+  border-radius: 1rem;
+  box-shadow: 0.3rem 0.3rem 0.3rem #587ff3;
+}
+.club_race_card_image {
+  border-radius: 1rem;
+  width: 15rem;
+  height: 15rem;
+}
+
+.no_like_allowed {
+  color: red !important;
+}
+
 /* weather */
 .weatherapp {
   background-image: url('/images/cold-bg.jpg');
