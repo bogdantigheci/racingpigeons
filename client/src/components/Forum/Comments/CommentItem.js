@@ -6,7 +6,7 @@ import { deleteComment, editComment } from '../../../actions/post';
 class CommentItem extends Component {
   state = {
     text: this.props.comment.text,
-    edit: false
+    edit: false,
   };
   handleDeleteComment(postId, commentId) {
     this.props.deleteComment(postId, commentId);
@@ -16,7 +16,7 @@ class CommentItem extends Component {
     editCommentData = {
       text: this.state.text,
       user: this.props.user.userData.id,
-      name: this.props.user.userData.name
+      name: this.props.user.userData.name,
     };
 
     this.props.editComment(postId, commentId, editCommentData);
@@ -63,7 +63,8 @@ class CommentItem extends Component {
                 this.props.comment.text
               )}
             </div>
-            {this.props.comment.user === this.props.user.userData.id ? (
+            {this.props.comment.user === this.props.user.userData.id ||
+            this.props.user.userData.isAdmin ? (
               <div>
                 <button
                   onClick={this.handleDeleteComment.bind(
@@ -92,14 +93,14 @@ class CommentItem extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+  user: state.user,
 });
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   deleteComment: (postId, commentId) =>
     dispatch(deleteComment(postId, commentId)),
   editComment: (postId, commentId, editCommentData) =>
-    dispatch(editComment(postId, commentId, editCommentData))
+    dispatch(editComment(postId, commentId, editCommentData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentItem);

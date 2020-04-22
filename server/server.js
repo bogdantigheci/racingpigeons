@@ -653,15 +653,12 @@ app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
 // @desc    Add comment to post
 
 app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
-  // const { errors, isValid } = validateCommentInput(req.body);
-
-  // if (!isValid) return res.status(400).json(errors);
-
   Post.findOne({ _id: req.params.id })
     .then((post) => {
       const newComment = {
         text: req.body.text,
         user: req.user._id,
+        name: req.user.name,
       };
 
       post.comments.unshift(newComment);
