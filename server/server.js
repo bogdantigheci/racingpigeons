@@ -55,6 +55,7 @@ const { Product } = require('./models/product');
 const { Payment } = require('./models/payment');
 const { Site } = require('./models/site');
 const { Post } = require('./models/post');
+const { Race } = require('./models/race');
 
 ///Validation
 
@@ -214,6 +215,37 @@ app.get('/api/product/breeders', (req, res) => {
 app.get('/api/product/breeders/:id', (req, res) => {
   Breeder.findById(req.params.id)
     .then((breeder) => res.json(breeder))
+    .catch((err) =>
+      res.status(404).json({ nopostfound: 'No post found with that ID' })
+    );
+});
+
+//////////////////////////////////////
+//    RACES
+//////////////////////////////////////
+
+app.post('/api/product/races', auth, admin, (req, res) => {
+  const race = new Race(req.body);
+  race.save((err, doc) => {
+    if (err) return res.json({ success: false, err });
+
+    res.status(200).json({
+      success: true,
+      race: doc,
+    });
+  });
+});
+
+app.get('/api/product/races', (req, res) => {
+  Race.find({}, (err, races) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).send({ races });
+  });
+});
+
+app.get('/api/product/races/:id', (req, res) => {
+  Race.findById(req.params.id)
+    .then((race) => res.json(race))
     .catch((err) =>
       res.status(404).json({ nopostfound: 'No post found with that ID' })
     );

@@ -1,12 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
 
-const Breed = props => {
+const Breed = (props) => {
   return (
     <div className="container d-flex flex-wrap">
       {props.breeds
         ? props.breeds.map((breed, i) => (
-            <div key={i} className="card promoting-card breeds_display">
+            <div key={i} className="card promoting-card breeds_display mx-auto">
               <div className="card-body d-flex flex-row">
                 <div className="mx-auto">
                   <h4 className="card-title font-weight-bold mb-2 breed_card_title">

@@ -14,6 +14,9 @@ import {
   CLEAR_PRODUCT_DETAIL,
   CLEAR_ERRORS,
   GET_ERRORS,
+  ADD_RACE,
+  GET_RACE,
+  GET_RACES,
 } from '../constants/types';
 import { PRODUCT_SERVER } from '../components/utils/misc';
 
@@ -205,6 +208,44 @@ export const editCommentFromProduct = (prodId, commentId, editCommentData) => (
       })
     );
 };
+
+export function addRace(dataToSubmit, existingRaces) {
+  const request = axios
+    .post(`${PRODUCT_SERVER}/races`, dataToSubmit)
+    .then((response) => {
+      let races = [...existingRaces, response.data.race];
+      return {
+        success: response.data.success,
+        races,
+      };
+    });
+  return {
+    type: ADD_RACE,
+    payload: request,
+  };
+}
+
+export function getRaces() {
+  const request = axios
+    .get(`${PRODUCT_SERVER}/races`)
+    .then((response) => response.data);
+  return {
+    type: GET_RACES,
+    payload: request,
+  };
+}
+
+export function getRace(id) {
+  const request = axios
+    .get(`${PRODUCT_SERVER}/races/${id}`)
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    type: GET_RACE,
+    payload: request,
+  };
+}
 
 export const clearErrors = () => {
   return {

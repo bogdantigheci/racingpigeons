@@ -2,14 +2,14 @@ import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 
-const Breeder = props => {
+const Breeder = (props) => {
   return (
     <div>
       <div className="container d-flex">
         <div className="breeders_display flex-wrap">
           {props.breeders
             ? props.breeders.map((breeder, i) => (
-                <div key={i} id="breeder_card_layout">
+                <div key={i} id="breeder_card_layout" className="mx-auto">
                   <div className="cardrow">
                     <div className="image-flip">
                       <div className="mainflip">

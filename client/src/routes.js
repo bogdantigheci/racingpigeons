@@ -23,6 +23,8 @@ import Post from './components/Forum/Comments/Post';
 import Club from './components/Club/Club';
 import BreederInfo from './components/Breeders/BreederInfo';
 import Weather from './components/Weather/Weather';
+import AddRaces from './components/User/Admin/AddRaces';
+import RaceInfo from './components/Club/RaceInfo';
 
 const Routes = () => {
   return (
@@ -40,6 +42,8 @@ const Routes = () => {
           exact
           component={Auth(ManageCategories, true)}
         />
+        />
+        <Route path="/admin/add_races" exact component={Auth(AddRaces, true)} />
         <Route
           path="/reset_password/:token"
           exact
@@ -66,13 +70,17 @@ const Routes = () => {
           exact
           component={Auth(BreederInfo, null)}
         />
+        <Route
+          path="/product/races/:id"
+          exact
+          component={Auth(RaceInfo, null)}
+        />
         <Route path="/register" exact component={Auth(Register, false)} />
         <Route
           path="/register_login"
           exact
           component={Auth(RegisterLogin, null)}
         />
-
         <Route path="/forum/post/:id" exact component={Auth(Post, true)} />
         <Route path="/forum" exact component={Auth(Forum, true)} />
         <Route path="/breeds" exact component={Auth(Breeds, null)} />

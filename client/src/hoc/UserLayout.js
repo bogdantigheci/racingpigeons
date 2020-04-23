@@ -30,6 +30,10 @@ const admin = [
     name: 'Manage categories',
     linkTo: '/admin/manage_categories',
   },
+  {
+    name: 'Add races',
+    linkTo: '/admin/add_races',
+  },
 ];
 
 const UserLayout = (props) => {

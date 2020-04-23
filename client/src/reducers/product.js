@@ -12,6 +12,9 @@ import {
   CLEAR_PRODUCT_DETAIL,
   CLEAR_ERRORS,
   GET_ERRORS,
+  ADD_RACE,
+  GET_RACE,
+  GET_RACES,
 } from '../constants/types';
 
 ///rename to products for better fit
@@ -80,6 +83,22 @@ const product = (state = { breeders: [] }, action) => {
       return { ...state, errors: [action.payload] };
     case CLEAR_ERRORS:
       return {};
+    case ADD_RACE:
+      return {
+        ...state,
+        addRace: action.payload.success,
+        races: action.payload.races,
+      };
+    case GET_RACES:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case GET_RACE:
+      return {
+        ...state,
+        race: action.payload,
+      };
     default:
       return state;
   }

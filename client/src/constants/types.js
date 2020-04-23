@@ -31,3 +31,6 @@ export const GET_ERRORS = 'GET_ERRORS';
 export const GET_POSTS_TO_PRODUCTS = 'GET_POSTS_TO_PRODUCTS';
 export const GET_MESSAGES_TO_CHAT = 'GET_MESSAGES_TO_CHAT';
 export const ADD_MESSAGE_TO_CHAT = 'ADD_MESSAGE_TO_CHAT';
+export const ADD_RACE = 'ADD_RACE';
+export const GET_RACE = 'GET_RACE';
+export const GET_RACES = 'GET_RACES';

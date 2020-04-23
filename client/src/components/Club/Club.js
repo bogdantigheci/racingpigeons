@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
-import RacesReports from './RacesReports';
+import Races from './Races';
+import { connect } from 'react-redux';
+import { getRaces } from '../../actions/product';
+import _ from 'lodash';
 
 class Club extends Component {
+  componentDidMount() {
+    this.props.getRaces();
+  }
   render() {
     return (
       <div className="container">
@@ -29,17 +35,17 @@ class Club extends Component {
           <h3 className="text-center mt-4">Races and Reports</h3>
         </div>
         <div className="d-flex flex-wrap mt-4">
-          <RacesReports />
-          <RacesReports />
-          <RacesReports />
-          <RacesReports />
-          <RacesReports />
-          <RacesReports />
-          <RacesReports />
+          <Races races={_.get(this.props.products, 'races', [])} />
         </div>
       </div>
     );
   }
 }
 
-export default Club;
+const mapStateToProps = (state) => ({ products: state.product });
+
+const mapDispatchToProps = (dispatch) => ({
+  getRaces: () => dispatch(getRaces()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Club);
