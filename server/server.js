@@ -613,7 +613,10 @@ app.get('/api/forum/posts/:id', (req, res) => {
   Post.findById(req.params.id)
     .then((post) => res.json(post))
     .catch((err) =>
-      res.status(404).json({ nopostfound: 'No post found with that ID' })
+      res.status(404).json({
+        nopostfound:
+          'The post you are looking for does not exist or was removed!',
+      })
     );
 });
 
@@ -685,6 +688,12 @@ app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
 // @desc    Add comment to post
 
 app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
+  const { errors, isValid } = validateCommentInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   Post.findOne({ _id: req.params.id })
     .then((post) => {
       const newComment = {
@@ -785,7 +794,6 @@ app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
 
 // // @route   EDIT api/product/comment/:id/:comment_id/edit
 // // @desc    Edit comment from post
-// //not working yet
 app.post(
   '/api/product/comment/:id/:comment_id/edit',
   auth,

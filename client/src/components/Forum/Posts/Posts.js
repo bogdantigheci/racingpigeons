@@ -4,6 +4,7 @@ import { getPosts } from '../../../actions/post';
 import Spinner from '../../utils/Forum/Spinner';
 import PostFeed from './PostFeed';
 import PostForm from './PostForm';
+import _ from 'lodash';
 
 class Posts extends Component {
   componentDidMount() {
@@ -19,17 +20,17 @@ class Posts extends Component {
     }
     return (
       <div>
-        <PostForm />
+        <PostForm posts={this.props.posts} />
         {postContent}
       </div>
     );
   }
 }
-const mapStateToProps = state => ({
-  posts: state.post
+const mapStateToProps = (state) => ({
+  posts: state.post,
 });
-const mapDispatchToProps = dispatch => ({
-  getPosts: () => dispatch(getPosts())
+const mapDispatchToProps = (dispatch) => ({
+  getPosts: () => dispatch(getPosts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

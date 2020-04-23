@@ -46,6 +46,15 @@ class CommentForm extends Component {
                   value={this.state.text}
                   onChange={this.onChange}
                 />
+                {this.props.post.errors && (
+                  <div>
+                    {this.props.post.errors.map((error, i) => (
+                      <p key={i} className="form_error">
+                        {error.text}
+                      </p>
+                    ))}
+                  </div>
+                )}
               </div>
               <button type="submit" className="btn btn-primary">
                 Submit

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../../utils/Forum/TextAreaFieldGroup';
-import { addPost } from '../../../actions/post';
+import { addPost, getPosts } from '../../../actions/post';
 
 class PostForm extends Component {
   constructor(props) {
@@ -24,6 +24,7 @@ class PostForm extends Component {
 
     this.props.addPost(newPost);
     this.setState({ text: '' });
+    this.props.getPosts();
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -71,6 +72,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addPost: (postData) => dispatch(addPost(postData)),
+  getPosts: () => dispatch(getPosts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
