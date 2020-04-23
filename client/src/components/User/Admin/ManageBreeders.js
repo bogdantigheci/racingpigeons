@@ -80,7 +80,7 @@ class ManageBreeders extends Component {
         config: {
           name: 'placements_input',
           type: 'text',
-          placeholder: 'Enter placements',
+          placeholder: 'Enter placements list split by comma (ex: a, b, c )',
         },
         validation: {
           required: true,
