@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import FormField from '../../utils/formfield';
+import UserLayout from '../../../hoc/UserLayout';
 import {
   update,
   generateData,
@@ -160,49 +160,51 @@ class ManageBreeders extends Component {
 
   render() {
     return (
-      <div className="admin_category_wrapper">
-        <h1>Races</h1>
-        <div className="admin_two_column">
-          <div className="left">
-            <div className="breeds_container">{this.showCategoryItems()}</div>
-          </div>
-          <div className="right">
-            <form onSubmit={(event) => this.submitForm(event)}>
-              <FileUpload
-                imagesHandler={(images) => this.imagesHandler(images)}
-                reset={this.state.formSuccess}
-              />
-              <FormField
-                id={'name'}
-                formdata={this.state.formdata.name}
-                change={(element) => this.updateForm(element)}
-              />
-              <FormField
-                id={'club'}
-                formdata={this.state.formdata.club}
-                change={(element) => this.updateForm(element)}
-              />
-              <FormField
-                id={'contestants'}
-                formdata={this.state.formdata.contestants}
-                change={(element) => this.updateForm(element)}
-              />
-              <FormField
-                id={'details'}
-                formdata={this.state.formdata.details}
-                change={(element) => this.updateForm(element)}
-              />
+      <UserLayout>
+        <div className="admin_category_wrapper">
+          <h1>Races</h1>
+          <div className="admin_two_column">
+            <div className="left">
+              <div className="breeds_container">{this.showCategoryItems()}</div>
+            </div>
+            <div className="right">
+              <form onSubmit={(event) => this.submitForm(event)}>
+                <FileUpload
+                  imagesHandler={(images) => this.imagesHandler(images)}
+                  reset={this.state.formSuccess}
+                />
+                <FormField
+                  id={'name'}
+                  formdata={this.state.formdata.name}
+                  change={(element) => this.updateForm(element)}
+                />
+                <FormField
+                  id={'club'}
+                  formdata={this.state.formdata.club}
+                  change={(element) => this.updateForm(element)}
+                />
+                <FormField
+                  id={'contestants'}
+                  formdata={this.state.formdata.contestants}
+                  change={(element) => this.updateForm(element)}
+                />
+                <FormField
+                  id={'details'}
+                  formdata={this.state.formdata.details}
+                  change={(element) => this.updateForm(element)}
+                />
 
-              {this.state.formError ? (
-                <div className="error_label">Please check your data</div>
-              ) : null}
-              <button onClick={(event) => this.submitForm(event)}>
-                Add Race
-              </button>
-            </form>
+                {this.state.formError ? (
+                  <div className="error_label">Please check your data</div>
+                ) : null}
+                <button onClick={(event) => this.submitForm(event)}>
+                  Add Race
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </UserLayout>
     );
   }
 }
