@@ -70,7 +70,7 @@ class PostItem extends Component {
                 </button>
                 <Link
                   to={`forum/post/${this.props.post._id}`}
-                  className="btn btn-info mr-1"
+                  className="btn btn-primary mr-1"
                 >
                   Comments
                 </Link>
