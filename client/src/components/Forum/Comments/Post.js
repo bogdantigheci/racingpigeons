@@ -40,8 +40,8 @@ class Post extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Link to="/forum" className="btn btn-light mb-3">
-                Back To Forum
+              <Link to="/forum" className="btn btn-primary mb-3">
+                Back to forum
               </Link>
               {postContent}
             </div>
@@ -52,12 +52,12 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  post: state.post
+const mapStateToProps = (state) => ({
+  post: state.post,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getPost: id => dispatch(getPost(id))
+const mapDispatchToProps = (dispatch) => ({
+  getPost: (id) => dispatch(getPost(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

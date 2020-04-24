@@ -1120,6 +1120,13 @@ select {
   margin-bottom: 1.25rem;
 }
 
+.bg-info {
+  background-color: #587ff3 !important;
+}
+.btn-info {
+  background-color: #587ff3;
+}
+
 /* card-item */
 
 .card_item_wrapper {

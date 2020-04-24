@@ -4,7 +4,6 @@ import { getPosts } from '../../../actions/post';
 import Spinner from '../../utils/Forum/Spinner';
 import PostFeed from './PostFeed';
 import PostForm from './PostForm';
-import _ from 'lodash';
 
 class Posts extends Component {
   componentDidMount() {
