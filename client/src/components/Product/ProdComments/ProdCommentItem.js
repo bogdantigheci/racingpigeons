@@ -66,7 +66,8 @@ class ProdCommentItem extends Component {
                 this.props.comment.text
               )}
               <span className="delbtn">
-                {this.props.comment.user === this.props.user.userData.id ? (
+                {this.props.comment.user === this.props.user.userData.id ||
+                this.props.user.userData.isAdmin ? (
                   <div>
                     <button
                       onClick={this.handleDeleteCommentFromProduct.bind(
