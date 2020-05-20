@@ -468,6 +468,9 @@ app.post('/api/users/successBuy', auth, (req, res) => {
                 $inc: {
                   sold: item.quantity,
                 },
+                $set: {
+                  publish: false,
+                },
               },
               { new: false },
               callback
