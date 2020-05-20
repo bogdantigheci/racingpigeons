@@ -32,7 +32,7 @@ class Club extends Component {
           </p>
         </div>
         <div>
-          <h3 className="text-center mt-4">Races and Reports</h3>
+          <h3 className="text-center mt-4">Races</h3>
         </div>
         <div className="d-flex flex-wrap mt-4">
           <Races races={_.get(this.props.products, 'races', [])} />
