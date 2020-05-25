@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getRace } from '../../actions/product';
 import _ from 'lodash';
+import { withNamespaces } from 'react-i18next';
 
 class RaceInfo extends Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class RaceInfo extends Component {
     });
   }
   render() {
+    const { t } = this.props;
     return (
       <div>
         <div>
@@ -41,7 +43,7 @@ class RaceInfo extends Component {
                     : 'container race_placements'
                 }
               >
-                <h5 className="placements-title">Contestants</h5>
+                <h5 className="placements-title">{t('Contestants')}</h5>
                 <div className="container placements_detail">
                   {_.get(this.props.products.race, 'contestants', '').map(
                     (contestants, i) => (
@@ -52,7 +54,7 @@ class RaceInfo extends Component {
               </div>
             </div>
             <div className="container">
-              <h5 className="bio_title">Race details</h5>
+              <h5 className="bio_title">{t('Race details')}</h5>
               <div className="bio container">
                 {_.get(this.props.products.race, 'details', '')}
               </div>
@@ -68,4 +70,6 @@ const mapStateToProps = (state) => ({ products: state.product });
 const mapDispatchToProps = (dispatch) => ({
   getRace: (id) => dispatch(getRace(id)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(RaceInfo);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(RaceInfo)
+);

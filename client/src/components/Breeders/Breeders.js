@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getBreeders } from '../../actions/product';
 import Breeder from './Breeder';
 import _ from 'lodash';
+import { withNamespaces } from 'react-i18next';
 
 class Breeders extends Component {
   componentDidMount() {
@@ -15,9 +16,10 @@ class Breeders extends Component {
   };
 
   render() {
+    const { t } = this.props;
     return (
       <div>
-        <h5 className="page-title h1">Breeders</h5>
+        <h5 className="page-title h1">{t('Breeders')}</h5>
         <Breeder breeders={_.get(this.props.products, 'breeders', [])} />
       </div>
     );
@@ -30,4 +32,6 @@ const mapDispatchToProps = (dispatch) => ({
   getBreeders: () => dispatch(getBreeders()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Breeders);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(Breeders)
+);

@@ -7,6 +7,7 @@ import {
   isFormValid,
   resetFields,
 } from '../../utils/formActions';
+import { withNamespaces } from 'react-i18next';
 
 import { connect } from 'react-redux';
 import { getBreeds, addBreed } from '../../../actions/product';
@@ -128,9 +129,10 @@ class ManageBreeds extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="admin_category_wrapper">
-        <h1>Breeds</h1>
+        <h1>{t('Breeds')}</h1>
         <div className="admin_two_column">
           <div className="left">
             <div className="breeds_container">{this.showCategoryItems()}</div>
@@ -145,18 +147,21 @@ class ManageBreeds extends Component {
                 id={'name'}
                 formdata={this.state.formdata.name}
                 change={(element) => this.updateForm(element)}
+                placeholder={t('Name')}
               />
               <FormField
                 id={'description'}
                 formdata={this.state.formdata.description}
                 change={(element) => this.updateForm(element)}
+                placeholder={t('Description')}
+                label={t('Description')}
               />
 
               {this.state.formError ? (
-                <div className="error_label">Please check your data</div>
+                <div className="error_label">{t('Please check your data')}</div>
               ) : null}
               <button onClick={(event) => this.submitForm(event)}>
-                Add breed
+                {t('Add breed')}
               </button>
             </form>
           </div>
@@ -175,4 +180,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addBreed(dataToSubmit, existingBreeds)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageBreeds);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(ManageBreeds)
+);

@@ -6,6 +6,7 @@ import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
 import Spinner from '../../utils/Forum/Spinner';
 import { getPost } from '../../../actions/post';
+import { withNamespaces } from 'react-i18next';
 
 class Post extends Component {
   componentDidMount() {
@@ -35,13 +36,14 @@ class Post extends Component {
         </div>
       );
     }
+    const { t } = this.props;
     return (
       <div className="post">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <Link to="/forum" className="btn btn-primary mb-3">
-                Back to forum
+                {t('Back to forum')}
               </Link>
               {postContent}
             </div>
@@ -60,4 +62,6 @@ const mapDispatchToProps = (dispatch) => ({
   getPost: (id) => dispatch(getPost(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(Post)
+);

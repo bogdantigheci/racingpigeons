@@ -1,6 +1,7 @@
 import React from 'react';
+import { withNamespaces } from 'react-i18next';
 
-const ProductBlock = ({ products, removeItem }) => {
+const ProductBlock = ({ products, removeItem, t }) => {
   const renderCartImage = (images) => {
     if (images.length > 0) {
       return images[0].url;
@@ -21,18 +22,20 @@ const ProductBlock = ({ products, removeItem }) => {
               />
             </div>
             <div className="item">
-              <h4>Product name</h4>
+              <h4>{t('Pigeon details')}</h4>
               <div>
-                Breed: {product.breed.name}
-                <div>Breeder: {product.breeder.name}</div>
+                {t('Breed')}: {product.breed.name}
+                <div>
+                  {t('Breeder')}: {product.breeder.name}
+                </div>
               </div>
             </div>
             <div className="item">
-              <h4>Quantity</h4>
+              <h4>{t('Quantity')}</h4>
               <div>{product.quantity}</div>
             </div>
             <div className="item">
-              <h4>Price</h4>
+              <h4>{t('Price')}</h4>
               <div>€ {product.price}</div>
             </div>
             <div className="item btn">
@@ -50,4 +53,4 @@ const ProductBlock = ({ products, removeItem }) => {
   return <div>{renderItems()}</div>;
 };
 
-export default ProductBlock;
+export default withNamespaces()(ProductBlock);

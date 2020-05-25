@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../../utils/Forum/TextAreaFieldGroup';
 import { deleteComment, editComment } from '../../../actions/post';
+import { withNamespaces } from 'react-i18next';
 
 class CommentItem extends Component {
   state = {
@@ -31,6 +32,7 @@ class CommentItem extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -56,7 +58,7 @@ class CommentItem extends Component {
                       this.state.text
                     )}
                   >
-                    Save
+                    {t('Save')}
                   </button>
                 </div>
               ) : (
@@ -82,7 +84,7 @@ class CommentItem extends Component {
                   className="btn btn-primary mr-1"
                   onClick={() => this.handleEdit()}
                 >
-                  Edit
+                  {t('Edit')}
                 </button>
               </div>
             ) : null}
@@ -103,4 +105,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(editComment(postId, commentId, editCommentData)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentItem);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(CommentItem)
+);

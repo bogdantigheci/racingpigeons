@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../../utils/Forum/TextAreaFieldGroup';
 import { addPost, getPosts } from '../../../actions/post';
+import { withNamespaces } from 'react-i18next';
 
 class PostForm extends Component {
   constructor(props) {
@@ -31,17 +32,18 @@ class PostForm extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
           <div className="card-header bg-primary text-white">
-            Say Something...
+            {t('Say Something...')}
           </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <TextAreaFieldGroup
-                  placeholder="Create a post"
+                  placeholder={t('Create a post')}
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
@@ -57,7 +59,7 @@ class PostForm extends Component {
                 </div>
               )}
               <button type="submit" className="btn btn-primary">
-                Submit
+                {t('Submit')}
               </button>
             </form>
           </div>
@@ -77,4 +79,6 @@ const mapDispatchToProps = (dispatch) => ({
   getPosts: () => dispatch(getPosts()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(PostForm)
+);

@@ -2,8 +2,10 @@ import React from 'react';
 import MyButton from '../utils/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { withNamespaces } from 'react-i18next';
 
 const ProductInfo = (props) => {
+  const { t } = props;
   const showProdTags = (detail) => (
     <div className="product_tags">
       {detail.shipping ? (
@@ -12,8 +14,8 @@ const ProductInfo = (props) => {
             <FontAwesomeIcon icon={faTruck} />
           </div>
           <div className="tag_text">
-            <div>Free Shipping</div>
-            <div>And Return</div>
+            <div>{t('Free Shipping')}</div>
+            <div>{t('And Return')}</div>
           </div>
         </div>
       ) : null}
@@ -23,8 +25,8 @@ const ProductInfo = (props) => {
             <FontAwesomeIcon icon={faCheck} />
           </div>
           <div className="tag_text">
-            <div>Available</div>
-            <div>In Shop</div>
+            <div>{t('Available')}</div>
+            <div>{t('In Shop')}</div>
           </div>
         </div>
       ) : (
@@ -33,8 +35,8 @@ const ProductInfo = (props) => {
             <FontAwesomeIcon icon={faTimes} />
           </div>
           <div className="tag_text">
-            <div>Not Available</div>
-            <div>Preorder Only</div>
+            <div>{t('Not Available')}</div>
+            <div>{t('Preorder Only')}</div>
           </div>
         </div>
       )}
@@ -57,13 +59,13 @@ const ProductInfo = (props) => {
 
   const showProdSpecifications = (detail) => (
     <div className="product_specifications">
-      <h2>Specifics</h2>
+      <h2>{t('Specifics')}</h2>
       <div>
         <div className="item">
-          <strong>Breed:</strong> {detail.breed.name}
+          <strong>{t('Breed')}:</strong> {detail.breed.name}
         </div>
         <div className="item">
-          <strong>Breeder:</strong> {detail.breeder.name}
+          <strong>{t('Breeder')}:</strong> {detail.breeder.name}
         </div>
       </div>
     </div>
@@ -84,4 +86,4 @@ const ProductInfo = (props) => {
   );
 };
 
-export default ProductInfo;
+export default withNamespaces()(ProductInfo);

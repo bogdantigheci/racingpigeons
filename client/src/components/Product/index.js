@@ -8,6 +8,7 @@ import { addToCart } from '../../actions/user';
 import ProdComments from './ProdComments/ProdComments';
 import _ from 'lodash';
 import ShopModal from '../Shop/Modal';
+import { withNamespaces } from 'react-i18next';
 
 class ProductDetail extends Component {
   state = {
@@ -44,9 +45,10 @@ class ProductDetail extends Component {
   };
 
   render() {
+    const { t } = this.props;
     return (
       <div>
-        <ShopHeader title="Product detail" />
+        <ShopHeader title={t('Pigeon details')} />
         <ShopModal
           show={this.state.modalShow}
           onHide={() => this.setModalShow()}
@@ -79,7 +81,7 @@ class ProductDetail extends Component {
               />
             </div>
           ) : (
-            'Loading'
+            t('Loading...')
           )}
         </div>
       </div>
@@ -100,4 +102,6 @@ const mapDispatchToProps = (dispatch) => ({
   addToCart: (id) => dispatch(addToCart(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(ProductDetail)
+);

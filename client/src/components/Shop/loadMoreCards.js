@@ -1,7 +1,9 @@
 import React from 'react';
 import CardBlockShop from '../utils/cardBlockShop';
+import { withNamespaces } from 'react-i18next';
 
-const LoadmoreCards = props => {
+const LoadmoreCards = (props) => {
+  const { t } = props;
   return (
     <div>
       <div>
@@ -9,11 +11,11 @@ const LoadmoreCards = props => {
       </div>
       {props.size > 0 && props.size >= props.limit ? (
         <div className="load_more_container">
-          <span onClick={() => props.loadMore()}>Load More</span>
+          <span onClick={() => props.loadMore()}>{t('Load More')}</span>
         </div>
       ) : null}
     </div>
   );
 };
 
-export default LoadmoreCards;
+export default withNamespaces()(LoadmoreCards);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../../utils/Forum/TextAreaFieldGroup';
 import { addComment } from '../../../actions/post';
+import { withNamespaces } from 'react-i18next';
 
 class CommentForm extends Component {
   constructor(props) {
@@ -31,17 +32,18 @@ class CommentForm extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
           <div className="card-header bg-primary text-white">
-            Make a comment...
+            {t('Make a comment...')}
           </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <TextAreaFieldGroup
-                  placeholder="Reply to post"
+                  placeholder={t("Reply to post")}
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
@@ -57,7 +59,7 @@ class CommentForm extends Component {
                 )}
               </div>
               <button type="submit" className="btn btn-primary">
-                Submit
+                {t('Submit')}
               </button>
             </form>
           </div>
@@ -75,4 +77,6 @@ const mapDispatchToProps = (dispatch) => ({
   addComment: (postId, newComment) => dispatch(addComment(postId, newComment)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(CommentForm)
+);

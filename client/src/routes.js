@@ -25,6 +25,8 @@ import BreederInfo from './components/Breeders/BreederInfo';
 import Weather from './components/Weather/Weather';
 import AddRaces from './components/User/Admin/AddRaces';
 import RaceInfo from './components/Club/RaceInfo';
+import SellRequest from './components/User/SellRequest';
+import SellRequests from './components/User/Admin/SellRequests';
 
 const Routes = () => {
   return (
@@ -42,7 +44,12 @@ const Routes = () => {
           exact
           component={Auth(ManageCategories, true)}
         />
+        <Route
+          path="/admin/sell_requests"
+          exact
+          component={Auth(SellRequests, true)}
         />
+
         <Route path="/admin/add_races" exact component={Auth(AddRaces, true)} />
         <Route
           path="/reset_password/:token"
@@ -59,6 +66,11 @@ const Routes = () => {
           path="/user/user_profile"
           exact
           component={Auth(UpdateProfile, true)}
+        />
+        <Route
+          path="/user/sell_request"
+          exact
+          component={Auth(SellRequest, true)}
         />
         <Route
           path="/product_detail/:id"

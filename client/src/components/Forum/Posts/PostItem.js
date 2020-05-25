@@ -7,6 +7,7 @@ import {
   removeLike,
   getPost,
 } from '../../../actions/post';
+import { withNamespaces } from 'react-i18next';
 
 class PostItem extends Component {
   handledeletePost(id) {
@@ -32,6 +33,7 @@ class PostItem extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -72,7 +74,7 @@ class PostItem extends Component {
                   to={`forum/post/${this.props.post._id}`}
                   className="btn btn-primary mr-1"
                 >
-                  Comments
+                  {t('Comments')}
                 </Link>
                 {this.props.post.user === this.props.user.userData.id ||
                 this.props.user.userData.isAdmin ? (
@@ -110,4 +112,6 @@ const mapDispatchToProps = (dispatch) => ({
   removeLike: (id) => dispatch(removeLike(id)),
   getPost: (id) => dispatch(getPost(id)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(PostItem);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(PostItem)
+);

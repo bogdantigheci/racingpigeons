@@ -1,8 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 
 const Breeder = (props) => {
+  const { t } = props;
+
   return (
     <div>
       <div className="container d-flex">
@@ -45,7 +48,7 @@ const Breeder = (props) => {
                                   to={`/product/breeders/${breeder._id}`}
                                   className="text-xs-center"
                                 >
-                                  Read more
+                                  {t('Read more')}
                                 </Link>
                               </div>
                             </div>
@@ -63,4 +66,4 @@ const Breeder = (props) => {
   );
 };
 
-export default Breeder;
+export default withNamespaces()(Breeder);

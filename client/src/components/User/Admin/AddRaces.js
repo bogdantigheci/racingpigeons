@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux';
 import { getRaces, addRace } from '../../../actions/product';
 import FileUpload from '../../utils/FileUpload';
+import { withNamespaces } from 'react-i18next';
 
 class ManageBreeders extends Component {
   state = {
@@ -159,10 +160,11 @@ class ManageBreeders extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <UserLayout>
         <div className="admin_category_wrapper">
-          <h1>Races</h1>
+          <h1>{t('Races')}</h1>
           <div className="admin_two_column">
             <div className="left">
               <div className="breeds_container">{this.showCategoryItems()}</div>
@@ -177,28 +179,35 @@ class ManageBreeders extends Component {
                   id={'name'}
                   formdata={this.state.formdata.name}
                   change={(element) => this.updateForm(element)}
+                  placeholder={t('Name')}
                 />
                 <FormField
                   id={'club'}
                   formdata={this.state.formdata.club}
                   change={(element) => this.updateForm(element)}
+                  placeholder={t('Club')}
                 />
                 <FormField
                   id={'contestants'}
                   formdata={this.state.formdata.contestants}
                   change={(element) => this.updateForm(element)}
+                  placeholder={t('Enter contestants split by comma')}
                 />
                 <FormField
                   id={'details'}
                   formdata={this.state.formdata.details}
                   change={(element) => this.updateForm(element)}
+                  label={t('Race details')}
+                  placeholder={t('Race details')}
                 />
 
                 {this.state.formError ? (
-                  <div className="error_label">Please check your data</div>
+                  <div className="error_label">
+                    {t('Please check your data')}
+                  </div>
                 ) : null}
                 <button onClick={(event) => this.submitForm(event)}>
-                  Add Race
+                  {t('Add Race')}
                 </button>
               </form>
             </div>
@@ -218,4 +227,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addRace(dataToSubmit, existingRaces)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageBreeders);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(ManageBreeders)
+);

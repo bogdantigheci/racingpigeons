@@ -1,4 +1,4 @@
-export const validate = (element, formdata = []) => {
+export const validate = (element, formdata = [], t) => {
   let error = [true, ''];
 
   if (element.validation.email) {
@@ -25,10 +25,10 @@ export const validate = (element, formdata = []) => {
 
 export const update = (element, formdata, formName) => {
   const newFormdata = {
-    ...formdata
+    ...formdata,
   };
   const newElement = {
-    ...newFormdata[element.id]
+    ...newFormdata[element.id],
   };
 
   newElement.value = element.event.target.value;
@@ -70,7 +70,7 @@ export const populateOptionFields = (formdata, arrayData = [], field) => {
   const newArray = [];
   const newFormdata = { ...formdata };
 
-  arrayData.forEach(item => {
+  arrayData.forEach((item) => {
     newArray.push({ key: item._id, value: item.name });
   });
   newFormdata[field].config.options = newArray;

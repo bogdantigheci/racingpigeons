@@ -1,23 +1,25 @@
 import React from 'react';
 import Slider from 'react-slick';
 import MyButton from '../utils/button';
+import { withNamespaces } from 'react-i18next';
 
-const HomeSlider = props => {
+const HomeSlider = (props) => {
+  const { t } = props;
   const slides = [
     {
       img: '/images/racinghomer.jpg',
-      lineOne: 'Racing Homer',
-      lineTwo: 'Best Racing Pigeon',
-      linkTitle: 'Shop now',
-      linkTo: '/shop'
+      lineOne: t('Racing Homer'),
+      lineTwo: t('Best Racing Pigeon'),
+      linkTitle: t('Shop now'),
+      linkTo: '/shop',
     },
     {
       img: '/images/tippler.jpg',
-      lineOne: 'Tippler',
-      lineTwo: 'An amazing racing pigeon',
-      linkTitle: 'Shop now',
-      linkTo: '/shop'
-    }
+      lineOne: t('Tippler'),
+      lineTwo: t('An amazing racing pigeon'),
+      linkTitle: t('Shop now'),
+      linkTo: '/shop',
+    },
   ];
 
   const settings = {
@@ -27,7 +29,7 @@ const HomeSlider = props => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    autoplay: true
+    autoplay: true,
   };
 
   const generateSlides = () =>
@@ -38,7 +40,7 @@ const HomeSlider = props => {
               className="featured_image"
               style={{
                 background: `url(${item.img})`,
-                height: `${window.innerHeight}px`
+                height: `${window.innerHeight}px`,
               }}
             >
               <div className="featured_action">
@@ -50,7 +52,7 @@ const HomeSlider = props => {
                     title={item.linkTitle}
                     linkTo={item.linkTo}
                     addStyles={{
-                      margin: '10px 0 0 0'
+                      margin: '10px 0 0 0',
                     }}
                   />
                 </div>
@@ -67,4 +69,4 @@ const HomeSlider = props => {
   );
 };
 
-export default HomeSlider;
+export default withNamespaces()(HomeSlider);

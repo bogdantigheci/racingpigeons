@@ -17,6 +17,8 @@ import {
   ADD_RACE,
   GET_RACE,
   GET_RACES,
+  SELL_REQUEST,
+  GET_SELL_REQUESTS,
 } from '../constants/types';
 import { PRODUCT_SERVER } from '../components/utils/misc';
 
@@ -86,6 +88,26 @@ export function addProduct(dataToSubmit) {
     .then((response) => response.data);
   return {
     type: ADD_PRODUCT,
+    payload: request,
+  };
+}
+
+export function sellRequest(dataToSubmit) {
+  const request = axios
+    .post(`${PRODUCT_SERVER}/sell_request`, dataToSubmit)
+    .then((response) => response.data);
+  return {
+    type: SELL_REQUEST,
+    payload: request,
+  };
+}
+
+export function getSellRequests() {
+  const request = axios
+    .get(`${PRODUCT_SERVER}/requests`)
+    .then((response) => response.data);
+  return {
+    type: GET_SELL_REQUESTS,
     payload: request,
   };
 }

@@ -4,6 +4,7 @@ import ProductBlock from '../utils/productBlock';
 import { connect } from 'react-redux';
 import { getCartItems, removeCartItem } from '../../actions/user';
 import _ from 'lodash';
+import { withNamespaces } from 'react-i18next';
 
 class ModalDetails extends Component {
   state = {
@@ -61,6 +62,7 @@ class ModalDetails extends Component {
   };
 
   render() {
+    const { t } = this.props;
     return (
       <div>
         <div className="user_cart">
@@ -73,7 +75,7 @@ class ModalDetails extends Component {
             <div>
               <div className="user_cart_sum">
                 <div className="total_amount">
-                  Total amount: € {this.state.total}
+                  {t('Total amount')}: € {this.state.total}
                 </div>
               </div>
             </div>
@@ -94,4 +96,6 @@ const mapDispatchToProps = (dispatch) => ({
   removeCartItem: (id) => dispatch(removeCartItem(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalDetails);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(ModalDetails)
+);

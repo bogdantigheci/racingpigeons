@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux';
 import { getBreeders, addBreeder } from '../../../actions/product';
 import FileUpload from '../../utils/FileUpload';
+import { withNamespaces } from 'react-i18next';
 
 class ManageBreeders extends Component {
   state = {
@@ -80,7 +81,7 @@ class ManageBreeders extends Component {
         config: {
           name: 'placements_input',
           type: 'text',
-          placeholder: 'Enter placements list split by comma (ex: a, b, c )',
+          placeholder: 'Enter placements split by comma',
         },
         validation: {
           required: true,
@@ -159,9 +160,10 @@ class ManageBreeders extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="admin_category_wrapper">
-        <h1>Breeders</h1>
+        <h1>{t('Breeders')}</h1>
         <div className="admin_two_column">
           <div className="left">
             <div className="breeds_container">{this.showCategoryItems()}</div>
@@ -176,28 +178,33 @@ class ManageBreeders extends Component {
                 id={'name'}
                 formdata={this.state.formdata.name}
                 change={(element) => this.updateForm(element)}
+                placeholder={t('Name')}
               />
               <FormField
                 id={'club'}
                 formdata={this.state.formdata.club}
                 change={(element) => this.updateForm(element)}
+                placeholder={t('Club')}
               />
               <FormField
                 id={'placements'}
                 formdata={this.state.formdata.placements}
                 change={(element) => this.updateForm(element)}
+                placeholder={t('Placements')}
               />
               <FormField
                 id={'bio'}
                 formdata={this.state.formdata.bio}
                 change={(element) => this.updateForm(element)}
+                label={t('Bio')}
+                placeholder={t('Bio')}
               />
 
               {this.state.formError ? (
-                <div className="error_label">Please check your data</div>
+                <div className="error_label">{t('Please check your data')}</div>
               ) : null}
               <button onClick={(event) => this.submitForm(event)}>
-                Add breeder
+                {t('Add breeder')}
               </button>
             </form>
           </div>
@@ -216,4 +223,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addBreeder(dataToSubmit, existingBreeds)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageBreeders);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(ManageBreeders)
+);

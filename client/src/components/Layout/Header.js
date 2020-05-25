@@ -1,77 +1,12 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-// import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
 import DrawerToggleButton from './DrawerToggleButton';
 import { logoutUser } from '../../actions/user';
+import ChangeLanguage from '../utils/changeLanguage';
+import { withNamespaces } from 'react-i18next';
 
 class Header extends Component {
-  state = {
-    page: [
-      {
-        name: 'Home',
-        linkTo: '/',
-        public: true,
-      },
-      {
-        name: 'Shop',
-        linkTo: '/shop',
-        public: true,
-      },
-      {
-        name: 'Club',
-        linkTo: '/club',
-        public: true,
-      },
-
-      {
-        name: 'Breeders',
-        linkTo: '/breeders',
-        public: true,
-      },
-
-      {
-        name: 'Breeds',
-        linkTo: '/breeds',
-        public: true,
-      },
-      {
-        name: 'Forum',
-        linkTo: '/forum',
-        public: false,
-      },
-      {
-        name: 'Weather',
-        linkTo: '/weather',
-        public: true,
-      },
-    ],
-    user: [
-      {
-        name: 'My Account',
-        linkTo: '/user/dashboard',
-        public: false,
-      },
-      {
-        name: 'My Cart',
-        linkTo: '/user/cart',
-        public: false,
-      },
-
-      {
-        name: 'Log in',
-        linkTo: '/register_login',
-        public: true,
-      },
-      {
-        name: 'Log out',
-        linkTo: '/user/logout',
-        public: false,
-      },
-    ],
-  };
-
   logoutHandler = () => {
     this.props.dispatch(logoutUser()).then((response) => {
       if (response.payload.success) {
@@ -124,7 +59,7 @@ class Header extends Component {
     }
 
     return list.map((item, i) => {
-      if (item.name !== 'My Cart') {
+      if (item.name !== 'My cart') {
         return this.defaultLink(item, i);
       } else {
         return this.cartLink(item, i);
@@ -133,6 +68,71 @@ class Header extends Component {
   };
 
   render() {
+    const { t } = this.props;
+    const menuLinks = {
+      page: [
+        {
+          name: t('Home'),
+          linkTo: '/',
+          public: true,
+        },
+        {
+          name: t('Shop'),
+          linkTo: '/shop',
+          public: true,
+        },
+        {
+          name: t('Club'),
+          linkTo: '/club',
+          public: true,
+        },
+
+        {
+          name: t('Breeders'),
+          linkTo: '/breeders',
+          public: true,
+        },
+
+        {
+          name: t('Breeds'),
+          linkTo: '/breeds',
+          public: true,
+        },
+        {
+          name: t('Forum'),
+          linkTo: '/forum',
+          public: false,
+        },
+        {
+          name: t('Weather'),
+          linkTo: '/weather',
+          public: true,
+        },
+      ],
+      user: [
+        {
+          name: t('My account'),
+          linkTo: '/user/dashboard',
+          public: false,
+        },
+        {
+          name: t('My cart'),
+          linkTo: '/user/cart',
+          public: false,
+        },
+
+        {
+          name: t('Log in'),
+          linkTo: '/register_login',
+          public: true,
+        },
+        {
+          name: t('Log out'),
+          linkTo: '/user/logout',
+          public: false,
+        },
+      ],
+    };
     return (
       <header className="toolbar">
         <nav className="toolbar__navigation">
@@ -150,9 +150,10 @@ class Header extends Component {
           </div>
           <div className="spacer" />
           <div className="toolbar_navigation-items">
-            {this.showLinks(this.state.page)}
-            {this.showLinks(this.state.user)}
+            {this.showLinks(menuLinks.page)}
+            {this.showLinks(menuLinks.user)}
           </div>
+          <ChangeLanguage />
         </nav>
       </header>
     );
@@ -163,4 +164,4 @@ const mapStateToProps = (state) => {
   return { user: state.user };
 };
 
-export default connect(mapStateToProps)(withRouter(Header));
+export default withNamespaces()(connect(mapStateToProps)(withRouter(Header)));

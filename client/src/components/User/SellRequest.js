@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
-import UserLayout from '../../../hoc/UserLayout';
-import FormField from '../../utils/formfield';
+import UserLayout from '../../hoc/UserLayout';
+import FormField from '../utils/formfield';
 import { connect } from 'react-redux';
 import {
   update,
   generateData,
   isFormValid,
-  populateOptionFields,
   resetFields,
-} from '../../utils/formActions';
+} from '../utils/formActions';
 import {
   getBreeds,
   getBreeders,
-  addProduct,
+  sellRequest,
   clearProduct,
-} from '../../../actions/product';
-import FileUpload from '../../utils/FileUpload';
+} from '../../actions/product';
+import FileUpload from '../utils/FileUpload';
 import { withNamespaces } from 'react-i18next';
 
-class AddProduct extends Component {
+class SellRequest extends Component {
   state = {
     formError: false,
     formSuccess: false,
@@ -75,12 +74,12 @@ class AddProduct extends Component {
         showlabel: true,
       },
       breeder: {
-        element: 'select',
+        element: 'input',
         value: '',
         config: {
           label: 'Breeder',
           name: 'breeder_input',
-          options: [],
+          placeholder: 'Enter breeder',
         },
         validation: {
           required: true,
@@ -91,12 +90,12 @@ class AddProduct extends Component {
         showlabel: true,
       },
       breed: {
-        element: 'select',
+        element: 'input',
         value: '',
         config: {
           label: 'Breed',
           name: 'breed_input',
-          options: [],
+          placeholder: 'Enter breed',
         },
         validation: {
           required: true,
@@ -213,8 +212,8 @@ class AddProduct extends Component {
     let formIsValid = isFormValid(this.state.formdata, 'products');
 
     if (formIsValid) {
-      this.props.addProduct(dataToSubmit).then(() => {
-        if (this.props.products.addProduct.success) {
+      this.props.sellRequest(dataToSubmit).then(() => {
+        if (this.props.products.sellRequest.success) {
           this.resetFieldHandler();
         }
       });
@@ -236,32 +235,12 @@ class AddProduct extends Component {
     });
   };
 
-  componentDidMount() {
-    const formdata = this.state.formdata;
-    this.props.getBreeders().then((response) => {
-      const newFormData = populateOptionFields(
-        formdata,
-        this.props.products.breeders,
-        'breeder'
-      );
-      this.updateFields(newFormData);
-    });
-    this.props.getBreeds().then((response) => {
-      const newFormData = populateOptionFields(
-        formdata,
-        this.props.products.breeds,
-        'breed'
-      );
-      this.updateFields(newFormData);
-    });
-  }
-
   render() {
     const { t } = this.props;
     return (
       <UserLayout>
         <div>
-          <h1>{t('Add product')}</h1>
+          <h1>{t('Sell request')}</h1>
           <form onSubmit={(event) => this.submitForm(event)}>
             <FileUpload
               imagesHandler={(images) => this.imagesHandler(images)}
@@ -294,12 +273,14 @@ class AddProduct extends Component {
               formdata={this.state.formdata.breed}
               change={(element) => this.updateForm(element)}
               label={t('Breed')}
+              placeholder={t('Enter breed')}
             />
             <FormField
               id={'breeder'}
               formdata={this.state.formdata.breeder}
               change={(element) => this.updateForm(element)}
               label={t('Breeder')}
+              placeholder={t('Enter breeder')}
             />
             <div className="form_devider"></div>
             <FormField
@@ -330,7 +311,7 @@ class AddProduct extends Component {
               <div className="error_label">{t('Please check your data')}</div>
             ) : null}
             <button onClick={(event) => this.submitForm(event)}>
-              {t('Add product')}
+              {t('Send request')}
             </button>
           </form>
         </div>
@@ -346,8 +327,8 @@ const mapDispatchToProps = (dispatch) => ({
   getBreeders: () => dispatch(getBreeders()),
   getBreeds: () => dispatch(getBreeds()),
   clearProduct: () => dispatch(clearProduct()),
-  addProduct: (dataToSubmit) => dispatch(addProduct(dataToSubmit)),
+  sellRequest: (dataToSubmit) => dispatch(sellRequest(dataToSubmit)),
 });
 export default withNamespaces()(
-  connect(mapStateToProps, mapDispatchToProps)(AddProduct)
+  connect(mapStateToProps, mapDispatchToProps)(SellRequest)
 );

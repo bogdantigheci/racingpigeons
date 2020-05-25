@@ -1,7 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
+import { withNamespaces } from 'react-i18next';
 
 const Breed = (props) => {
+  const { t } = props;
+
   return (
     <div className="container d-flex flex-wrap">
       {props.breeds
@@ -39,7 +42,7 @@ const Breed = (props) => {
                     aria-expanded="false"
                     aria-controls={`id${i}`}
                   >
-                    Description
+                    {t('Description')}
                   </a>
                 </div>
               </div>
@@ -50,4 +53,4 @@ const Breed = (props) => {
   );
 };
 
-export default Breed;
+export default withNamespaces()(Breed);

@@ -15,6 +15,8 @@ import {
   ADD_RACE,
   GET_RACE,
   GET_RACES,
+  SELL_REQUEST,
+  GET_SELL_REQUESTS,
 } from '../constants/types';
 
 ///rename to products for better fit
@@ -51,6 +53,16 @@ const product = (state = { breeders: [] }, action) => {
       return {
         ...state,
         addProduct: action.payload,
+      };
+    case SELL_REQUEST:
+      return {
+        ...state,
+        sellRequest: action.payload,
+      };
+    case GET_SELL_REQUESTS:
+      return {
+        ...state,
+        sellRequests: action.payload,
       };
     case ADD_BREED:
       return {

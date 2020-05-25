@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 import Races from './Races';
 import { connect } from 'react-redux';
 import { getRaces } from '../../actions/product';
 import _ from 'lodash';
+import { withNamespaces } from 'react-i18next';
 
 class Club extends Component {
   componentDidMount() {
     this.props.getRaces();
   }
   render() {
+    const { t } = this.props;
+
     return (
       <div className="container">
-        <h1 className="text-center mt-2 mb-3">About</h1>
+        <h1 className="text-center mt-2 mb-3">{t('About')}</h1>
         <div>
           <p>
             "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -32,7 +34,7 @@ class Club extends Component {
           </p>
         </div>
         <div>
-          <h3 className="text-center mt-4">Races</h3>
+          <h3 className="text-center mt-4">{t('Races')}</h3>
         </div>
         <div className="d-flex flex-wrap mt-4">
           <Races races={_.get(this.props.products, 'races', [])} />
@@ -48,4 +50,6 @@ const mapDispatchToProps = (dispatch) => ({
   getRaces: () => dispatch(getRaces()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Club);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(Club)
+);

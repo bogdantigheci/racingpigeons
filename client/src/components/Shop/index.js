@@ -13,6 +13,7 @@ import LoadMoreCards from './loadMoreCards';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faTh } from '@fortawesome/free-solid-svg-icons';
+import { withNamespaces } from 'react-i18next';
 
 class Shop extends Component {
   state = {
@@ -93,9 +94,10 @@ class Shop extends Component {
 
   render() {
     const products = this.props.products;
+    const { t } = this.props;
     return (
       <div>
-        <ShopHeader title="Browse Products" />
+        <ShopHeader title={t('Browse Pigeons')} />
         <div className="container-fluid">
           <div className="shop_wrapper">
             <div className="left">
@@ -117,7 +119,7 @@ class Shop extends Component {
                 <div className="large_left">
                   <CollapseCheckbox
                     initState={window.innerWidth > 768 ? true : false}
-                    title="Breeders"
+                    title={t('Breeders')}
                     list={products.breeders}
                     handleFilters={(filters) =>
                       this.handleFilters(filters, 'breeder')
@@ -125,7 +127,7 @@ class Shop extends Component {
                   />
                   <CollapseCheckbox
                     initState={window.innerWidth > 768 ? true : false}
-                    title="Breeds"
+                    title={t('Breeds')}
                     list={products.breeds}
                     handleFilters={(filters) =>
                       this.handleFilters(filters, 'breed')
@@ -133,7 +135,7 @@ class Shop extends Component {
                   />
                   <CollapseRadio
                     initState={window.innerWidth > 768 ? true : false}
-                    title="Price"
+                    title={t('Price')}
                     list={price}
                     handleFilters={(filters) =>
                       this.handleFilters(filters, 'price')
@@ -169,4 +171,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(getProductsToShop(skip, limit, filters, previousState)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Shop);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(Shop)
+);

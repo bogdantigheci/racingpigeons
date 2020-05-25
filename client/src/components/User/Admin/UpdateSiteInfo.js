@@ -10,6 +10,7 @@ import {
 
 import { connect } from 'react-redux';
 import { getSiteData, updateSiteData } from '../../../actions/site';
+import { withNamespaces } from 'react-i18next';
 
 class UpdateSiteNfo extends Component {
   state = {
@@ -137,39 +138,46 @@ class UpdateSiteNfo extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div>
         <form onSubmit={(event) => this.submitForm(event)}>
-          <h1>Site info</h1>
+          <h1>{t('App info')}</h1>
           <FormField
             id={'address'}
             formdata={this.state.formdata.address}
             change={(element) => this.updateForm(element)}
+            label={t('Address')}
           />
           <FormField
             id={'hours'}
             formdata={this.state.formdata.hours}
             change={(element) => this.updateForm(element)}
+            label={t('Working hours')}
           />
           <FormField
             id={'phone'}
             formdata={this.state.formdata.phone}
             change={(element) => this.updateForm(element)}
+            label={t('Phone')}
           />
           <FormField
             id={'email'}
             formdata={this.state.formdata.email}
             change={(element) => this.updateForm(element)}
+            label={t('Email')}
           />
 
           <div>
             {this.state.formSuccess ? (
-              <div className="form_success">Success</div>
+              <div className="form_success">{t('Success')}</div>
             ) : null}
             {this.state.formError ? (
-              <div className="error_label">Please check your data</div>
+              <div className="error_label">{t('Please check your data')}</div>
             ) : null}
-            <button onClick={(event) => this.submitForm(event)}>Update</button>
+            <button onClick={(event) => this.submitForm(event)}>
+              {t('Update')}
+            </button>
           </div>
         </form>
       </div>
@@ -185,4 +193,6 @@ const mapDispatchToProps = (dispatch) => ({
   updateSiteData: (dataToSubmit) => dispatch(updateSiteData(dataToSubmit)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateSiteNfo);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(UpdateSiteNfo)
+);

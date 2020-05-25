@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { withNamespaces } from 'react-i18next';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 class Fileupload extends Component {
@@ -11,23 +9,23 @@ class Fileupload extends Component {
     super();
     this.state = {
       uploadedFiles: [],
-      uploading: false
+      uploading: false,
     };
   }
 
-  onDrop = files => {
+  onDrop = (files) => {
     this.setState({ uploading: true });
     let formData = new FormData();
     const config = {
-      header: { 'content-type': 'multipart/form-data' }
+      header: { 'content-type': 'multipart/form-data' },
     };
     formData.append('file', files[0]);
 
-    axios.post('/api/users/uploadimage', formData, config).then(response => {
+    axios.post('/api/users/uploadimage', formData, config).then((response) => {
       this.setState(
         {
           uploading: false,
-          uploadedFiles: [...this.state.uploadedFiles, response.data]
+          uploadedFiles: [...this.state.uploadedFiles, response.data],
         },
         () => {
           this.props.imagesHandler(this.state.uploadedFiles);
@@ -36,15 +34,15 @@ class Fileupload extends Component {
     });
   };
 
-  onRemove = id => {
-    axios.get(`/api/users/removeimage?public_id=${id}`).then(response => {
-      let images = this.state.uploadedFiles.filter(item => {
+  onRemove = (id) => {
+    axios.get(`/api/users/removeimage?public_id=${id}`).then((response) => {
+      let images = this.state.uploadedFiles.filter((item) => {
         return item.public_id !== id;
       });
 
       this.setState(
         {
-          uploadedFiles: images
+          uploadedFiles: images,
         },
         () => {
           this.props.imagesHandler(images);
@@ -54,7 +52,7 @@ class Fileupload extends Component {
   };
 
   showUploadedImages = () =>
-    this.state.uploadedFiles.map(item => (
+    this.state.uploadedFiles.map((item) => (
       <div
         className="dropzone_box"
         key={item.public_id}
@@ -70,19 +68,20 @@ class Fileupload extends Component {
   static getDerivedStateFromProps(props, state) {
     if (props.reset) {
       return (state = {
-        uploadedFiles: []
+        uploadedFiles: [],
       });
     }
     return null;
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div>
         <section>
           <div className="dropzone clear">
             <Dropzone
-              onDrop={e => this.onDrop(e)}
+              onDrop={(e) => this.onDrop(e)}
               multiple={false}
               className="dropzone_box"
             >
@@ -91,7 +90,7 @@ class Fileupload extends Component {
                 getInputProps,
                 isDragActive,
                 isDragReject,
-                rejectedFiles
+                rejectedFiles,
               }) => {
                 const isFileTooLarge =
                   rejectedFiles.length > 0 &&
@@ -100,13 +99,13 @@ class Fileupload extends Component {
                   <div {...getRootProps()}>
                     <input {...getInputProps()} />
                     {isDragActive
-                      ? 'Drop your file here to upload!'
-                      : 'Click me or drag a file to upload!'}
+                      ? t('Drop your file here to upload!')
+                      : t('Click me or drag a file to upload!')}
                     {isDragActive &&
                       !isDragReject &&
-                      'Drop your file here to upload!'}
-                    {isDragReject && 'File type not accepted, sorry!'}
-                    {isFileTooLarge && <div>File is too large.</div>}
+                      t('Drop your file here to upload!')}
+                    {isDragReject && t('File type not accepted, sorry!')}
+                    {isFileTooLarge && <div>{t('File is too large.')}</div>}
                   </div>
                 );
               }}
@@ -117,7 +116,7 @@ class Fileupload extends Component {
                 className="dropzone_box"
                 style={{
                   textAlign: 'center',
-                  paddingTop: '60px'
+                  paddingTop: '60px',
                 }}
               >
                 <CircularProgress style={{ color: '#00bcd4' }} thickness={7} />
@@ -130,4 +129,4 @@ class Fileupload extends Component {
   }
 }
 
-export default Fileupload;
+export default withNamespaces()(Fileupload);

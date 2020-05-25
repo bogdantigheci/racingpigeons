@@ -1,14 +1,3 @@
-export const breeds = [
-  {
-    _id: 1,
-    name: 'Racing Homer',
-  },
-  {
-    _id: 2,
-    name: 'Tippler',
-  },
-];
-
 export const price = [
   {
     _id: 0,

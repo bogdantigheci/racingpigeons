@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { withNamespaces } from 'react-i18next';
 
-const MyButton = props => {
+const MyButton = (props) => {
+  const { t } = props;
   const buttons = () => {
     let template = '';
 
@@ -30,7 +32,7 @@ const MyButton = props => {
         template = (
           <div className="add_to_cart_link" onClick={() => props.runAction()}>
             <FontAwesomeIcon icon={faShoppingBag} />
-            Add to cart
+            {t('Add to cart')}
           </div>
         );
         break;
@@ -43,4 +45,4 @@ const MyButton = props => {
   return <div className="my_link">{buttons()}</div>;
 };
 
-export default MyButton;
+export default withNamespaces()(MyButton);

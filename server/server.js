@@ -56,6 +56,7 @@ const { Payment } = require('./models/payment');
 const { Site } = require('./models/site');
 const { Post } = require('./models/post');
 const { Race } = require('./models/race');
+const { Request } = require('./models/request');
 
 ///Validation
 
@@ -161,6 +162,25 @@ app.post('/api/product/article', auth, admin, (req, res) => {
       success: true,
       article: doc,
     });
+  });
+});
+
+app.post('/api/product/sell_request', auth, admin, (req, res) => {
+  const request = new Request(req.body);
+
+  request.save((err, doc) => {
+    if (err) return res.json({ success: false, err });
+    res.status(200).json({
+      success: true,
+      request: doc,
+    });
+  });
+});
+
+app.get('/api/product/requests', (req, res) => {
+  Request.find({}, (err, requests) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).send({ requests });
   });
 });
 
@@ -625,14 +645,14 @@ app.get('/api/forum/posts/:id', (req, res) => {
 
 // // // @desc    remove post
 
-app.get('/api/forum/posts/remove/:id', auth, admin, function (req, res, next) {
+app.get('/api/forum/posts/remove/:id', auth, admin, function (req, res) {
   Post.findById(req.params.id)
     .then((post) => {
-      if (post.user.toString() !== req.user.id) {
+      if (post.user.toString() === req.user.id || req.user.role === 1) {
+        post.remove().then(() => res.json({ success: true }));
+      } else {
         return res.status(401).json({ notauthorized: 'User not authorized' });
       }
-
-      post.remove().then(() => res.json({ success: true }));
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
@@ -681,7 +701,6 @@ app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
         .indexOf(req.user.id);
 
       post.likes.splice(removeIndex, 1);
-
       post.save().then((post) => res.json({ success: true }));
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));

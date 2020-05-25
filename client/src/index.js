@@ -11,6 +11,7 @@ import logger from 'redux-logger';
 import Reducer from './reducers';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import './i18n';
 
 const store = createStore(
   Reducer,

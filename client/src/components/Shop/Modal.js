@@ -2,8 +2,10 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import ModalDetails from './ModalDetails';
 import { Link } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 
 const ShopModal = (props) => {
+  const { t } = props;
   return (
     <Modal
       {...props}
@@ -13,7 +15,7 @@ const ShopModal = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Cart Details
+          {t('Cart Details')}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -21,24 +23,24 @@ const ShopModal = (props) => {
           <ModalDetails />
         ) : (
           <div>
-            You need to
-            <Link to="/register_login"> Login</Link> before adding an item to
-            cart!
+            {t('You need to be')}
+            <Link to="/register_login"> {t('logged in')}</Link>{' '}
+            {t('before adding a pigeon to cart!')}
           </div>
         )}
       </Modal.Body>
       {props.prodauth || props.cardauth ? (
         <Modal.Footer>
-          <Button onClick={props.onHide}>Continue</Button>
+          <Button onClick={props.onHide}>{t('Continue')}</Button>
           <Link to="/user/cart">
-            <Button>Checkout</Button>
+            <Button>{t('Checkout')}</Button>
           </Link>
         </Modal.Footer>
       ) : (
         <Modal.Footer>
           <div>
-            Don't have an account yet?
-            <Link to="/register"> Register!</Link>
+            {t('Do not have an account yet?')}
+            <Link to="/register"> {t('Register!')}</Link>
           </div>
         </Modal.Footer>
       )}
@@ -46,4 +48,4 @@ const ShopModal = (props) => {
   );
 };
 
-export default ShopModal;
+export default withNamespaces()(ShopModal);

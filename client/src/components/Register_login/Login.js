@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FormField from '../utils/formfield';
 import { update, generateData, isFormValid } from '../utils/formActions';
 import { withRouter } from 'react-router-dom';
-
+import { withNamespaces } from 'react-i18next';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/user';
 
@@ -77,6 +77,7 @@ class Login extends Component {
   };
 
   render() {
+    const { t } = this.props;
     return (
       <div className="signin_wrapper">
         <form onSubmit={(event) => this.submitForm(event)}>
@@ -84,33 +85,35 @@ class Login extends Component {
             id={'email'}
             formdata={this.state.formdata.email}
             change={(element) => this.updateForm(element)}
+            placeholder={t('Enter your email')}
           />
 
           <FormField
             id={'password'}
             formdata={this.state.formdata.password}
             change={(element) => this.updateForm(element)}
+            placeholder={t('Enter your password')}
           />
 
           {this.state.formError ? (
-            <div className="error_label">Please check your data</div>
+            <div className="error_label">{t('Please check your data')}</div>
           ) : null}
           <div
             className="login_button"
             onClick={(event) => this.submitForm(event)}
           >
-            Log in
+            {t('Log in')}
           </div>
         </form>
         <div
           className="forgot_pass"
           onClick={() => this.props.history.push('/reset_user')}
         >
-          Forgot your password?
+          {t('Forgot your password?')}
         </div>
       </div>
     );
   }
 }
 
-export default connect()(withRouter(Login));
+export default withNamespaces()(connect()(withRouter(Login)));

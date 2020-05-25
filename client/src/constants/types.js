@@ -34,3 +34,5 @@ export const ADD_MESSAGE_TO_CHAT = 'ADD_MESSAGE_TO_CHAT';
 export const ADD_RACE = 'ADD_RACE';
 export const GET_RACE = 'GET_RACE';
 export const GET_RACES = 'GET_RACES';
+export const SELL_REQUEST = 'SELL_REQUEST';
+export const GET_SELL_REQUESTS = 'GET_SELL_REQUESTS';

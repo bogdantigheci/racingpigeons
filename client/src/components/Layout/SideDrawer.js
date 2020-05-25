@@ -1,76 +1,10 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-// import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { logoutUser } from '../../actions/user';
 import { connect } from 'react-redux';
+import { withNamespaces } from 'react-i18next';
 
 class sideDrawer extends Component {
-  state = {
-    page: [
-      {
-        name: 'Home',
-        linkTo: '/',
-        public: true,
-      },
-      {
-        name: 'Shop',
-        linkTo: '/shop',
-        public: true,
-      },
-      {
-        name: 'Club',
-        linkTo: '/club',
-        public: true,
-      },
-
-      {
-        name: 'Breeders',
-        linkTo: '/breeders',
-        public: true,
-      },
-
-      {
-        name: 'Breeds',
-        linkTo: '/breeds',
-        public: true,
-      },
-      {
-        name: 'Forum',
-        linkTo: '/forum',
-        public: false,
-      },
-      {
-        name: 'Weather',
-        linkTo: '/weather',
-        public: true,
-      },
-    ],
-    user: [
-      {
-        name: 'My Account',
-        linkTo: '/user/dashboard',
-        public: false,
-      },
-      {
-        name: 'My Cart',
-        linkTo: '/user/cart',
-        public: false,
-      },
-
-      {
-        name: 'Log in',
-        linkTo: '/register_login',
-        public: true,
-      },
-      {
-        name: 'Log out',
-        linkTo: '/user/logout',
-        public: false,
-      },
-    ],
-  };
-
   logoutHandler = () => {
     this.props.dispatch(logoutUser()).then((response) => {
       if (response.payload.success) {
@@ -81,7 +15,6 @@ class sideDrawer extends Component {
 
   cartLink = (item, i) => {
     const user = this.props.user.userData;
-
     return (
       <div className="cart_link" key={i}>
         <span>{user.cart ? user.cart.length : 0}</span>
@@ -123,7 +56,7 @@ class sideDrawer extends Component {
     }
 
     return list.map((item, i) => {
-      if (item.name !== 'My Cart') {
+      if (item.name !== 'My cart') {
         return this.defaultLink(item, i);
       } else {
         return this.cartLink(item, i);
@@ -131,6 +64,72 @@ class sideDrawer extends Component {
     });
   };
   render() {
+    const { t } = this.props;
+    const menuLinks = {
+      page: [
+        {
+          name: t('Home'),
+          linkTo: '/',
+          public: true,
+        },
+        {
+          name: t('Shop'),
+          linkTo: '/shop',
+          public: true,
+        },
+        {
+          name: t('Club'),
+          linkTo: '/club',
+          public: true,
+        },
+
+        {
+          name: t('Breeders'),
+          linkTo: '/breeders',
+          public: true,
+        },
+
+        {
+          name: t('Breeds'),
+          linkTo: '/breeds',
+          public: true,
+        },
+        {
+          name: t('Forum'),
+          linkTo: '/forum',
+          public: false,
+        },
+        {
+          name: t('Weather'),
+          linkTo: '/weather',
+          public: true,
+        },
+      ],
+      user: [
+        {
+          name: t('My account'),
+          linkTo: '/user/dashboard',
+          public: false,
+        },
+        {
+          name: t('My cart'),
+          linkTo: '/user/cart',
+          public: false,
+        },
+
+        {
+          name: t('Log in'),
+          linkTo: '/register_login',
+          public: true,
+        },
+        {
+          name: t('Log out'),
+          linkTo: '/user/logout',
+          public: false,
+        },
+      ],
+    };
+
     let drawerClasses = 'side-drawer';
     if (this.props.show) {
       drawerClasses = 'side-drawer open';
@@ -139,8 +138,8 @@ class sideDrawer extends Component {
     return (
       <nav className={drawerClasses}>
         <ul>
-          {this.showLinks(this.state.page)}
-          {this.showLinks(this.state.user)}
+          {this.showLinks(menuLinks.page)}
+          {this.showLinks(menuLinks.user)}
         </ul>
       </nav>
     );
@@ -151,4 +150,6 @@ const mapStateToProps = (state) => {
   return { user: state.user };
 };
 
-export default connect(mapStateToProps)(withRouter(sideDrawer));
+export default withNamespaces()(
+  connect(mapStateToProps)(withRouter(sideDrawer))
+);

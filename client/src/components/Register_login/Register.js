@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FormField from '../utils/formfield';
 import { update, generateData, isFormValid } from '../utils/formActions';
 import Dialog from '@material-ui/core/Dialog';
-
+import { withNamespaces } from 'react-i18next';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/user';
 
@@ -17,14 +17,14 @@ class Register extends Component {
         config: {
           name: 'name_input',
           type: 'text',
-          placeholder: 'Enter your name'
+          placeholder: 'Enter your name',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       lastname: {
         element: 'input',
@@ -32,14 +32,14 @@ class Register extends Component {
         config: {
           name: 'lastname_input',
           type: 'text',
-          placeholder: 'Enter your lastname'
+          placeholder: 'Enter your lastname',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       email: {
         element: 'input',
@@ -47,15 +47,15 @@ class Register extends Component {
         config: {
           name: 'email_input',
           type: 'email',
-          placeholder: 'Enter your email'
+          placeholder: 'Enter your email',
         },
         validation: {
           required: true,
-          email: true
+          email: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       password: {
         element: 'input',
@@ -63,14 +63,14 @@ class Register extends Component {
         config: {
           name: 'password_input',
           type: 'password',
-          placeholder: 'Enter your password'
+          placeholder: 'Enter your password',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       confirmPassword: {
         element: 'input',
@@ -78,28 +78,28 @@ class Register extends Component {
         config: {
           name: 'confirm_password_input',
           type: 'password',
-          placeholder: 'Confirm your password'
+          placeholder: 'Confirm your password',
         },
         validation: {
           required: true,
-          confirm: 'password'
+          confirm: 'password',
         },
         valid: false,
         touched: false,
-        validationMessage: ''
-      }
-    }
+        validationMessage: '',
+      },
+    },
   };
 
-  updateForm = element => {
+  updateForm = (element) => {
     const newFormdata = update(element, this.state.formdata, 'register');
     this.setState({
       formError: false,
-      formdata: newFormdata
+      formdata: newFormdata,
     });
   };
 
-  submitForm = event => {
+  submitForm = (event) => {
     event.preventDefault();
 
     let dataToSubmit = generateData(this.state.formdata, 'register');
@@ -108,11 +108,11 @@ class Register extends Component {
     if (formIsValid) {
       this.props
         .dispatch(registerUser(dataToSubmit))
-        .then(response => {
+        .then((response) => {
           if (response.payload.success) {
             this.setState({
               formError: false,
-              formSuccess: true
+              formSuccess: true,
             });
             setTimeout(() => {
               this.props.history.push('/register_login');
@@ -121,37 +121,40 @@ class Register extends Component {
             this.setState({ formError: true });
           }
         })
-        .catch(e => {
+        .catch((e) => {
           this.setState({ formError: true });
         });
     } else {
       this.setState({
-        formError: true
+        formError: true,
       });
     }
   };
 
   render() {
+    const { t } = this.props;
     return (
       <div className="page_wrapper">
         <div className="container">
           <div className="register_login_container">
             <div className="left">
-              <form onSubmit={event => this.submitForm(event)}>
+              <form onSubmit={(event) => this.submitForm(event)}>
                 <h2>Personal information</h2>
                 <div className="form_block_two">
                   <div className="block">
                     <FormField
                       id={'name'}
                       formdata={this.state.formdata.name}
-                      change={element => this.updateForm(element)}
+                      change={(element) => this.updateForm(element)}
+                      placeholder={t('Enter your name')}
                     />
                   </div>
                   <div className="block">
                     <FormField
                       id={'lastname'}
                       formdata={this.state.formdata.lastname}
-                      change={element => this.updateForm(element)}
+                      change={(element) => this.updateForm(element)}
+                      placeholder={t('Enter your last name')}
                     />
                   </div>
                 </div>
@@ -159,7 +162,8 @@ class Register extends Component {
                   <FormField
                     id={'email'}
                     formdata={this.state.formdata.email}
-                    change={element => this.updateForm(element)}
+                    change={(element) => this.updateForm(element)}
+                    placeholder={t('Enter your email')}
                   />
                 </div>
                 <h2>Verify password</h2>
@@ -168,23 +172,27 @@ class Register extends Component {
                     <FormField
                       id={'password'}
                       formdata={this.state.formdata.password}
-                      change={element => this.updateForm(element)}
+                      change={(element) => this.updateForm(element)}
+                      placeholder={t('Enter your password')}
                     />
                   </div>
                   <div className="block">
                     <FormField
                       id={'confirmPassword'}
                       formdata={this.state.formdata.confirmPassword}
-                      change={element => this.updateForm(element)}
+                      change={(element) => this.updateForm(element)}
+                      placeholder={t('Confirm your password')}
                     />
                   </div>
                 </div>
                 <div>
                   {this.state.formError ? (
-                    <div className="error_label">Please check your data</div>
+                    <div className="error_label">
+                      {t('Please check your data')}
+                    </div>
                   ) : null}
-                  <button onClick={event => this.submitForm(event)}>
-                    Create an account
+                  <button onClick={(event) => this.submitForm(event)}>
+                    {t('Create an account')}
                   </button>
                 </div>
               </form>
@@ -194,9 +202,9 @@ class Register extends Component {
 
         <Dialog open={this.state.formSuccess}>
           <div className="dialog_alert">
-            <div>Congratulations !!</div>
+            <div>{t('Congratulations !!')}</div>
             <div>
-              You will be redirected to the LOGIN in a couple seconds...
+              {t('You will be redirected to the LOGIN in a couple seconds...')}
             </div>
           </div>
         </Dialog>
@@ -205,4 +213,4 @@ class Register extends Component {
   }
 }
 
-export default connect()(Register);
+export default withNamespaces()(connect()(Register));

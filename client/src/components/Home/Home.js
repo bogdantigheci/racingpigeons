@@ -4,6 +4,7 @@ import HomePromotion from './HomePromotion';
 import { connect } from 'react-redux';
 import { getProductsByArrival } from '../../actions/product';
 import CardBlock from '../utils/cardBlock';
+import { withNamespaces } from 'react-i18next';
 
 class Home extends Component {
   componentDidMount() {
@@ -11,12 +12,13 @@ class Home extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div>
         <HomeSlider />
         <CardBlock
           list={this.props.product.byArrival}
-          title="New Pigeons on SALE!"
+          title={t('New Pigeons on SALE!')}
         />
         <HomePromotion />
       </div>
@@ -24,10 +26,10 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    product: state.product
+    product: state.product,
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default withNamespaces()(connect(mapStateToProps)(Home));

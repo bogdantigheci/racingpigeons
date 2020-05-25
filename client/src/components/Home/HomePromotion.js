@@ -1,13 +1,15 @@
 import React from 'react';
 import MyButton from '../utils/button';
+import { withNamespaces } from 'react-i18next';
 
-const HomePromotion = props => {
+const HomePromotion = (props) => {
+  const { t } = props;
   const promotion = {
     img: '/images/racinghomer.jpg',
-    lineOne: 'Up to 40% off',
-    lineTwo: 'For retired racing pigeons',
-    linkTitle: 'Shop now',
-    linkTo: '/shop'
+    lineOne: t('Up to 40% off'),
+    lineTwo: t('For retired racing pigeons'),
+    linkTitle: t('Shop now'),
+    linkTo: '/shop',
   };
 
   const renderPromotion = () =>
@@ -15,7 +17,7 @@ const HomePromotion = props => {
       <div
         className="home_promotion_img"
         style={{
-          background: `url(${promotion.img})`
+          background: `url(${promotion.img})`,
         }}
       >
         <div className="tag title">{promotion.lineOne}</div>
@@ -26,7 +28,7 @@ const HomePromotion = props => {
             title={promotion.linkTitle}
             linkTo={promotion.linkTo}
             addStyles={{
-              margin: '10px 0 0 0'
+              margin: '10px 0 0 0',
             }}
           />
         </div>
@@ -36,4 +38,4 @@ const HomePromotion = props => {
   return <div className="home_promotion">{renderPromotion()}</div>;
 };
 
-export default HomePromotion;
+export default withNamespaces()(HomePromotion);

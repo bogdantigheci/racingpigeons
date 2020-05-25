@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
 import { faSmile } from '@fortawesome/free-solid-svg-icons';
 import Paypal from '../utils/payPal';
+import { withNamespaces } from 'react-i18next';
 
 class UserCart extends Component {
   state = {
@@ -61,10 +62,10 @@ class UserCart extends Component {
     });
   };
 
-  showNoItemMessage = () => (
+  showNoItemMessage = (message) => (
     <div className="cart_no_items">
       <FontAwesomeIcon icon={faFrown} />
-      <div>You have no items</div>
+      <div>{message}</div>
     </div>
   );
 
@@ -91,10 +92,11 @@ class UserCart extends Component {
   };
 
   render() {
+    const { t } = this.props;
     return (
       <UserLayout>
         <div>
-          <h1>My cart</h1>
+          <h1>{t('My cart')}</h1>
           <div className="user_cart">
             <ProductBlock
               products={this.props.user}
@@ -105,18 +107,18 @@ class UserCart extends Component {
               <div>
                 <div className="user_cart_sum">
                   <div className="total_amount">
-                    Total amount: € {this.state.total}
+                    {t('Total amount')}: € {this.state.total}
                   </div>
                 </div>
               </div>
             ) : this.state.showSuccess ? (
               <div className="cart_success">
                 <FontAwesomeIcon icon={faSmile} />
-                <div>THANK YOU</div>
-                <div>YOUR ORDER IS NOW COMPLETE</div>
+                <div>{t('THANK YOU')}</div>
+                <div>{t('YOUR ORDER IS NOW COMPLETE')}</div>
               </div>
             ) : (
-              this.showNoItemMessage()
+              this.showNoItemMessage(t('You have no pigeon in cart'))
             )}
           </div>
 
@@ -153,4 +155,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserCart);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(UserCart)
+);

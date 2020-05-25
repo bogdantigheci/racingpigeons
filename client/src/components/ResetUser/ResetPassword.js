@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import FormField from '../utils/formfield';
 import { update, generateData, isFormValid } from '../utils/formActions';
-
+import { withNamespaces } from 'react-i18next';
 import Dialog from '@material-ui/core/Dialog';
 
 class ResetPass extends Component {
@@ -19,14 +19,14 @@ class ResetPass extends Component {
         config: {
           name: 'password_input',
           type: 'password',
-          placeholder: 'Enter your password'
+          placeholder: 'Enter your password',
         },
         validation: {
-          required: true
+          required: true,
         },
         valid: false,
         touched: false,
-        validationMessage: ''
+        validationMessage: '',
       },
       confirmPassword: {
         element: 'input',
@@ -34,28 +34,28 @@ class ResetPass extends Component {
         config: {
           name: 'confirm_password_input',
           type: 'password',
-          placeholder: 'Confirm your password'
+          placeholder: 'Confirm your password',
         },
         validation: {
           required: true,
-          confirm: 'password'
+          confirm: 'password',
         },
         valid: false,
         touched: false,
-        validationMessage: ''
-      }
-    }
+        validationMessage: '',
+      },
+    },
   };
 
-  updateForm = element => {
+  updateForm = (element) => {
     const newFormdata = update(element, this.state.formdata, 'reset_pass');
     this.setState({
       formError: false,
-      formdata: newFormdata
+      formdata: newFormdata,
     });
   };
 
-  submitForm = event => {
+  submitForm = (event) => {
     event.preventDefault();
 
     let dataToSubmit = generateData(this.state.formdata, 'reset_pass');
@@ -65,13 +65,13 @@ class ResetPass extends Component {
       axios
         .post('/api/users/reset_password', {
           ...dataToSubmit,
-          resetToken: this.state.resetToken
+          resetToken: this.state.resetToken,
         })
-        .then(response => {
+        .then((response) => {
           if (!response.data.success) {
             this.setState({
               formError: true,
-              formErrorMessage: response.data.message
+              formErrorMessage: response.data.message,
             });
           } else {
             this.setState({ formError: false, formSuccess: true });
@@ -82,7 +82,7 @@ class ResetPass extends Component {
         });
     } else {
       this.setState({
-        formError: true
+        formError: true,
       });
     }
   };
@@ -93,24 +93,27 @@ class ResetPass extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="container">
-        <form onSubmit={event => this.submitForm(event)}>
-          <h2>Reset password</h2>
+        <form onSubmit={(event) => this.submitForm(event)}>
+          <h2>{t('Reset password')}</h2>
 
           <div className="form_block_two">
             <div className="block">
               <FormField
                 id={'password'}
                 formdata={this.state.formdata.password}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
+                placeholder={t('Enter your password')}
               />
             </div>
             <div className="block">
               <FormField
                 id={'confirmPassword'}
                 formdata={this.state.formdata.confirmPassword}
-                change={element => this.updateForm(element)}
+                change={(element) => this.updateForm(element)}
+                placeholder={t('Confirm your password')}
               />
             </div>
           </div>
@@ -121,18 +124,19 @@ class ResetPass extends Component {
             ) : (
               ''
             )}
-            <button onClick={event => this.submitForm(event)}>
-              Reset password
+            <button onClick={(event) => this.submitForm(event)}>
+              {t('Reset password')}
             </button>
           </div>
         </form>
 
         <Dialog open={this.state.formSuccess}>
           <div className="dialog_alert">
-            <div>Alright !!</div>
+            <div>{t('Alright !!')}</div>
             <div>
-              Your password was changed...you will be redirected to Login!
-              Please wait...
+              {t(
+                'Your password was changed...you will be redirected to Login! Please wait...'
+              )}
             </div>
           </div>
         </Dialog>
@@ -141,4 +145,4 @@ class ResetPass extends Component {
   }
 }
 
-export default ResetPass;
+export default withNamespaces()(ResetPass);

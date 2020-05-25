@@ -5,6 +5,7 @@ import { addToCart } from '../../actions/user';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import ShopModal from '../Shop/Modal';
+import { withNamespaces } from 'react-i18next';
 
 class Card extends Component {
   state = { modalShow: false };
@@ -35,7 +36,7 @@ class Card extends Component {
 
   render() {
     const props = this.props;
-
+    const { t } = props;
     return (
       <div className={`card_item_wrapper  ${props.grid}`}>
         <Link to={`/product_detail/${props._id}`}>
@@ -48,7 +49,9 @@ class Card extends Component {
         <div className="action_container">
           <div className="tags">
             <div className="breed">{props.breed.name}</div>
-            <div className="name">Ring ID: {props.ringId}</div>
+            <div className="name">
+              {t('Ring ID')}: {props.ringId}
+            </div>
             <div className="price">€{props.price}</div>
           </div>
           <ShopModal
@@ -67,7 +70,7 @@ class Card extends Component {
               <MyButton
                 type="default"
                 altClass="card_link"
-                title="Details"
+                title={t('Details')}
                 linkTo={`/product_detail/${props._id}`}
                 addStyles={{
                   margin: '10px 0 0 0',
@@ -98,4 +101,6 @@ const mapDispatchToProps = (dispatch) => ({
   addToCart: (_id) => dispatch(addToCart(_id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(Card)
+);

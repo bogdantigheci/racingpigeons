@@ -5,6 +5,7 @@ import {
   deleteCommentFromProduct,
   editCommentFromProduct,
 } from '../../../actions/product';
+import { withNamespaces } from 'react-i18next';
 
 class ProdCommentItem extends Component {
   state = {
@@ -34,6 +35,7 @@ class ProdCommentItem extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="card card-body mb-3">
         <div className="row">
@@ -45,7 +47,7 @@ class ProdCommentItem extends Component {
               {this.state.edit ? (
                 <div>
                   <TextAreaFieldGroup
-                    placeholder="Edit text"
+                    placeholder={t('Edit text')}
                     name="text"
                     value={this.state.text}
                     onChange={this.onChange.bind(this)}
@@ -59,7 +61,7 @@ class ProdCommentItem extends Component {
                       this.state.text
                     )}
                   >
-                    Save
+                    {t('Save')}
                   </button>
                 </div>
               ) : (
@@ -85,7 +87,7 @@ class ProdCommentItem extends Component {
                       className="btn btn-primary mr-1"
                       onClick={() => this.handleEdit()}
                     >
-                      Edit
+                      {t('Edit')}
                     </button>
                   </div>
                 ) : null}
@@ -109,4 +111,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(editCommentFromProduct(productId, commentId, editCommentData)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProdCommentItem);
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(ProdCommentItem)
+);

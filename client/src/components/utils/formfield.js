@@ -1,6 +1,7 @@
 import React from 'react';
+import { withNamespaces } from 'react-i18next';
 
-const Formfield = ({ formdata, change, id }) => {
+const Formfield = ({ formdata, change, id, placeholder, label, t }) => {
   const showError = () => {
     let errorMessage = null;
 
@@ -21,13 +22,14 @@ const Formfield = ({ formdata, change, id }) => {
         formTemplate = (
           <div className="formBlock">
             {formdata.showlabel ? (
-              <div className="label_inputs">{formdata.config.label}</div>
+              <div className="label_inputs">{label}</div>
             ) : null}
             <input
               {...formdata.config}
+              placeholder={placeholder}
               value={formdata.value}
-              onBlur={event => change({ event, id, blur: true })}
-              onChange={event => change({ event, id })}
+              onBlur={(event) => change({ event, id, blur: true })}
+              onChange={(event) => change({ event, id })}
             />
             {showError()}
           </div>
@@ -37,13 +39,14 @@ const Formfield = ({ formdata, change, id }) => {
         formTemplate = (
           <div className="formBlock">
             {formdata.showlabel ? (
-              <div className="label_inputs">{formdata.config.label}</div>
+              <div className="label_inputs">{label}</div>
             ) : null}
             <textarea
               {...formdata.config}
               value={formdata.value}
-              onBlur={event => change({ event, id, blur: true })}
-              onChange={event => change({ event, id })}
+              onBlur={(event) => change({ event, id, blur: true })}
+              onChange={(event) => change({ event, id })}
+              placeholder={placeholder}
             />
             {showError()}
           </div>
@@ -53,15 +56,15 @@ const Formfield = ({ formdata, change, id }) => {
         formTemplate = (
           <div className="formBlock">
             {formdata.showlabel ? (
-              <div className="label_inputs">{formdata.config.label}</div>
+              <div className="label_inputs">{label}</div>
             ) : null}
             <select
               value={formdata.value}
-              onBlur={event => change({ event, id, blur: true })}
-              onChange={event => change({ event, id })}
+              onBlur={(event) => change({ event, id, blur: true })}
+              onChange={(event) => change({ event, id })}
             >
-              <option value="">Select one</option>
-              {formdata.config.options.map(item => (
+              <option value="">{t('Select one')}</option>
+              {formdata.config.options.map((item) => (
                 <option key={item.key} value={item.key}>
                   {item.value}
                 </option>
@@ -81,4 +84,4 @@ const Formfield = ({ formdata, change, id }) => {
   return <div>{renderTemplate()}</div>;
 };
 
-export default Formfield;
+export default withNamespaces()(Formfield);
