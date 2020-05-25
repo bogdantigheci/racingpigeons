@@ -19,6 +19,7 @@ import {
   GET_RACES,
   SELL_REQUEST,
   GET_SELL_REQUESTS,
+  GET_SELL_REQUEST,
 } from '../constants/types';
 import { PRODUCT_SERVER } from '../components/utils/misc';
 
@@ -108,6 +109,18 @@ export function getSellRequests() {
     .then((response) => response.data);
   return {
     type: GET_SELL_REQUESTS,
+    payload: request,
+  };
+}
+
+export function getSellRequest(id) {
+  const request = axios
+    .get(`${PRODUCT_SERVER}/requests/${id}`)
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    type: GET_SELL_REQUEST,
     payload: request,
   };
 }

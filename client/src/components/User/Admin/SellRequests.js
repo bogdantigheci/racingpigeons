@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getSellRequests } from '../../../actions/product';
 
-class SellRequests extends Component {
+class SellRequest extends Component {
   componentDidMount() {
     this.props.getSellRequests();
   }
   render() {
-    console.log('11111111111111111111111', this.props.products);
     return (
       <div className="container d-flex flex-wrap">
         {this.props.products && this.props.products.sellRequests
@@ -23,7 +22,7 @@ class SellRequests extends Component {
                       'images[0].url',
                       `/images/image_not_available.png`
                     )}
-                    alt="race"
+                    alt="sell request"
                   />
                 </Link>
               </div>
@@ -36,7 +35,7 @@ class SellRequests extends Component {
 
 const mapStateToProps = (state) => ({ products: state.product });
 const mapDispatchToProps = (dispatch) => ({
-  getSellRequests: (id) => dispatch(getSellRequests(id)),
+  getSellRequests: () => dispatch(getSellRequests()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SellRequests);
+export default connect(mapStateToProps, mapDispatchToProps)(SellRequest);

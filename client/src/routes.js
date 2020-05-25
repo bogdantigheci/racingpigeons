@@ -27,6 +27,7 @@ import AddRaces from './components/User/Admin/AddRaces';
 import RaceInfo from './components/Club/RaceInfo';
 import SellRequest from './components/User/SellRequest';
 import SellRequests from './components/User/Admin/SellRequests';
+import SellRequestInfo from './components/User/Admin/SellRequestInfo';
 
 const Routes = () => {
   return (
@@ -86,6 +87,11 @@ const Routes = () => {
           path="/product/races/:id"
           exact
           component={Auth(RaceInfo, null)}
+        />
+        <Route
+          path="/product/requests/:id"
+          exact
+          component={Auth(SellRequestInfo, null)}
         />
         <Route path="/register" exact component={Auth(Register, false)} />
         <Route

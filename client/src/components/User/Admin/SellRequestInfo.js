@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSellRequests } from '../../actions/product';
+import { getSellRequest } from '../../../actions/product';
 import _ from 'lodash';
 import { withNamespaces } from 'react-i18next';
 
 class SellRequestInfo extends Component {
   componentDidMount() {
     const id = this.props.match.params.id;
-    this.props.getSellRequests(id).then((response) => {
-      if (!this.props.products.sellRequest) {
+    this.props.getSellRequest(id).then((response) => {
+      if (!this.props.products.request) {
         this.props.history.push('/page_not_found');
       }
     });
   }
   render() {
     const { t } = this.props;
-    console.log('sadasdasdasdasdas1111111111111', this.props.products);
+    console.log('111111111111111111111111111111111111', this.props);
     return (
       <div>
+        asdasdadasds
         {/* <div>
           <div className="page-title">
             <h1>{_.get(this.props.products.sellRequest, 'breed', '')}</h1>
@@ -71,7 +72,7 @@ class SellRequestInfo extends Component {
 
 const mapStateToProps = (state) => ({ products: state.product });
 const mapDispatchToProps = (dispatch) => ({
-  getSellRequests: (id) => dispatch(getSellRequests(id)),
+  getSellRequest: (id) => dispatch(getSellRequest(id)),
 });
 export default withNamespaces()(
   connect(mapStateToProps, mapDispatchToProps)(SellRequestInfo)

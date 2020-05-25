@@ -183,6 +183,13 @@ app.get('/api/product/requests', (req, res) => {
     res.status(200).send({ requests });
   });
 });
+app.get('/api/product/requests/:id', (req, res) => {
+  Request.findById(req.params.id)
+    .then((request) => res.json(request))
+    .catch((err) =>
+      res.status(404).json({ nopostfound: 'No request found with that ID' })
+    );
+});
 
 //////////////////////////////////////
 //    BREEDS -brand
@@ -267,7 +274,7 @@ app.get('/api/product/races/:id', (req, res) => {
   Race.findById(req.params.id)
     .then((race) => res.json(race))
     .catch((err) =>
-      res.status(404).json({ nopostfound: 'No post found with that ID' })
+      res.status(404).json({ nopostfound: 'No race found with that ID' })
     );
 });
 
