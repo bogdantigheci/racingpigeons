@@ -23,6 +23,7 @@ body {
   border-radius: 5px;
   margin-bottom: 3px;
 }
+
 .review_button {
   cursor: pointer;
   text-transform: uppercase;
@@ -971,6 +972,7 @@ select {
 .page-title {
   text-align: center;
   color: blue;
+  margin-top: 1rem;
   margin-bottom: 3rem;
   text-transform: uppercase;
   font-family: 'Monoton', cursive;

@@ -14,7 +14,7 @@ class Club extends Component {
 
     return (
       <div className="container">
-        <h1 className="text-center mt-2 mb-3">{t('About')}</h1>
+        <h1 className="text-center mt-2 mb-3 page-title">{t('About')}</h1>
         <div>
           <p>
             "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -34,7 +34,7 @@ class Club extends Component {
           </p>
         </div>
         <div>
-          <h3 className="text-center mt-4">{t('Races')}</h3>
+          <h3 className="text-center mt-4 page-title">{t('Races')}</h3>
         </div>
         <div className="d-flex flex-wrap mt-4">
           <Races races={_.get(this.props.products, 'races', [])} />
