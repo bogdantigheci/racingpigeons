@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getSellRequest } from '../../../actions/product';
 import _ from 'lodash';
 import { withNamespaces } from 'react-i18next';
+import UserLayout from '../../../hoc/UserLayout';
+import moment from 'moment';
 
 class SellRequestInfo extends Component {
   componentDidMount() {
@@ -15,57 +17,63 @@ class SellRequestInfo extends Component {
   }
   render() {
     const { t } = this.props;
-    console.log('111111111111111111111111111111111111', this.props);
+    console.log(
+      '111111111111111111111111111111111111',
+      this.props.products.request
+    );
     return (
-      <div>
-        asdasdadasds
-        {/* <div>
+      <UserLayout>
+        {this.props.products &&
+        this.props.products &&
+        this.props.products.request ? (
           <div className="page-title">
-            <h1>{_.get(this.props.products.sellRequest, 'breed', '')}</h1>
-          </div>
-        </div>
-        {this.props.products && this.props.products.sellRequest ? (
-          <div className="container d-flex flex-wrap">
-            <div className="d-flex flex-wrap breeder_info_container">
-              <div className="breeder_info_image_container">
-                <img
-                  className="img-fluid rounded float-left breeder_info_image"
-                  src={_.get(
-                    this.props.products.sellRequest,
-                    'images[0].url',
-                    `/images/image_not_available.png`
-                  )}
-                  alt="name"
-                />
-              </div>
-              <div
-                className={
-                  window.innerWidth > 768
-                    ? 'race_placements'
-                    : 'container race_placements'
-                }
-              >
-                <h5 className="placements-title">{t('Contestants')}</h5>
-                <div className="container placements_detail">
-                  {_.get(
-                    this.props.products.sellRequest,
-                    'contestants',
-                    ''
-                  ).map((breed, i) => (
-                    <div key={i}>{breed}</div>
-                  ))}
-                </div>
-              </div>
+            <h4>
+              {t('Sell request from')} {this.props.products.request.breeder}
+            </h4>
+            <h4>
+              <img
+                className="img-fluid rounded"
+                src={_.get(
+                  this.props.products.request,
+                  'images[0].url',
+                  `/images/image_not_available.png`
+                )}
+                alt="name"
+              />
+            </h4>
+            <div>
+              {t('Requested at')}:{' '}
+              {moment(this.props.products.request.createdAt).format(
+                'DD-MM-YYYY'
+              )}
             </div>
-            <div className="container">
-              <h5 className="bio_title">{t('Race details')}</h5>
-              <div className="bio container">
-                {_.get(this.props.products.sellRequest, 'details', '')}
-              </div>
+            <div>
+              {t('Breed')}: {this.props.products.request.breed}
+            </div>
+            <div>
+              {t('Ring ID')}: {this.props.products.request.ringId}
+            </div>
+            <div>
+              {t('Price')}: {this.props.products.request.price}
+            </div>
+            <div>
+              {t('Publish')}:{' '}
+              {this.props.products.request.publish ? 'YES' : 'NO'}
+            </div>
+            <div>
+              {t('Available')}:{' '}
+              {this.props.products.request.available ? 'YES' : 'NO'}
+            </div>
+            <div>
+              {t('Shipping')}:{' '}
+              {this.props.products.request.shipping ? 'YES' : 'NO'}
+            </div>
+            <div>
+              {t('Description')}: {this.props.products.request.description}
             </div>
           </div>
-        ) : null} */}
-      </div>
+        ) : null}
+      </UserLayout>
     );
   }
 }

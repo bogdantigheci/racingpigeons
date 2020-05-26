@@ -10,7 +10,7 @@ const PurchaseHistory = (props) => {
           <tr key={i}>
             <td>{moment(product.dateOfPurchase).format('DD-MM-YYYY')}</td>
             <td>{product.breed}</td>
-            <td>$ {product.price}</td>
+            <td>€ {product.price}</td>
             <td>{product.porder}</td>
           </tr>
         ))
