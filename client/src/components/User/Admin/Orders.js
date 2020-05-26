@@ -15,7 +15,7 @@ class SellRequest extends Component {
     return (
       <UserLayout>
         {this.props.products && this.props.products.payments ? (
-          <div>
+          <div className="user_nfo_panel">
             <h4 className="page-title">{t('Orders')}</h4>
             <PaymentHistory payments={this.props.products.payments.payments} />
           </div>

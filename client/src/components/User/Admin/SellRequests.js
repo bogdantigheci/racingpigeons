@@ -17,7 +17,7 @@ class SellRequest extends Component {
         {this.props.products &&
         this.props.products.sellRequests &&
         this.props.products.sellRequests.requests ? (
-          <div>
+          <div className="user_nfo_panel">
             <h4 className="page-title">{t('Sell requests')}</h4>
             <SellRequestHistory
               sellRequests={this.props.products.sellRequests.requests}
