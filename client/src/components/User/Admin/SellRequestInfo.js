@@ -83,7 +83,7 @@ class SellRequestInfo extends Component {
                 </button>
               ) : (
                 <div className="revised">
-                  {t('This sell request was already reviewed!')}
+                  {t('This sell request has already been reviewed!')}
                 </div>
               )}
             </div>
