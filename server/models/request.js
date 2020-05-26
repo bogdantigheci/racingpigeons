@@ -45,10 +45,9 @@ const requestSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
-    sold: {
-      type: Number,
-      maxlength: 100,
-      default: 0,
+    reviewed: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

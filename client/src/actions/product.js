@@ -125,6 +125,18 @@ export function getSellRequest(id) {
   };
 }
 
+export function reviewSellRequest(id) {
+  const request = axios
+    .post(`${PRODUCT_SERVER}/requests/${id}`)
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    type: GET_SELL_REQUEST,
+    payload: request,
+  };
+}
+
 export const clearProduct = () => {
   return {
     type: CLEAR_PRODUCT,
@@ -228,6 +240,7 @@ export const deleteCommentFromProduct = (prodId, commentId) => (dispatch) => {
       })
     );
 };
+
 export const editCommentFromProduct = (prodId, commentId, editCommentData) => (
   dispatch
 ) => {

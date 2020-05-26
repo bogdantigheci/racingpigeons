@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSellRequest } from '../../../actions/product';
+import { getSellRequest, reviewSellRequest } from '../../../actions/product';
 import _ from 'lodash';
 import { withNamespaces } from 'react-i18next';
 import UserLayout from '../../../hoc/UserLayout';
@@ -15,11 +15,16 @@ class SellRequestInfo extends Component {
       }
     });
   }
+
+  handleRequest = (id) => {
+    id = this.props.match.params.id;
+    this.props.reviewSellRequest(id);
+  };
   render() {
     const { t } = this.props;
     console.log(
       '111111111111111111111111111111111111',
-      this.props.products.request
+      this.props.match.params.id
     );
     return (
       <UserLayout>
@@ -58,18 +63,29 @@ class SellRequestInfo extends Component {
             </div>
             <div>
               {t('Publish')}:{' '}
-              {this.props.products.request.publish ? 'YES' : 'NO'}
+              {this.props.products.request.publish ? t('YES') : t('NO')}
             </div>
             <div>
               {t('Available')}:{' '}
-              {this.props.products.request.available ? 'YES' : 'NO'}
+              {this.props.products.request.available ? t('YES') : t('NO')}
             </div>
             <div>
               {t('Shipping')}:{' '}
-              {this.props.products.request.shipping ? 'YES' : 'NO'}
+              {this.props.products.request.shipping ? t('YES') : t('NO')}
             </div>
             <div>
               {t('Description')}: {this.props.products.request.description}
+            </div>
+            <div>
+              {!this.props.products.request.reviewed ? (
+                <button onClick={() => this.handleRequest()}>
+                  {t('Review')}
+                </button>
+              ) : (
+                <div className="revised">
+                  {t('This sell request was already reviewed!')}
+                </div>
+              )}
             </div>
           </div>
         ) : null}
@@ -81,6 +97,7 @@ class SellRequestInfo extends Component {
 const mapStateToProps = (state) => ({ products: state.product });
 const mapDispatchToProps = (dispatch) => ({
   getSellRequest: (id) => dispatch(getSellRequest(id)),
+  reviewSellRequest: (id) => dispatch(reviewSellRequest(id)),
 });
 export default withNamespaces()(
   connect(mapStateToProps, mapDispatchToProps)(SellRequestInfo)

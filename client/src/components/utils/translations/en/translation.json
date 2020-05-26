@@ -135,5 +135,11 @@
   "Manage categories": "Manage categories",
   "Add races": "Add races",
   "Admin": "Admin",
-  "Sell requests": "Sell requests"
+  "Sell requests": "Sell requests",
+  "YES": "YES",
+  "NO": "NO",
+  "Sell request from": "Sell request from",
+  "Requested at": "Requested at",
+  "Review": "Review",
+  "This sell request was already reviewed!": "This sell request was already reviewed!"
 }

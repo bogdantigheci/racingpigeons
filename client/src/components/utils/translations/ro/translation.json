@@ -133,5 +133,11 @@
   "Manage categories": "Gestioneaza categorii",
   "Add races": "Adauga concursuri",
   "Admin": "Administrator",
-  "Sell requests":"Solicitari vanzare"
+  "Sell requests": "Solicitari vanzare",
+  "YES": "DA",
+  "NO": "NU",
+  "Sell request from": "Cerere de vanzare de la",
+  "Requested at": "Data cerere",
+  "Review": "Analizeaza",
+  "This sell request was already reviewed!": "Aceasta cerere de vanzare a fost deja revizuita!"
 }

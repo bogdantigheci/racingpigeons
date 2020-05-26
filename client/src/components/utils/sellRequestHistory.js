@@ -19,6 +19,7 @@ const SellRequestHistory = (props) => {
             <td>{request.ringId}</td>
             <td>{request.breed}</td>
             <td>{request.breeder}</td>
+            <td>{request.reviewed ? t('YES') : t('NO')}</td>
           </tr>
         ))
       : null;
@@ -32,6 +33,7 @@ const SellRequestHistory = (props) => {
             <th>{t('Ring ID')}</th>
             <th>{t('Breed')}</th>
             <th>{t('Breeder')}</th>
+            <th>{t('Reviewed')}</th>
           </tr>
         </thead>
         <tbody>{renderBlocks()}</tbody>

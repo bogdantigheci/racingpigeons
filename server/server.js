@@ -191,6 +191,20 @@ app.get('/api/product/requests/:id', (req, res) => {
     );
 });
 
+app.post('/api/product/requests/:id', auth, (req, res) => {
+  Request.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: { reviewed: true },
+    },
+    { new: true },
+    (err, request) => {
+      if (err) return res.json({ success: false, err });
+      return res.status(200).send(request);
+    }
+  );
+});
+
 //////////////////////////////////////
 //    BREEDS -brand
 //////////////////////////////////////
