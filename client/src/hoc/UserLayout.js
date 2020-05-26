@@ -45,6 +45,10 @@ const UserLayout = (props) => {
       name: t('Sell requests'),
       linkTo: '/admin/sell_requests',
     },
+    {
+      name: t('Orders'),
+      linkTo: '/admin/orders',
+    },
   ];
 
   const generateLinks = (links) =>

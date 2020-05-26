@@ -28,6 +28,8 @@ import RaceInfo from './components/Club/RaceInfo';
 import SellRequest from './components/User/SellRequest';
 import SellRequests from './components/User/Admin/SellRequests';
 import SellRequestInfo from './components/User/Admin/SellRequestInfo';
+import Orders from './components/User/Admin/Orders';
+import PaymentInfo from './components/User/Admin/PaymentInfo';
 
 const Routes = () => {
   return (
@@ -50,7 +52,7 @@ const Routes = () => {
           exact
           component={Auth(SellRequests, true)}
         />
-
+        <Route path="/admin/orders" exact component={Auth(Orders, true)} />
         <Route path="/admin/add_races" exact component={Auth(AddRaces, true)} />
         <Route
           path="/reset_password/:token"
@@ -92,6 +94,11 @@ const Routes = () => {
           path="/product/requests/:id"
           exact
           component={Auth(SellRequestInfo, null)}
+        />
+        <Route
+          path="/product/payments/:id"
+          exact
+          component={Auth(PaymentInfo, null)}
         />
         <Route path="/register" exact component={Auth(Register, false)} />
         <Route

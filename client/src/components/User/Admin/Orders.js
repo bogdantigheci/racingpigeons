@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSellRequests } from '../../../actions/product';
-import SellRequestHistory from '../../utils/sellRequestHistory';
+import { getPayments } from '../../../actions/product';
+import PaymentHistory from '../../utils/PaymentHistory';
 import UserLayout from '../../../hoc/UserLayout';
 import { withNamespaces } from 'react-i18next';
 
 class SellRequest extends Component {
   componentDidMount() {
-    this.props.getSellRequests();
+    this.props.getPayments();
   }
 
   render() {
     const { t } = this.props;
     return (
       <UserLayout>
-        {this.props.products &&
-        this.props.products.sellRequests &&
-        this.props.products.sellRequests.requests ? (
+        {this.props.products && this.props.products.payments ? (
           <div>
-            <h4 className="page-title">{t('Sell requests')}</h4>
-            <SellRequestHistory
-              sellRequests={this.props.products.sellRequests.requests}
-            />
+            <h4 className="page-title">{t('Orders')}</h4>
+            <PaymentHistory payments={this.props.products.payments.payments} />
           </div>
         ) : null}
       </UserLayout>
@@ -31,7 +27,7 @@ class SellRequest extends Component {
 
 const mapStateToProps = (state) => ({ products: state.product });
 const mapDispatchToProps = (dispatch) => ({
-  getSellRequests: () => dispatch(getSellRequests()),
+  getPayments: () => dispatch(getPayments()),
 });
 
 export default withNamespaces()(

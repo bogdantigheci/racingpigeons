@@ -141,5 +141,7 @@
   "Sell request from": "Sell request from",
   "Requested at": "Requested at",
   "Review": "Review",
-  "This sell request has already been reviewed!": "This sell request has already been reviewed!"
+  "This sell request has already been reviewed!": "This sell request has already been reviewed!",
+  "Order ID": "Order ID",
+  "Reviewed": "Reviewed"
 }

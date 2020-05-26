@@ -205,6 +205,35 @@ app.post('/api/product/requests/:id', auth, (req, res) => {
   );
 });
 
+app.get('/api/product/payments', (req, res) => {
+  Payment.find({}, (err, payments) => {
+    if (err) return res.status(400).send(err);
+    res.status(200).send({ payments });
+  });
+});
+
+app.get('/api/product/payments/:id', (req, res) => {
+  Payment.findById(req.params.id)
+    .then((payment) => res.json(payment))
+    .catch((err) =>
+      res.status(404).json({ nopostfound: 'No payment found with that ID' })
+    );
+});
+
+app.post('/api/product/payments/:id', auth, (req, res) => {
+  Payment.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: { reviewed: true },
+    },
+    { new: true },
+    (err, payment) => {
+      if (err) return res.json({ success: false, err });
+      return res.status(200).send(payment);
+    }
+  );
+});
+
 //////////////////////////////////////
 //    BREEDS -brand
 //////////////////////////////////////

@@ -20,6 +20,8 @@ import {
   SELL_REQUEST,
   GET_SELL_REQUESTS,
   GET_SELL_REQUEST,
+  GET_PAYMENTS,
+  GET_PAYMENT,
 } from '../constants/types';
 import { PRODUCT_SERVER } from '../components/utils/misc';
 
@@ -133,6 +135,40 @@ export function reviewSellRequest(id) {
     });
   return {
     type: GET_SELL_REQUEST,
+    payload: request,
+  };
+}
+
+export function getPayments() {
+  const request = axios
+    .get(`${PRODUCT_SERVER}/payments`)
+    .then((response) => response.data);
+  return {
+    type: GET_PAYMENTS,
+    payload: request,
+  };
+}
+
+export function getPayment(id) {
+  const request = axios
+    .get(`${PRODUCT_SERVER}/payments/${id}`)
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    type: GET_PAYMENT,
+    payload: request,
+  };
+}
+
+export function reviewPayment(id) {
+  const request = axios
+    .post(`${PRODUCT_SERVER}/payments/${id}`)
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    type: GET_PAYMENT,
     payload: request,
   };
 }

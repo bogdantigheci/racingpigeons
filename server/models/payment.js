@@ -3,16 +3,20 @@ const mongoose = require('mongoose');
 const paymentSchema = mongoose.Schema({
   user: {
     type: Array,
-    default: []
+    default: [],
   },
   data: {
     type: Array,
-    default: []
+    default: [],
   },
   product: {
     type: Array,
-    default: []
-  }
+    default: [],
+  },
+  reviewed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Payment = mongoose.model('Payment', paymentSchema);

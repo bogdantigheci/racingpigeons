@@ -22,20 +22,14 @@ class SellRequestInfo extends Component {
   };
   render() {
     const { t } = this.props;
-    console.log(
-      '111111111111111111111111111111111111',
-      this.props.match.params.id
-    );
     return (
       <UserLayout>
-        {this.props.products &&
-        this.props.products &&
-        this.props.products.request ? (
+        {this.props.products && this.props.products.request ? (
           <div className="page-title">
             <h4>
               {t('Sell request from')} {this.props.products.request.breeder}
             </h4>
-            <h4>
+            <div>
               <img
                 className="img-fluid rounded"
                 src={_.get(
@@ -45,7 +39,7 @@ class SellRequestInfo extends Component {
                 )}
                 alt="name"
               />
-            </h4>
+            </div>
             <div>
               {t('Requested at')}:{' '}
               {moment(this.props.products.request.createdAt).format(
@@ -78,7 +72,10 @@ class SellRequestInfo extends Component {
             </div>
             <div>
               {!this.props.products.request.reviewed ? (
-                <button onClick={() => this.handleRequest()}>
+                <button
+                  className="review_button"
+                  onClick={() => this.handleRequest()}
+                >
                   {t('Review')}
                 </button>
               ) : (

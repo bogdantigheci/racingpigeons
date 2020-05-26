@@ -17,6 +17,24 @@ body {
   text-decoration: underline;
 }
 
+.paid_pigeons {
+  box-sizing: border-box;
+  border: 2px solid #587ff3;
+  border-radius: 5px;
+  margin-bottom: 3px;
+}
+.review_button {
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 0.6rem;
+  background: #4169e1;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-top: 5px;
+  color: white;
+}
+
 /* club */
 
 .club_race_card {
@@ -1419,6 +1437,7 @@ select {
 }
 .user_container .user_left_nav h2 {
   padding-top: 1rem;
+  color: blue;
 }
 
 .user_container .user_left_nav .links a {
@@ -1428,7 +1447,7 @@ select {
   font-weight: bold;
   padding: 1rem 0;
   width: 100%;
-  color: #ffff;
+  color: #4169e1;
 }
 
 .user_container .user_right {
@@ -1977,7 +1996,7 @@ select {
     font-weight: bold;
     padding: 1rem 0;
     width: 100%;
-    color: #ffff;
+    color: #4169e1;
   }
 
   .user_container .user_right {
