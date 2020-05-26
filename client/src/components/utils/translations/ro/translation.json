@@ -141,5 +141,10 @@
   "Review": "Analizeaza",
   "This sell request has already been reviewed!": "Aceasta cerere de vanzare a fost deja revizuita!",
   "Order ID": "ID comanda",
-  "Reviewed": "Revizuita"
+  "Reviewed": "Revizuita",
+  "Orders": "Comenzi",
+  "Order number": "Numar comanda",
+  "Payment ID": "ID tranzactie",
+  "Pigeons": "Porumbei",
+  "Buyer":"Cumparator"
 }

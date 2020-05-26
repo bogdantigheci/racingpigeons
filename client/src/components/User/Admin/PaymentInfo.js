@@ -49,8 +49,9 @@ class SellRequestInfo extends Component {
               {t('Pigeons')}:{' '}
               {this.props.products.payment.product.map((pigeon, i) => (
                 <div className="paid_pigeons">
-                  Breed: {pigeon.breed}, Ring ID: {pigeon.ringId}, Price:{' '}
-                  {pigeon.price}, Payment ID: {pigeon.paymentId}{' '}
+                  {t('Breed')}: {pigeon.breed}, {t('Ring ID')}: {pigeon.ringId},{' '}
+                  {t('Price')}: {pigeon.price}, {t('Payment ID')}:{' '}
+                  {pigeon.paymentId}{' '}
                 </div>
               ))}
             </div>

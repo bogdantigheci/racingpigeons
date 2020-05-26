@@ -143,5 +143,10 @@
   "Review": "Review",
   "This sell request has already been reviewed!": "This sell request has already been reviewed!",
   "Order ID": "Order ID",
-  "Reviewed": "Reviewed"
+  "Reviewed": "Reviewed",
+  "Orders": "Orders",
+  "Order number": "Order number",
+  "Payment ID": "Payment ID",
+  "Pigeons": "Pigeons",
+  "Buyer": "Buyer"
 }
