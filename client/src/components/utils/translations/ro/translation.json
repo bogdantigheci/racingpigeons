@@ -107,7 +107,7 @@
   "Update": "Actualizeaza",
   "THANK YOU": "MULTUMIM",
   "YOUR ORDER IS NOW COMPLETE": "COMANDA DUMNEAVOASTRA ESTE COMPLETA",
-  "You have no pigeon in cart": "Nu aveti nici un porumbel in cos",
+  "Your cart is empty": "Cosul dumneavoastra este gol",
   "User information": "Informatii utilizator",
   "Edit account info": "Editeaza informatii cont",
   "Purchase history": "Istoric tranzactii",
@@ -146,5 +146,5 @@
   "Order number": "Numar comanda",
   "Payment ID": "ID tranzactie",
   "Pigeons": "Porumbei",
-  "Buyer":"Cumparator"
+  "Buyer": "Cumparator"
 }

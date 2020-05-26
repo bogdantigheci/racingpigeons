@@ -118,7 +118,7 @@ class UserCart extends Component {
                 <div>{t('YOUR ORDER IS NOW COMPLETE')}</div>
               </div>
             ) : (
-              this.showNoItemMessage(t('You have no pigeon in cart'))
+              this.showNoItemMessage(t('Your cart is empty'))
             )}
           </div>
 
