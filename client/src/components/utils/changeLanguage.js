@@ -8,12 +8,19 @@ const ChangeLanguage = ({ i18n }) => {
   };
   return (
     <React.Fragment>
-      <button className="lang-button" onClick={() => changeLanguage('ro')}>
-        <Flag code="ro" height="16" />
-      </button>
-      <button className="lang-button" onClick={() => changeLanguage('en')}>
-        <Flag code="gb" height="16" />
-      </button>
+      <Flag
+        className="lang-button"
+        onClick={() => changeLanguage('ro')}
+        code="ro"
+        height="16"
+      />
+
+      <Flag
+        className="lang-button"
+        onClick={() => changeLanguage('en')}
+        code="gb"
+        height="16"
+      />
     </React.Fragment>
   );
 };
