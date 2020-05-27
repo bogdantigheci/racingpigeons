@@ -71,6 +71,7 @@ class ModalDetails extends Component {
             products={this.props.user}
             type="cart"
             removeItem={(id) => this.removeFromCart(id)}
+            rateRON={this.props.rateRON}
           />
           {this.state.showTotal ? (
             <div>

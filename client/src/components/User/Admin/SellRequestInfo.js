@@ -41,34 +41,36 @@ class SellRequestInfo extends Component {
               />
             </div>
             <div>
-              {t('Requested at')}:{' '}
-              {moment(this.props.products.request.createdAt).format(
-                'DD-MM-YYYY'
-              )}
-            </div>
-            <div>
-              {t('Breed')}: {this.props.products.request.breed}
-            </div>
-            <div>
-              {t('Ring ID')}: {this.props.products.request.ringId}
-            </div>
-            <div>
-              {t('Price')}: {this.props.products.request.price}
-            </div>
-            <div>
-              {t('Publish')}:{' '}
-              {this.props.products.request.publish ? t('YES') : t('NO')}
-            </div>
-            <div>
-              {t('Available')}:{' '}
-              {this.props.products.request.available ? t('YES') : t('NO')}
-            </div>
-            <div>
-              {t('Shipping')}:{' '}
-              {this.props.products.request.shipping ? t('YES') : t('NO')}
-            </div>
-            <div>
-              {t('Description')}: {this.props.products.request.description}
+              <div>
+                {t('Requested at')}:{' '}
+                {moment(this.props.products.request.createdAt).format(
+                  'DD-MM-YYYY'
+                )}
+              </div>
+              <div>
+                {t('Breed')}: {this.props.products.request.breed}
+              </div>
+              <div>
+                {t('Ring ID')}: {this.props.products.request.ringId}
+              </div>
+              <div>
+                {t('Price')}: {this.props.products.request.price}
+              </div>
+              <div>
+                {t('Publish')}:{' '}
+                {this.props.products.request.publish ? t('YES') : t('NO')}
+              </div>
+              <div>
+                {t('Available')}:{' '}
+                {this.props.products.request.available ? t('YES') : t('NO')}
+              </div>
+              <div>
+                {t('Shipping')}:{' '}
+                {this.props.products.request.shipping ? t('YES') : t('NO')}
+              </div>
+              <div>
+                {t('Description')}: {this.props.products.request.description}
+              </div>
             </div>
             <div>
               {!this.props.products.request.reviewed ? (
