@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import ShopModal from '../Shop/Modal';
 import { withNamespaces } from 'react-i18next';
+import { getRateRON } from '../../selectors/exchangeRate';
 
 class Card extends Component {
   state = { modalShow: false };
@@ -53,6 +54,9 @@ class Card extends Component {
               {t('Ring ID')}: {props.ringId}
             </div>
             <div className="price">€{props.price}</div>
+            <div className="price">
+              {(props.price * props.rateRON).toFixed(2)} Lei
+            </div>
           </div>
           <ShopModal
             show={this.state.modalShow}
@@ -95,6 +99,7 @@ class Card extends Component {
 const mapStateToProps = (state) => ({
   user: state.user,
   products: state.product,
+  rateRON: getRateRON(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

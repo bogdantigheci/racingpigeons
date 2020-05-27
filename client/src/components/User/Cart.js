@@ -10,6 +10,7 @@ import { faFrown } from '@fortawesome/free-solid-svg-icons';
 import { faSmile } from '@fortawesome/free-solid-svg-icons';
 import Paypal from '../utils/payPal';
 import { withNamespaces } from 'react-i18next';
+import { getRateRON } from '../../selectors/exchangeRate';
 
 class UserCart extends Component {
   state = {
@@ -102,12 +103,17 @@ class UserCart extends Component {
               products={this.props.user}
               type="cart"
               removeItem={(id) => this.removeFromCart(id)}
+              rateRON={this.props.rateRON}
             />
             {this.state.showTotal ? (
               <div>
                 <div className="user_cart_sum">
                   <div className="total_amount">
                     {t('Total amount')}: € {this.state.total}
+                    <div>
+                      {t('Total amount')}:{' '}
+                      {(this.state.total * this.props.rateRON).toFixed(2)} Lei
+                    </div>
                   </div>
                 </div>
               </div>
@@ -144,6 +150,8 @@ class UserCart extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  products: state.product,
+  rateRON: getRateRON(state),
 });
 
 const mapDispatchToProps = (dispatch) => {

@@ -22,6 +22,7 @@ class ManageBreeders extends Component {
         element: 'input',
         value: '',
         config: {
+          label: 'Name',
           name: 'name_input',
           type: 'text',
           placeholder: 'Enter the breeder',
@@ -32,11 +33,13 @@ class ManageBreeders extends Component {
         valid: false,
         touched: false,
         validationMessage: '',
+        showlabel: true,
       },
       club: {
         element: 'input',
         value: '',
         config: {
+          label: 'Club',
           name: 'club_input',
           type: 'text',
           placeholder: 'Enter the club',
@@ -47,12 +50,13 @@ class ManageBreeders extends Component {
         valid: false,
         touched: false,
         validationMessage: '',
+        showlabel: true,
       },
       bio: {
         element: 'textarea',
         value: '',
         config: {
-          label: 'Breeder bio',
+          label: 'Bio',
           name: 'bio_input',
           type: 'text',
           placeholder: 'Enter breeder bio',
@@ -79,6 +83,7 @@ class ManageBreeders extends Component {
         element: 'input',
         value: '',
         config: {
+          label: 'Placements',
           name: 'placements_input',
           type: 'text',
           placeholder: 'Enter placements split by comma',
@@ -89,6 +94,7 @@ class ManageBreeders extends Component {
         valid: false,
         touched: false,
         validationMessage: '',
+        showlabel: true,
       },
     },
   };
@@ -178,19 +184,22 @@ class ManageBreeders extends Component {
                 id={'name'}
                 formdata={this.state.formdata.name}
                 change={(element) => this.updateForm(element)}
-                placeholder={t('Name')}
+                placeholder={t('Full name')}
+                label={t('Full name')}
               />
               <FormField
                 id={'club'}
                 formdata={this.state.formdata.club}
                 change={(element) => this.updateForm(element)}
                 placeholder={t('Club')}
+                label={t('Club')}
               />
               <FormField
                 id={'placements'}
                 formdata={this.state.formdata.placements}
                 change={(element) => this.updateForm(element)}
                 placeholder={t('Placements')}
+                label={t('Placements')}
               />
               <FormField
                 id={'bio'}

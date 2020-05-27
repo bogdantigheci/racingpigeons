@@ -1190,7 +1190,7 @@ select {
 }
 
 .card_item_wrapper .tags .breed {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: #2196f3;
 }
@@ -1548,6 +1548,7 @@ select {
   margin-bottom: 2rem;
   box-sizing: border-box;
   box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem #4169e1;
+  cursor: pointer;
 }
 
 .dropzone_box {
@@ -1710,7 +1711,7 @@ select {
   }
 
   .card_item_wrapper .tags .breed {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: #2196f3;
     min-height: 3rem;

@@ -32,6 +32,7 @@ class ManageBreeders extends Component {
         valid: false,
         touched: false,
         validationMessage: '',
+        showlabel: true,
       },
       club: {
         element: 'input',
@@ -47,6 +48,7 @@ class ManageBreeders extends Component {
         valid: false,
         touched: false,
         validationMessage: '',
+        showlabel: true,
       },
       details: {
         element: 'textarea',
@@ -89,6 +91,7 @@ class ManageBreeders extends Component {
         valid: false,
         touched: false,
         validationMessage: '',
+        showlabel: true,
       },
     },
   };
@@ -179,19 +182,22 @@ class ManageBreeders extends Component {
                   id={'name'}
                   formdata={this.state.formdata.name}
                   change={(element) => this.updateForm(element)}
-                  placeholder={t('Name')}
+                  placeholder={t('Full name')}
+                  label={t('Full name')}
                 />
                 <FormField
                   id={'club'}
                   formdata={this.state.formdata.club}
                   change={(element) => this.updateForm(element)}
                   placeholder={t('Club')}
+                  label={t('Club')}
                 />
                 <FormField
                   id={'contestants'}
                   formdata={this.state.formdata.contestants}
                   change={(element) => this.updateForm(element)}
                   placeholder={t('Enter contestants split by comma')}
+                  label={t('Contestants')}
                 />
                 <FormField
                   id={'details'}

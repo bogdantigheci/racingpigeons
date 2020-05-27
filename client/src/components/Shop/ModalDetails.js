@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getCartItems, removeCartItem } from '../../actions/user';
 import _ from 'lodash';
 import { withNamespaces } from 'react-i18next';
+import { getRateRON } from '../../selectors/exchangeRate';
 
 class ModalDetails extends Component {
   state = {
@@ -76,6 +77,8 @@ class ModalDetails extends Component {
               <div className="user_cart_sum">
                 <div className="total_amount">
                   {t('Total amount')}: € {this.state.total}
+                  {t('Total amount')}:
+                  {(this.state.total * this.props.rateRON).toFixed(2)} Lei
                 </div>
               </div>
             </div>
@@ -88,6 +91,8 @@ class ModalDetails extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  products: state.product,
+  rateRON: getRateRON(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -22,6 +22,7 @@ class ManageBreeds extends Component {
         element: 'input',
         value: '',
         config: {
+          label: 'Name',
           name: 'name_input',
           type: 'text',
           placeholder: 'Enter the breed',
@@ -32,6 +33,7 @@ class ManageBreeds extends Component {
         valid: false,
         touched: false,
         validationMessage: '',
+        showlabel: true,
       },
       description: {
         element: 'textarea',
@@ -147,7 +149,8 @@ class ManageBreeds extends Component {
                 id={'name'}
                 formdata={this.state.formdata.name}
                 change={(element) => this.updateForm(element)}
-                placeholder={t('Name')}
+                placeholder={t('Full name')}
+                label={t('Full name')}
               />
               <FormField
                 id={'description'}

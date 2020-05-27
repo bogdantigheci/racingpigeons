@@ -12,11 +12,14 @@ import Reducer from './reducers';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import './i18n';
+import { getExchangeRate } from './actions/exchangeRate';
 
 const store = createStore(
   Reducer,
   composeWithDevTools(applyMiddleware(thunk, logger, promiseMiddleware))
 );
+
+store.dispatch(getExchangeRate());
 
 ReactDOM.render(
   <Provider store={store}>

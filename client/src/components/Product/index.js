@@ -9,6 +9,7 @@ import ProdComments from './ProdComments/ProdComments';
 import _ from 'lodash';
 import ShopModal from '../Shop/Modal';
 import { withNamespaces } from 'react-i18next';
+import { getRateRON } from '../../selectors/exchangeRate';
 
 class ProductDetail extends Component {
   state = {
@@ -53,6 +54,7 @@ class ProductDetail extends Component {
           show={this.state.modalShow}
           onHide={() => this.setModalShow()}
           prodauth={this.props.auth ? 1 : 0}
+          exchangeRate={1}
         />
         <div className="container d-flex">
           {this.props.products.prodDetail ? (
@@ -72,6 +74,7 @@ class ProductDetail extends Component {
                       'prodDetail.comments',
                       []
                     )}
+                    rateRON={this.props.rateRON}
                   />
                 </div>
               </div>
@@ -94,6 +97,7 @@ const mapStateToProps = (state) => {
     products: state.product,
     cartDetail: state.user.userData.cart,
     auth: state.user.userData.isAuth,
+    rateRON: getRateRON(state),
   };
 };
 const mapDispatchToProps = (dispatch) => ({

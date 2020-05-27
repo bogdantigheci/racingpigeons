@@ -72,7 +72,6 @@ export function getProductsToShop(
     .post(`${PRODUCT_SERVER}/shop`, data)
     .then((response) => {
       let newState = [...previousState, ...response.data.articles];
-
       return {
         size: response.data.size,
         articles: newState,

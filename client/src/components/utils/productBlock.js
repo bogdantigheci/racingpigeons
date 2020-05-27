@@ -1,7 +1,7 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
 
-const ProductBlock = ({ products, removeItem, t }) => {
+const ProductBlock = ({ products, removeItem, t, rateRON }) => {
   const renderCartImage = (images) => {
     if (images.length > 0) {
       return images[0].url;
@@ -37,6 +37,7 @@ const ProductBlock = ({ products, removeItem, t }) => {
             <div className="item">
               <h4>{t('Price')}</h4>
               <div>€ {product.price}</div>
+              <div>{(product.price * rateRON).toFixed(2)} Lei</div>
             </div>
             <div className="item btn">
               <div
