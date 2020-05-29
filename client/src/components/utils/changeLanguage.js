@@ -13,6 +13,7 @@ const ChangeLanguage = ({ i18n }) => {
         onClick={() => changeLanguage('ro')}
         code="ro"
         height="16"
+        width="24"
       />
 
       <Flag
@@ -20,6 +21,7 @@ const ChangeLanguage = ({ i18n }) => {
         onClick={() => changeLanguage('en')}
         code="gb"
         height="16"
+        width="24"
       />
     </React.Fragment>
   );

@@ -49,6 +49,12 @@ const requestSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

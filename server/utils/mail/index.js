@@ -3,6 +3,7 @@ require('dotenv').config();
 const { welcome } = require('./welcome_template');
 const { purchase } = require('./purchase_template');
 const { resetPass } = require('./resetpass_template');
+const { sell_request } = require('./sell_request_template');
 
 const getEmailData = (to, name, token, template, actionData) => {
   let data = null;
@@ -12,7 +13,7 @@ const getEmailData = (to, name, token, template, actionData) => {
         from: 'Racing Pigeons <racingpigeonsbt@gmail.com>',
         to,
         subject: `Welcome to Racing Pigeons ${name}`,
-        html: welcome()
+        html: welcome(),
       };
       break;
     case 'purchase':
@@ -20,7 +21,7 @@ const getEmailData = (to, name, token, template, actionData) => {
         from: 'Racing Pigeons <racingpigeonsbt@gmail.com>',
         to,
         subject: `Thank you for your purchase ${name}`,
-        html: purchase(actionData)
+        html: purchase(actionData),
       };
       break;
     case 'reset_password':
@@ -28,8 +29,16 @@ const getEmailData = (to, name, token, template, actionData) => {
         from: 'Racing Pigeons <racingpigeonsbt@gmail.com>',
         to,
         subject: `Hey, ${name} use the link below to reset your password`,
-        html: resetPass(actionData)
+        html: resetPass(actionData),
       };
+    case 'sell_request':
+      data = {
+        from: 'Racing Pigeons <racingpigeonsbt@gmail.com>',
+        to,
+        subject: `Thank you for your sell request ${name}`,
+        html: sell_request(),
+      };
+      break;
 
     default:
       return data;
@@ -43,13 +52,13 @@ const sendEmail = (to, name, token, template, actionData = null) => {
     service: 'Gmail',
     auth: {
       user: 'racingpigeonsbt@gmail.com',
-      pass: process.env.EMAIL_PASS
-    }
+      pass: process.env.EMAIL_PASS,
+    },
   });
 
   const mail = getEmailData(to, name, null, template, actionData);
 
-  smtpTransport.sendMail(mail, function(error, response) {
+  smtpTransport.sendMail(mail, function (error, response) {
     if (error) {
       console.log(error);
     } else {

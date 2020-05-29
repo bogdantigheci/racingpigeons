@@ -170,6 +170,9 @@ app.post('/api/product/sell_request', auth, admin, (req, res) => {
 
   request.save((err, doc) => {
     if (err) return res.json({ success: false, err });
+
+    sendEmail(doc.email, doc.name, null, 'sell_request');
+
     res.status(200).json({
       success: true,
       request: doc,

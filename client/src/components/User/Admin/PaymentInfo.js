@@ -20,6 +20,7 @@ class SellRequestInfo extends Component {
   };
   render() {
     const { t } = this.props;
+    console.log(this.props.products.payment);
     return (
       <UserLayout>
         {this.props.products &&

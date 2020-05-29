@@ -10,7 +10,6 @@ import {
   ON_SUCCESS_BUY,
   UPDATE_USER_DATA,
   CLEAR_UPDATE_USER_DATA,
-  GET_EXCHANGE_RATE,
 } from '../constants/types';
 
 import { USER_SERVER, PRODUCT_SERVER } from '../components/utils/misc';

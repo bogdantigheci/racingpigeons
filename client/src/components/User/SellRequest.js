@@ -173,6 +173,26 @@ class SellRequest extends Component {
         validationMessage: '',
         showlabel: false,
       },
+      name: {
+        value: this.props.user.userData.name,
+        validation: {
+          required: false,
+        },
+        valid: true,
+        touched: false,
+        validationMessage: '',
+        showlabel: false,
+      },
+      email: {
+        value: this.props.user.userData.email,
+        validation: {
+          required: false,
+        },
+        valid: true,
+        touched: false,
+        validationMessage: '',
+        showlabel: false,
+      },
     },
   };
 
@@ -321,6 +341,7 @@ class SellRequest extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user,
   products: state.product,
 });
 const mapDispatchToProps = (dispatch) => ({
