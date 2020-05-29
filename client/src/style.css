@@ -19,12 +19,11 @@ body {
   color: red;
   margin-top: 10px;
   font-size: 1.3rem;
-  text-decoration: underline;
 }
 
 .paid_pigeons {
   box-sizing: border-box;
-  border: 2px solid #587ff3;
+  border-bottom: 2px solid #587ff3;
   border-radius: 5px;
   margin-bottom: 3px;
 }
