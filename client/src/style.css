@@ -901,6 +901,7 @@ select {
   border-radius: 2px;
   margin-right: 1rem;
   cursor: pointer;
+  color: #fff;
 }
 
 .reset_pass {
@@ -2007,8 +2008,14 @@ select {
     width: 50%;
   }
   .register_login_container button {
-    width: 100%;
+    width: 30%;
     margin: 0.4rem;
+    color: #fff;
+    margin: auto;
+    display: block;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 3px 3px 3px #ccc;
   }
   .register_login_container .my_link {
     width: 100%;
@@ -2017,7 +2024,7 @@ select {
   .register_login_container h2 {
     margin: 1rem 0px;
     text-transform: uppercase;
-    color: #686868;
+    color: #4169e1;
     width: 100%;
     font-size: 1.2rem;
   }

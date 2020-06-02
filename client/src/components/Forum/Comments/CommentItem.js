@@ -50,6 +50,7 @@ class CommentItem extends Component {
                     onChange={this.onChange.bind(this)}
                   />
                   <button
+                    className="btn btn-primary mr-1 mb-3"
                     type="submit"
                     onClick={this.handleEditCommentFromPost.bind(
                       this,

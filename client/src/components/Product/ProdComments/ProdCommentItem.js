@@ -54,6 +54,7 @@ class ProdCommentItem extends Component {
                   />
                   <button
                     type="submit"
+                    className="btn btn-primary mr-1"
                     onClick={this.handleEditCommentFromProduct.bind(
                       this,
                       this.props.prodId,

@@ -139,7 +139,7 @@ class Register extends Component {
           <div className="register_login_container">
             <div className="left">
               <form onSubmit={(event) => this.submitForm(event)}>
-                <h2>Personal information</h2>
+                <h2 className="bio_title">Personal information</h2>
                 <div className="form_block_two">
                   <div className="block">
                     <FormField
@@ -166,7 +166,7 @@ class Register extends Component {
                     placeholder={t('Enter your email')}
                   />
                 </div>
-                <h2>Verify password</h2>
+                <h2 className="bio_title">Verify password</h2>
                 <div className="form_block_two">
                   <div className="block">
                     <FormField
