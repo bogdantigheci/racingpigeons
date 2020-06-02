@@ -1213,6 +1213,7 @@ select {
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+  min-width: 15rem;
 }
 
 .card_item_wrapper .image {
