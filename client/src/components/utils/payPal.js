@@ -8,11 +8,11 @@ class PayPal extends Component {
     };
 
     const onCancel = (data) => {
-      console.log(JSON.stringify(data));
+      alert('Payment was canceled!');
     };
 
     const onError = (error) => {
-      console.log(JSON.stringify(error));
+      alert(error);
     };
 
     let env = 'sandbox';
