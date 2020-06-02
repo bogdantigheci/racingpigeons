@@ -20,7 +20,6 @@ class SellRequestInfo extends Component {
   };
   render() {
     const { t } = this.props;
-    console.log(this.props.products.payment);
     return (
       <UserLayout>
         {this.props.products &&
@@ -49,7 +48,7 @@ class SellRequestInfo extends Component {
             <div>
               {t('Pigeons')}:{' '}
               {this.props.products.payment.product.map((pigeon, i) => (
-                <div className="paid_pigeons">
+                <div className="paid_pigeons" key={i}>
                   {t('Breed')}: {pigeon.breed}, {t('Ring ID')}: {pigeon.ringId},{' '}
                   {t('Price')}: {pigeon.price}, {t('Payment ID')}:{' '}
                   {pigeon.paymentId}{' '}

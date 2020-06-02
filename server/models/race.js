@@ -6,6 +6,11 @@ const raceSchema = mongoose.Schema({
     type: String,
     maxlength: 100,
   },
+  county: {
+    required: true,
+    type: String,
+    maxlength: 100,
+  },
   details: {
     required: true,
     type: String,

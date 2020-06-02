@@ -34,6 +34,22 @@ class ManageBreeders extends Component {
         validationMessage: '',
         showlabel: true,
       },
+      county: {
+        element: 'input',
+        value: '',
+        config: {
+          name: 'county_input',
+          type: 'text',
+          placeholder: 'Enter county',
+        },
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+        validationMessage: '',
+        showlabel: true,
+      },
       club: {
         element: 'input',
         value: '',
@@ -184,6 +200,13 @@ class ManageBreeders extends Component {
                   change={(element) => this.updateForm(element)}
                   placeholder={t('Full name')}
                   label={t('Full name')}
+                />
+                <FormField
+                  id={'county'}
+                  formdata={this.state.formdata.county}
+                  change={(element) => this.updateForm(element)}
+                  placeholder={t('Enter county')}
+                  label={t('County')}
                 />
                 <FormField
                   id={'club'}

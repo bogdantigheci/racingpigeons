@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getRaces } from '../../actions/product';
 import _ from 'lodash';
 import { withNamespaces } from 'react-i18next';
+import RacesMap from './RacesMap';
 
 class Club extends Component {
   componentDidMount() {
@@ -38,6 +39,14 @@ class Club extends Component {
         </div>
         <div className="d-flex flex-wrap mt-4">
           <Races races={_.get(this.props.products, 'races', [])} />
+        </div>
+        <div>
+          <h3 className="text-center mt-4 page-title">
+            {t('See number of races in each county')}
+          </h3>
+        </div>
+        <div>
+          <RacesMap races={_.get(this.props.products, 'races', [])} />
         </div>
       </div>
     );
