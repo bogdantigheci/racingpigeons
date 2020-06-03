@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSellRequest, reviewSellRequest } from '../../../actions/product';
+import {
+  getSellRequest,
+  approveSellRequest,
+  declineSellRequest,
+} from '../../../actions/product';
 import _ from 'lodash';
 import { withNamespaces } from 'react-i18next';
 import UserLayout from '../../../hoc/UserLayout';
@@ -16,9 +20,13 @@ class SellRequestInfo extends Component {
     });
   }
 
-  handleRequest = (id) => {
+  handleApproveRequest = (id) => {
     id = this.props.match.params.id;
-    this.props.reviewSellRequest(id);
+    this.props.approveSellRequest(id);
+  };
+  handleDeclineRequest = (id) => {
+    id = this.props.match.params.id;
+    this.props.declineSellRequest(id);
   };
   render() {
     const { t } = this.props;
@@ -72,20 +80,31 @@ class SellRequestInfo extends Component {
                 {t('Description')}: {this.props.products.request.description}
               </div>
             </div>
-            <div>
-              {!this.props.products.request.reviewed ? (
-                <button
-                  className="review_button"
-                  onClick={() => this.handleRequest()}
-                >
-                  {t('Review')}
-                </button>
-              ) : (
-                <div className="revised">
-                  {t('This sell request has already been reviewed!')}
-                </div>
-              )}
-            </div>
+            {this.props.user.userData.isAdmin ? (
+              <div>
+                {this.props.products.request.reviewed === 'In review' ? (
+                  <div>
+                    <button
+                      className="review_button mr-3 p-2"
+                      onClick={() => this.handleApproveRequest()}
+                    >
+                      {t('Approve')}
+                    </button>
+                    <button
+                      className="review_button p-2"
+                      onClick={() => this.handleDeclineRequest()}
+                    >
+                      {t('Decline')}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="revised">
+                    {t('This sell request has been')}{' '}
+                    {t(this.props.products.request.reviewed)}!
+                  </div>
+                )}
+              </div>
+            ) : null}
           </div>
         ) : null}
       </UserLayout>
@@ -93,10 +112,14 @@ class SellRequestInfo extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ products: state.product });
+const mapStateToProps = (state) => ({
+  user: state.user,
+  products: state.product,
+});
 const mapDispatchToProps = (dispatch) => ({
   getSellRequest: (id) => dispatch(getSellRequest(id)),
-  reviewSellRequest: (id) => dispatch(reviewSellRequest(id)),
+  approveSellRequest: (id) => dispatch(approveSellRequest(id)),
+  declineSellRequest: (id) => dispatch(declineSellRequest(id)),
 });
 export default withNamespaces()(
   connect(mapStateToProps, mapDispatchToProps)(SellRequestInfo)

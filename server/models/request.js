@@ -46,8 +46,8 @@ const requestSchema = mongoose.Schema(
       default: [],
     },
     reviewed: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: 'In review',
     },
     name: {
       type: String,

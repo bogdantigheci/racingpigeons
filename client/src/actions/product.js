@@ -126,9 +126,20 @@ export function getSellRequest(id) {
   };
 }
 
-export function reviewSellRequest(id) {
+export function approveSellRequest(id) {
   const request = axios
-    .post(`${PRODUCT_SERVER}/requests/${id}`)
+    .post(`${PRODUCT_SERVER}/requests/${id}/approve`)
+    .then((response) => {
+      return response.data;
+    });
+  return {
+    type: GET_SELL_REQUEST,
+    payload: request,
+  };
+}
+export function declineSellRequest(id) {
+  const request = axios
+    .post(`${PRODUCT_SERVER}/requests/${id}/decline`)
     .then((response) => {
       return response.data;
     });

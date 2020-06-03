@@ -30,6 +30,7 @@ import SellRequests from './components/User/Admin/SellRequests';
 import SellRequestInfo from './components/User/Admin/SellRequestInfo';
 import Orders from './components/User/Admin/Orders';
 import PaymentInfo from './components/User/Admin/PaymentInfo';
+import UserSellRequests from './components/User/UserSellRequests';
 
 const Routes = () => {
   return (
@@ -74,6 +75,11 @@ const Routes = () => {
           path="/user/sell_request"
           exact
           component={Auth(SellRequest, true)}
+        />
+        <Route
+          path="/user/sell_requests"
+          exact
+          component={Auth(UserSellRequests, true)}
         />
         <Route
           path="/product_detail/:id"

@@ -17,7 +17,7 @@ const SellRequestHistory = (props) => {
             <td>{request.ringId}</td>
             <td>{request.breed}</td>
             <td>{request.breeder}</td>
-            <td>{request.reviewed ? t('YES') : t('NO')}</td>
+            <td>{t(request.reviewed)}</td>
           </tr>
         ))
       : null;

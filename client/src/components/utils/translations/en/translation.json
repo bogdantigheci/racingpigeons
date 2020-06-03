@@ -142,6 +142,7 @@
   "Requested at": "Requested at",
   "Review": "Review",
   "This sell request has already been reviewed!": "This sell request has already been reviewed!",
+  "This sell request has been": "This sell request has been",
   "Order ID": "Order ID",
   "Reviewed": "Reviewed",
   "Orders": "Orders",
@@ -150,5 +151,8 @@
   "Pigeons": "Pigeons",
   "Buyer": "Buyer",
   "Full name": "Full name",
-  "See number of races in each county": "See number of races in each county"
+  "In review": "In review",
+  "See number of races in each county": "See number of races in each county",
+  "Approve": "Approve",
+  "Decline": "Decline"
 }

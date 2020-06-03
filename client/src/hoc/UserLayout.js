@@ -22,6 +22,10 @@ const UserLayout = (props) => {
       name: t('Sell request'),
       linkTo: '/user/sell_request',
     },
+    {
+      name: t('Sell requests'),
+      linkTo: '/user/sell_requests',
+    },
   ];
 
   const admin = [

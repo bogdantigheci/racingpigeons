@@ -194,11 +194,25 @@ app.get('/api/product/requests/:id', (req, res) => {
     );
 });
 
-app.post('/api/product/requests/:id', auth, (req, res) => {
+app.post('/api/product/requests/:id/approve', auth, (req, res) => {
   Request.findOneAndUpdate(
     { _id: req.params.id },
     {
-      $set: { reviewed: true },
+      $set: { reviewed: 'Approved' },
+    },
+    { new: true },
+    (err, request) => {
+      if (err) return res.json({ success: false, err });
+      return res.status(200).send(request);
+    }
+  );
+});
+
+app.post('/api/product/requests/:id/decline', auth, (req, res) => {
+  Request.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: { reviewed: 'Declined' },
     },
     { new: true },
     (err, request) => {
