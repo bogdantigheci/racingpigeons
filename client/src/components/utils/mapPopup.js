@@ -12,6 +12,7 @@ const MapPopup = (props) => {
           className="map_path"
           id={props.id}
           onMouseOver={props.showResults}
+          onClick={props.showDetailedResults}
           d={props.path}
         />
       }
@@ -20,7 +21,13 @@ const MapPopup = (props) => {
           <div>
             {t('Races')} {props.noOfRaces}
           </div>
-          <div></div>
+          <div>
+            {props.detailedRaces
+              ? props.detailedRaces.map((race, i) => (
+                  <div key={i}>{race.name}</div>
+                ))
+              : null}
+          </div>
         </div>
       }
       basic

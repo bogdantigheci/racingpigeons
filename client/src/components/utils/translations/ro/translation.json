@@ -154,5 +154,6 @@
   "In review": "Revizuire in curs",
   "See number of races in each county": "Vezi numarul de concursuri in fiecare judet",
   "Approve": "Aproba",
-  "Decline": "Respinge"
+  "Decline": "Respinge",
+  "There are no races in this county!": "Nu sunt concursuri in acest judet!"
 }

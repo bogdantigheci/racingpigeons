@@ -346,6 +346,7 @@ class RacesMap extends React.Component {
         },
       ],
       noOfRaces: 0,
+      detailedRaces: [],
     };
 
     this.showResults = this.showResults.bind(this);
@@ -356,7 +357,24 @@ class RacesMap extends React.Component {
       (race) => race.county === e.target.id
     );
 
-    this.setState({ id: e.target.id, noOfRaces: result.length });
+    this.setState({
+      id: e.target.id,
+      noOfRaces: result.length,
+      detailedRaces: [],
+    });
+
+    return <MapPopup />;
+  };
+  showDetailedResults = (e) => {
+    const result = this.props.races.filter(
+      (race) => race.county === e.target.id
+    );
+
+    this.setState({
+      id: e.target.id,
+      detailedRaces: result,
+      noOfRaces: result.length,
+    });
 
     return <MapPopup />;
   };
@@ -382,7 +400,9 @@ class RacesMap extends React.Component {
                 id={path.id}
                 path={path.hoodPath}
                 noOfRaces={this.state.noOfRaces}
+                detailedRaces={this.state.detailedRaces}
                 showResults={this.showResults}
+                showDetailedResults={this.showDetailedResults}
               />
               <text className="county_text" x={path.x} y={path.y}>
                 {path.jud}

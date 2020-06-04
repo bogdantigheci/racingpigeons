@@ -154,5 +154,6 @@
   "In review": "In review",
   "See number of races in each county": "See number of races in each county",
   "Approve": "Approve",
-  "Decline": "Decline"
+  "Decline": "Decline",
+  "There are no races in this county!": "There are no races in this county!"
 }
