@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { withNamespaces } from 'react-i18next';
 
 const api = {
   key: 'd5f4d6c890cff71e3b4e0f49054d8c72',
   base: 'https://api.openweathermap.org/data/2.5/',
 };
 
-const Weather = () => {
+const Weather = ({ t }) => {
   const [searchParam, setSearchParam] = useState('');
   const [weather, setWeather] = useState({});
 
@@ -68,7 +69,7 @@ const Weather = () => {
           <input
             type="text"
             className="search-bar"
-            placeholder="Enter location..."
+            placeholder={t('Enter location...')}
             onChange={(e) => setSearchParam(e.target.value)}
             value={searchParam}
             onKeyPress={search}
@@ -95,4 +96,4 @@ const Weather = () => {
   );
 };
 
-export default Weather;
+export default withNamespaces()(Weather);
