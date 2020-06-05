@@ -165,7 +165,7 @@ app.post('/api/product/article', auth, admin, (req, res) => {
   });
 });
 
-app.post('/api/product/sell_request', auth, admin, (req, res) => {
+app.post('/api/product/sell_request', auth, (req, res) => {
   const request = new Request(req.body);
 
   request.save((err, doc) => {
@@ -602,7 +602,9 @@ app.post('/api/users/reset_user', (req, res) => {
     (err, user) => {
       user.generateResetToken((err, user) => {
         if (err) return res.json({ success: false, err });
+
         sendEmail(user.email, user.name, null, 'reset_password', user);
+
         return res.json({ success: true });
       });
     }
@@ -623,7 +625,7 @@ app.post('/api/users/reset_password', (req, res) => {
       if (!user)
         return res.json({
           success: false,
-          message: 'Sorry, token bad, generate a new one.',
+          message: 'Sorry, bad token, generate a new one.',
         });
 
       user.password = req.body.password;

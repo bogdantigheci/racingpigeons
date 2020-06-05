@@ -2,7 +2,7 @@ const mailer = require('nodemailer');
 require('dotenv').config();
 const { welcome } = require('./welcome_template');
 const { purchase } = require('./purchase_template');
-const { resetPass } = require('./resetpass_template');
+const { reset_password } = require('./reset_password_template');
 const { sell_request } = require('./sell_request_template');
 
 const getEmailData = (to, name, token, template, actionData) => {
@@ -29,8 +29,9 @@ const getEmailData = (to, name, token, template, actionData) => {
         from: 'Racing Pigeons <racingpigeonsbt@gmail.com>',
         to,
         subject: `Hey, ${name} use the link below to reset your password`,
-        html: resetPass(actionData),
+        html: reset_password(actionData),
       };
+      break;
     case 'sell_request':
       data = {
         from: 'Racing Pigeons <racingpigeonsbt@gmail.com>',
