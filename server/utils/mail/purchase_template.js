@@ -3,54 +3,436 @@ const purchase = (data) => {
     let template = '';
     data.product.forEach((item) => {
       template += `
-              <div style="font-family: monospace, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding: 15px 25px ; text-transform: uppercase;">
-                  <h3>
-                    Breed: ${item.breed} RingID: ${item.ringId}
-                  </h3>
-                  <p>Price paid: $ ${item.price}</p>
-                  <p>Purchase order: ${item.porder}</p>
-               </div>
-              `;
+      <tr
+      style="
+        font-family: 'Courier New', Courier,
+          monospace;
+        box-sizing: border-box;
+        font-size: 16px;
+        margin: 0;
+      "
+    >
+      <td
+        style="
+          font-family: 'Courier New', Courier,
+            monospace;
+          box-sizing: border-box;
+          font-size: 16px;
+          vertical-align: top;
+          border-top-width: 1px;
+          border-top-color: #eee;
+          border-top-style: solid;
+          margin: 0;
+          padding: 5px 0;
+          border-bottom-color: #333;
+          border-bottom-width: 2px;
+          border-bottom-style: solid;
+        "
+        valign="top"
+      >
+<div><div>Breed: ${item.breed}</div>
+<div>RingId: ${item.ringId}</div>
+<div>Purchase order: ${item.porder}</div>
+</div>                                  </td>
+    
+    </tr>
+  
+   
+  </table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+`;
     });
 
     return template;
   };
 
   return `
-    <!DOCTYPE html>
-    <html style="margin: 0; padding: 0;">
-    
-        <head>
-            <title>One | Email template!</title>
-        </head>
-    
-            <body style="margin: 0; padding: 0;">
-                <table class="table" cellpadding="0" cellspacing="0" style="background-color: #eee; empty-cells: hide; margin: 0 auto; padding: 0; width: 600px;">
-                    <tr>
-                        <td style="background-color: #999592; margin: 0 auto;">
-                            <h1 style="box-sizing: border-box; color: white; font-family: monospace, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding: 15px 25px; text-align: center; text-transform: uppercase;">
-
-                            Thank you for your order</h1></td>
-                    </tr>
-                    <tr>
-                        <td style="margin: 0 auto;">
-                             <h2 style="box-sizing: border-box; color: #000000; font-family: monospace, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding: 15px 25px; text-align: center; text-transform: uppercase;">
-                             Your purchase information</h2> 
-                                     ${getItems()}
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html
+    xmlns="http://www.w3.org/1999/xhtml"
+    style="
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      box-sizing: border-box;
+      font-size: 16px;
+      margin: 0;
+    "
+  >
+    <head>
+      <meta name="viewport" content="width=device-width" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Purchase Email Template</title>
+  
+      <style type="text/css">
+        img {
+          max-width: 100%;
+        }
+        body {
+          -webkit-font-smoothing: antialiased;
+          -webkit-text-size-adjust: none;
+          width: 100% !important;
+          height: 100%;
+          line-height: 2em;
+        }
+        body {
+          background-color: #f6f6f6;
+        }
+        @media only screen and (max-width: 640px) {
+          body {
+            padding: 0 !important;
+          }
+          h1 {
+            font-weight: 800 !important;
+            margin: 20px 0 5px !important;
+          }
+          h2 {
+            font-weight: 800 !important;
+            margin: 20px 0 5px !important;
+          }
+          h3 {
+            font-weight: 800 !important;
+            margin: 20px 0 5px !important;
+          }
+          h4 {
+            font-weight: 800 !important;
+            margin: 20px 0 5px !important;
+          }
+          h1 {
+            font-size: 22px !important;
+          }
+          h2 {
+            font-size: 18px !important;
+          }
+          h3 {
+            font-size: 16px !important;
+          }
+          .container {
+            padding: 0 !important;
+            width: 100% !important;
+          }
+          .content {
+            padding: 0 !important;
+          }
+          .content-wrap {
+            padding: 10px !important;
+          }
+          .invoice {
+            width: 100% !important;
+          }
+        }
+      </style>
+    </head>
+  
+    <body
+      itemscope
+      itemtype="http://schema.org/EmailMessage"
+      style="
+        font-family: 'Courier New', Courier, monospace;
+        box-sizing: border-box;
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: none;
+        width: 100% !important;
+        height: 100%;
+        line-height: 1.6em;
+        background-color: #f6f6f6;
+        margin: 0;
+      "
+      bgcolor="#f6f6f6"
+    >
+      <table
+        class="body-wrap"
+        style="
+          font-family: 'Courier New', Courier, monospace;
+          box-sizing: border-box;
+          font-size: 16px;
+          width: 100%;
+          background-color: #f6f6f6;
+          margin: 0;
+        "
+        bgcolor="#f6f6f6"
+      >
+        <tr
+          style="
+            font-family: 'Courier New', Courier, monospace;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin: 0;
+          "
+        >
+          <td
+            style="
+              font-family: 'Courier New', Courier, monospace;
+              box-sizing: border-box;
+              font-size: 16px;
+              vertical-align: top;
+              margin: 0;
+            "
+            valign="top"
+          ></td>
+          <td
+            class="container"
+            width="600"
+            style="
+              font-family: 'Courier New', Courier, monospace;
+              box-sizing: border-box;
+              font-size: 16px;
+              display: block !important;
+              max-width: 600px !important;
+              clear: both !important;
+              margin: 0 auto;
+            "
+          >
+            <div
+              class="content"
+              style="
+                font-family: 'Courier New', Courier, monospace;
+                box-sizing: border-box;
+                font-size: 16px;
+                max-width: 600px;
+                display: block;
+                margin: 0 auto;
+                padding: 20px;
+              "
+            >
+              <table
+                class="main"
+                width="100%"
+                cellpadding="0"
+                cellspacing="0"
+                style="
+                  font-family: 'Courier New', Courier, monospace;
+                  box-sizing: border-box;
+                  font-size: 16px;
+                  border-radius: 3px;
+                  background-color: #fff;
+                  margin: 0;
+                  border: 1px solid #e9e9e9;
+                "
+                bgcolor="#fff"
+              >
+                <tr
+                  style="
+                    font-family: 'Courier New', Courier, monospace;
+                    box-sizing: border-box;
+                    font-size: 16px;
+                    margin: 0;
+                  "
+                >
+                  <td
+                    class="content-wrap aligncenter"
+                    style="
+                      font-family: 'Courier New', Courier, monospace;
+                      box-sizing: border-box;
+                      font-size: 16px;
+                      vertical-align: top;
+                      text-align: center;
+                      margin: 0;
+                      padding: 20px;
+                    "
+                    align="center"
+                    valign="top"
+                  >
+                    <table
+                      width="100%"
+                      cellpadding="0"
+                      cellspacing="0"
+                      style="
+                        font-family: 'Courier New', Courier, monospace;
+                        box-sizing: border-box;
+                        font-size: 16px;
+                        margin: 0;
+                      "
+                    >
+                      <tr
+                        style="
+                          font-family: 'Courier New', Courier, monospace;
+                          box-sizing: border-box;
+                          font-size: 16px;
+                          margin: 0;
+                        "
+                      >
+                        <td
+                          class="content-block"
+                          style="
+                            font-family: 'Courier New', Courier, monospace;
+                            box-sizing: border-box;
+                            font-size: 16px;
+                            vertical-align: top;
+                            margin: 0;
+                            padding: 0 0 20px;
+                          "
+                          valign="top"
+                        >
+                          <h2
+                            class="aligncenter"
+                            style="
+                              font-family: 'Courier New', Courier, monospace;
+                              box-sizing: border-box;
+                              font-size: 24px;
+                              color: #000;
+                              line-height: 1.2em;
+                              font-weight: 400;
+                              text-align: center;
+                              margin: 40px 0 0;
+                            "
+                            align="center"
+                          >
+                            Your order summary
+                          </h2>
                         </td>
-                    </tr>
-                    <tr>
-                         <td style="background-color: #999592; margin: 0 auto;">
-                                 <p style="box-sizing: border-box; color: white; font-family: monospace, Arial, sans-serif; letter-spacing: 0.5px; line-height: 1.4; margin: 0; padding: 15px 25px; text-align: center; text-transform: uppercase;font-size:10px">
-                                 Thank you for your order! If you have any questions feel free to
-                                 contact us! We hope to see you back soon!
-                                 </p></td>
-                    </tr>
-                </table>
-            </body>
-    
-      </html>
-    `;
+                      </tr>
+                      <tr
+                        style="
+                          font-family: 'Courier New', Courier, monospace;
+                          box-sizing: border-box;
+                          font-size: 16px;
+                          margin: 0;
+                        "
+                      >
+                        <td
+                          class="content-block aligncenter"
+                          style="
+                            font-family: 'Courier New', Courier, monospace;
+                            box-sizing: border-box;
+                            font-size: 16px;
+                            vertical-align: top;
+                            text-align: center;
+                            margin: 0;
+                            padding: 0 0 20px;
+                          "
+                          align="center"
+                          valign="top"
+                        >
+                          <table
+                            class="invoice"
+                            style="
+                              font-family: 'Courier New', Courier, monospace;
+                              box-sizing: border-box;
+                              font-size: 16px;
+                              text-align: left;
+                              width: 80%;
+                              margin: 40px auto;
+                            "
+                          >
+                            <tr
+                              style="
+                                font-family: 'Courier New', Courier, monospace;
+                                box-sizing: border-box;
+                                font-size: 16px;
+                                margin: 0;
+                              "
+                            >
+                              <td
+                                style="
+                                  font-family: 'Courier New', Courier, monospace;
+                                  box-sizing: border-box;
+                                  font-size: 16px;
+                                  vertical-align: top;
+                                  margin: 0;
+                                  padding: 5px 0;
+                                "
+                                valign="top"
+                              >
+                                <table
+                                  class="invoice-items"
+                                  cellpadding="0"
+                                  cellspacing="0"
+                                  style="
+                                    font-family: 'Courier New', Courier, monospace;
+                                    box-sizing: border-box;
+                                    font-size: 16px;
+                                    width: 100%;
+                                    margin: 0;
+                                  "
+                                >
+                       ${getItems()}
+                      <tr
+                        style="
+                          font-family: 'Courier New', Courier, monospace;
+                          box-sizing: border-box;
+                          font-size: 16px;
+                          margin: 0;
+                        "
+                      >
+                        <td
+                          class="content-block aligncenter"
+                          style="
+                            font-family: 'Courier New', Courier, monospace;
+                            box-sizing: border-box;
+                            font-size: 16px;
+                            vertical-align: top;
+                            text-align: center;
+                            margin: 0;
+                            padding: 0 0 20px;
+                          "
+                          align="center"
+                          valign="top"
+                        >
+                          <p>If you have any issues please contact us via the application chat or <a
+                            href="mailto:racingpigeonsbt@gmail.com"
+                            style="
+                              font-family: 'Courier New', Courier, monospace;
+                              box-sizing: border-box;
+                              font-size: 16px;
+                              color: blue;
+                              text-decoration: underline;
+                              margin: 0;
+                            "
+                            >email</a
+                          >.</p>
+                        </td>
+                      </tr>
+                      <tr
+                        style="
+                          font-family: 'Courier New', Courier, monospace;
+                          box-sizing: border-box;
+                          font-size: 16px;
+                          margin: 0;
+                        "
+                      >
+                        <td
+                          class="content-block aligncenter"
+                          style="
+                          font-family: 'Courier New', Courier, monospace;
+                            box-sizing: border-box;
+                            font-size: 32px;
+                            vertical-align: top;
+                            text-align: center;
+                            margin: 0;
+                            color: blue;
+                            padding: 0 0 20px;
+                            font-weight: bold;
+                          "
+                          align="center"
+                          valign="top"
+                        >
+                          Racing Pigeons
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <div
+                class="footer"
+                style="
+                  font-family: 'Courier New', Courier, monospace;
+                  box-sizing: border-box;
+                  font-size: 16px;
+                  width: 100%;
+                  clear: both;
+                  color: #999;
+                  margin: 0;
+                  padding: 20px;
+                "
+              >
+              
+    </body>
+  </html>`;
 };
 
 module.exports = { purchase };

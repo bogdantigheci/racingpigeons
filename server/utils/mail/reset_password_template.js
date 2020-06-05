@@ -233,8 +233,21 @@ const reset_password = (data) => {
                           "
                           valign="top"
                         >
-                          Hi name,
-                        </td>
+                        If you did not request to reset your password, please
+                        contact an administrator via the application chat or
+                        <a
+                          href="mailto:racingpigeonsbt@gmail.com"
+                          style="
+                            font-family: 'Courier New', Courier, monospace;
+
+                            box-sizing: border-box;
+                            font-size: 18px;
+                            color: blue;
+                            text-decoration: underline;
+                            margin: 0;
+                          "
+                          >email.</a
+                        >                        </td>
                       </tr>
                       <tr
                         style="
@@ -256,7 +269,7 @@ const reset_password = (data) => {
                           "
                           valign="top"
                         >
-                          In order to reset your password please click on the
+                          If you did request a password request, please click on the
                           button below!
                         </td>
                       </tr>
@@ -372,9 +385,9 @@ const reset_password = (data) => {
                       style="
                         font-family: 'Courier New', Courier, monospace;
                         box-sizing: border-box;
-                        font-size: 12px;
+                        font-size: 16px;
                         vertical-align: top;
-                        color: #999;
+                        color: blue;
                         text-align: center;
                         margin: 0;
                         padding: 0 0 20px;
@@ -388,10 +401,11 @@ const reset_password = (data) => {
                         style="
                           font-family: 'Courier New', Courier, monospace;
                           box-sizing: border-box;
-                          font-size: 12px;
-                          color: #999;
+                          font-size: 16px;
+                          color: blue;
                           text-decoration: underline;
                           margin: 0;
+                          font-weight: bold;
                         "
                         >Racing Pigeons</a
                       >
