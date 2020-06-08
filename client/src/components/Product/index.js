@@ -28,7 +28,6 @@ class ProductDetail extends Component {
   componentWillMount() {
     this.props.clearProductDetail();
   }
-  //don't add duplicate pigeon in cart
   addToCartHandler = (id) => {
     const isInCart = _.find(
       _.map(this.props.cartDetail, (item) => item.id === id)

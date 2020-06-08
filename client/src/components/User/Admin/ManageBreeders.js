@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { getBreeders, addBreeder } from '../../../actions/product';
 import FileUpload from '../../utils/FileUpload';
 import { withNamespaces } from 'react-i18next';
+import _ from 'lodash';
 
 class ManageBreeders extends Component {
   state = {
@@ -100,7 +101,7 @@ class ManageBreeders extends Component {
   };
 
   showCategoryItems = () =>
-    this.props.products && this.props.products.breeders
+    _.get(this.props, 'products.breeders')
       ? this.props.products.breeders.map((item, i) => (
           <div className="category_item" key={i}>
             {item && item.name}

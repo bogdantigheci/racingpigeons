@@ -22,7 +22,6 @@ import {
   GET_PAYMENT,
 } from '../constants/types';
 
-///rename to products for better fit
 
 const product = (state = { breeders: [] }, action) => {
   switch (action.type) {

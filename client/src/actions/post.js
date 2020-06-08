@@ -27,7 +27,7 @@ export const addPost = (postData) => (dispatch) => {
       })
     );
 };
-// Get Posts
+
 export const getPosts = () => (dispatch) => {
   dispatch(setPostLoading());
   axios
@@ -46,7 +46,6 @@ export const getPosts = () => (dispatch) => {
     );
 };
 
-// Get Post
 export const getPost = (id) => (dispatch) => {
   dispatch(setPostLoading());
   axios
@@ -82,7 +81,6 @@ export const deletePost = (id) => (dispatch) => {
     );
 };
 
-// Add Like
 export const addLike = (id) => (dispatch) => {
   axios
     .get(`${FORUM_SERVER}/posts/like/${id}`)
@@ -95,7 +93,6 @@ export const addLike = (id) => (dispatch) => {
     );
 };
 
-// Remove Like
 export const removeLike = (id) => (dispatch) => {
   axios
     .get(`${FORUM_SERVER}/posts/unlike/${id}`)
@@ -108,7 +105,6 @@ export const removeLike = (id) => (dispatch) => {
     );
 };
 
-// Add Comment
 export const addComment = (postId, commentData) => (dispatch) => {
   dispatch(clearErrors());
   axios
@@ -127,7 +123,6 @@ export const addComment = (postId, commentData) => (dispatch) => {
     );
 };
 
-// Delete Comment
 export const deleteComment = (postId, commentId) => (dispatch) => {
   axios
     .get(`${FORUM_SERVER}/posts/comment/${postId}/${commentId}`)
@@ -167,14 +162,12 @@ export const editComment = (postId, commentId, editCommentData) => (
     );
 };
 
-// Set loading state
 export const setPostLoading = () => {
   return {
     type: POST_LOADING,
   };
 };
 
-// Clear errors
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS,

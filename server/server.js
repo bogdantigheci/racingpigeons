@@ -34,19 +34,13 @@ var pusher = new Pusher({
   useTLS: true,
 });
 
-//for heroku
-
 app.use(express.static('client/build'));
-
-////
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
   api_secret: process.env.CLOUD_API_SECRET,
 });
-
-////Models
 
 const { User } = require('./models/user');
 const { Breed } = require('./models/breed');
@@ -58,23 +52,13 @@ const { Post } = require('./models/post');
 const { Race } = require('./models/race');
 const { Request } = require('./models/request');
 
-///Validation
-
 const validatePostInput = require('../server/utils/validation/post');
 const validateCommentInput = require('../server/utils/validation/comment');
-
-///Middlewares
 
 const { auth } = require('./middleware/auth');
 const { admin } = require('./middleware/admin');
 
-///Utils
-
 const { sendEmail } = require('./utils/mail/index');
-
-//////////////////////////////////////
-//    PRODUCTS - PIGEONS
-//////////////////////////////////////
 
 app.post('/api/product/shop', (req, res) => {
   let order = req.body.order ? req.body.order : 'desc';
@@ -113,8 +97,6 @@ app.post('/api/product/shop', (req, res) => {
     });
 });
 
-//////by arrival
-/// /articles?sortBy=createdAt&order=desc&limit=4
 app.get('/api/product/articles', (req, res) => {
   let order = req.query.order ? req.query.order : 'asc';
   let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
@@ -130,8 +112,6 @@ app.get('/api/product/articles', (req, res) => {
       res.send(articles);
     });
 });
-
-/// /api/product/article?id=5e44032aae38cb5e54ad89a9&type=single
 
 app.get('/api/product/articles_by_id', (req, res) => {
   let type = req.query.type;
@@ -251,10 +231,6 @@ app.post('/api/product/payments/:id', auth, (req, res) => {
   );
 });
 
-//////////////////////////////////////
-//    BREEDS -brand
-//////////////////////////////////////
-
 app.post('/api/product/breeds', auth, admin, (req, res) => {
   const breed = new Breed(req.body);
 
@@ -274,10 +250,6 @@ app.get('/api/product/breeds', (req, res) => {
     res.status(200).send({ breeds });
   });
 });
-
-//////////////////////////////////////
-//    BREEDERS
-//////////////////////////////////////
 
 app.post('/api/product/breeders', auth, admin, (req, res) => {
   const breeder = new Breeder(req.body);
@@ -307,10 +279,6 @@ app.get('/api/product/breeders/:id', (req, res) => {
     );
 });
 
-//////////////////////////////////////
-//    RACES
-//////////////////////////////////////
-
 app.post('/api/product/races', auth, admin, (req, res) => {
   const race = new Race(req.body);
   race.save((err, doc) => {
@@ -337,10 +305,6 @@ app.get('/api/product/races/:id', (req, res) => {
       res.status(404).json({ nopostfound: 'No race found with that ID' })
     );
 });
-
-//////////////////////////////////////
-//     USERS
-/////////////////////////////////////
 
 app.get('/api/users/auth', auth, (req, res) => {
   res.status(200).json({
@@ -403,7 +367,6 @@ app.post('/api/users/uploadimage', auth, admin, formidable(), (req, res) => {
   cloudinary.uploader.upload(
     req.files.file.path,
     (result) => {
-      // console.log(result);
       res.status(200).send({
         public_id: result.public_id,
         url: result.url,
@@ -504,7 +467,6 @@ app.post('/api/users/successBuy', auth, (req, res) => {
     .toString()
     .substring(0, 8)}`;
 
-  // user history
   req.body.cartDetail.forEach((item) => {
     history.push({
       porder: po,
@@ -518,7 +480,6 @@ app.post('/api/users/successBuy', auth, (req, res) => {
     });
   });
 
-  // PAYMENTS DASH----verifica nume
   transactionData.user = {
     id: req.user._id,
     name: req.user.name,
@@ -642,10 +603,6 @@ app.post('/api/users/reset_password', (req, res) => {
   );
 });
 
-//////////////////////////////////////
-//    SITE -info
-/////////////////////////////////////
-
 app.get('/api/site/site_data', (req, res) => {
   Site.find({}, (err, site) => {
     if (err) return res.status(400).send(err);
@@ -668,12 +625,6 @@ app.post('/api/site/site_data', auth, admin, (req, res) => {
   );
 });
 
-//////////////////////////////////////
-//    FORUM
-/////////////////////////////////////
-
-// @desc    Create post
-
 app.post('/api/forum/posts', auth, (req, res) => {
   const { errors, isValid } = validatePostInput(req.body);
 
@@ -690,16 +641,12 @@ app.post('/api/forum/posts', auth, (req, res) => {
   newPost.save().then((post) => res.json(post));
 });
 
-// @desc    Get posts
-
 app.get('/api/forum/posts', (req, res) => {
   Post.find()
     .sort({ date: -1 })
     .then((posts) => res.json(posts))
     .catch((err) => res.status(404).json({ nopostsfound: 'No posts found' }));
 });
-
-//Get post by id
 
 app.get('/api/forum/posts/:id', (req, res) => {
   Post.findById(req.params.id)
@@ -712,8 +659,6 @@ app.get('/api/forum/posts/:id', (req, res) => {
     );
 });
 
-// // // @desc    remove post
-
 app.get('/api/forum/posts/remove/:id', auth, admin, function (req, res) {
   Post.findById(req.params.id)
     .then((post) => {
@@ -725,10 +670,6 @@ app.get('/api/forum/posts/remove/:id', auth, admin, function (req, res) {
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
-
-// @route   POST api/posts/like/:id
-// @desc    Like post
-// @access  Private
 
 app.get('/api/forum/posts/like/:id', auth, (req, res) => {
   Post.findById(req.params.id)
@@ -748,10 +689,6 @@ app.get('/api/forum/posts/like/:id', auth, (req, res) => {
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
-
-// // @route   POST api/posts/unlike/:id
-// // @desc    Unlike post
-// // @access  Private
 
 app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
   Post.findById(req.params.id)
@@ -774,9 +711,6 @@ app.get('/api/forum/posts/unlike/:id', auth, (req, res) => {
     })
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
-
-// @route   POST api/posts/comment/:id
-// @desc    Add comment to post
 
 app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
   const { errors, isValid } = validateCommentInput(req.body);
@@ -803,9 +737,6 @@ app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// @route   DELETE api/posts/comment/:id/:comment_id
-// @desc    Remove comment from post
-// @access  Private
 app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
@@ -830,9 +761,6 @@ app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
 
-// @route   PRODUCT api/posts/comment/:id
-// @desc    Add comment to product
-
 app.post('/api/product/comment/:id', auth, (req, res) => {
   const { errors, isValid } = validateCommentInput(req.body);
 
@@ -856,9 +784,6 @@ app.post('/api/product/comment/:id', auth, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// @route   DELETE api/product/comment/:id/:comment_id
-// @desc    Remove comment from product
-// @access  Private
 app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
   Product.findOne({ _id: req.params.id })
     .then((product) => {
@@ -883,8 +808,6 @@ app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
 
-// // @route   EDIT api/product/comment/:id/:comment_id/edit
-// // @desc    Edit comment from post
 app.post(
   '/api/product/comment/:id/:comment_id/edit',
   auth,
@@ -915,8 +838,6 @@ app.post(
   }
 );
 
-// // @route   EDIT api/posts/comment/:id/:comment_id/edit
-// // @desc    Edit comment from post
 app.post(
   '/api/forum/posts/comment/:id/:comment_id/edit',
   auth,
@@ -945,8 +866,6 @@ app.post(
       .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
-
-///////////DEFAULT for heroku
 
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');

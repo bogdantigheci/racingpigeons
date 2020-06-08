@@ -8,7 +8,7 @@ import {
   resetFields,
 } from '../../utils/formActions';
 import { withNamespaces } from 'react-i18next';
-
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { getBreeds, addBreed } from '../../../actions/product';
 import FileUpload from '../../utils/FileUpload';
@@ -66,7 +66,7 @@ class ManageBreeds extends Component {
   };
 
   showCategoryItems = () =>
-    this.props.products && this.props.products.breeds
+    _.get(this.props, 'products.breeds')
       ? this.props.products.breeds.map((item) => (
           <div className="category_item" key={item._id}>
             {item.name}
