@@ -10,7 +10,7 @@ export default function (ComposedClass, reload, adminRoute = null) {
     };
 
     componentDidMount() {
-      this.props.dispatch(auth()).then((response) => {
+      this.props.auth().then((response) => {
         let user = this.props.user.userData;
 
         if (!user.isAuth) {
@@ -46,5 +46,9 @@ export default function (ComposedClass, reload, adminRoute = null) {
     user: state.user,
   });
 
-  return connect(mapStateToProps)(AuthenticationCheck);
+  const mapDispatchToProps = (dispatch) => ({
+    auth: () => dispatch(auth()),
+  });
+
+  return connect(mapStateToProps, mapDispatchToProps)(AuthenticationCheck);
 }

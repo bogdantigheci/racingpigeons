@@ -85,8 +85,6 @@ body {
   color: white;
 }
 
-/* club */
-
 .club_race_card {
   box-sizing: border-box;
   border-radius: 1rem;
@@ -102,7 +100,6 @@ body {
   color: red !important;
 }
 
-/* weather */
 .weatherapp {
   background-image: url('/images/cold-bg.jpg');
   background-size: cover;
@@ -187,7 +184,6 @@ body {
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
 
-/* chat */
 .chat_box {
   width: 100%;
 }
@@ -241,8 +237,6 @@ body {
   width: 100%;
   height: 100%;
 }
-
-/* navigation */
 
 .backdrop {
   position: fixed;
@@ -501,10 +495,6 @@ header .log_out_link:active {
   color: #fa923f;
 }
 
-/*============================
-          FOOTER
-==============================*/
-
 footer .social_links {
   font-size: 3rem;
   padding: 1rem;
@@ -612,8 +602,6 @@ footer .business_nfo .nfo {
   margin: 0px 20px 20px 20px;
 }
 
-/* page top */
-
 .page_top {
   border-bottom: 1px solid #999592;
   padding: 20px 0px;
@@ -621,8 +609,6 @@ footer .business_nfo .nfo {
   text-align: center;
   text-transform: uppercase;
 }
-
-/* featured image */
 
 .featured_container .featured_image {
   position: relative;
@@ -649,7 +635,7 @@ footer .business_nfo .nfo {
   font-weight: 700;
 }
 
-.featured_container .featured_action .tag.low_title {
+.featured_container .featured_action .tag.second_title {
   font-size: 3rem;
   font-weight: 300;
   margin-top: 10px;
@@ -661,14 +647,12 @@ footer .business_nfo .nfo {
     font-weight: 700;
   }
 
-  .featured_container .featured_action .tag.low_title {
+  .featured_container .featured_action .tag.second_title {
     font-size: 3rem;
     font-weight: 300;
     margin-top: 10px;
   }
 }
-
-/* featured promotion */
 
 .home_promotion .home_promotion_img {
   height: 100%;
@@ -692,7 +676,7 @@ footer .business_nfo .nfo {
   margin: 10px auto;
 }
 
-.home_promotion .tag.low_title {
+.home_promotion .tag.second_title {
   font-size: 2rem;
   font-weight: 300;
   margin-top: 0.7rem;
@@ -702,8 +686,6 @@ footer .business_nfo .nfo {
 .home_promotion .my_link a {
   margin: 10px auto;
 }
-
-/* form */
 
 input {
   font-size: 1rem;
@@ -785,8 +767,6 @@ select {
   display: block;
 }
 
-/* buttons */
-
 .link_default {
   text-transform: uppercase;
   padding: 10px;
@@ -839,8 +819,6 @@ select {
   background: #e1ddc3;
   margin-top: 0.7rem;
 }
-
-/* register-login */
 
 .register_login_container {
   display: flex;
@@ -914,15 +892,12 @@ select {
   text-align: center;
 }
 
-/* page-layout */
-
 .page_container {
   min-height: 75vh;
   padding-top: 5rem;
   padding-bottom: 1rem;
 }
 
-/* breeds */
 .breeds_tittle {
   color: #ffff;
 }
@@ -960,10 +935,6 @@ select {
     margin-right: 0;
   }
 }
-
-/* end of breeds */
-
-/* breeders */
 
 .btn-primary:hover,
 .btn-primary:focus {
@@ -1183,10 +1154,6 @@ select {
   }
 }
 
-/* end of breeders */
-
-/* card-block */
-
 .card_block {
   margin: 7rem 0px;
 }
@@ -1203,8 +1170,6 @@ select {
   width: 100%;
   margin-bottom: 1.25rem;
 }
-
-/* card-item */
 
 .card_item_wrapper {
   flex-grow: 1;
@@ -1343,8 +1308,6 @@ select {
   font-weight: 700;
 }
 
-/* product detail */
-
 .image_prod_detail {
   width: 20rem;
   height: 20rem;
@@ -1476,10 +1439,7 @@ select {
   float: left;
 }
 
-/* user-myaccount */
-
 .user_container {
-  /* display: flex; */
   margin-bottom: 50px;
   height: 100%;
 }

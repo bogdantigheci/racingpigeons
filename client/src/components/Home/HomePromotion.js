@@ -21,7 +21,7 @@ const HomePromotion = (props) => {
         }}
       >
         <div className="tag title">{promotion.lineOne}</div>
-        <div className="tag low_title">{promotion.lineTwo}</div>
+        <div className="tag second_title">{promotion.lineTwo}</div>
         <div>
           <MyButton
             type="default"

@@ -45,7 +45,7 @@ const HomeSlider = (props) => {
             >
               <div className="featured_action">
                 <div className="tag title">{item.lineOne}</div>
-                <div className="tag low_title">{item.lineTwo}</div>
+                <div className="tag second_title">{item.lineTwo}</div>
                 <div>
                   <MyButton
                     type="default"

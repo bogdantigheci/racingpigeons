@@ -5,39 +5,39 @@ class ProdImg extends Component {
   state = {
     lightbox: false,
     imagePos: 0,
-    lightboxImages: []
+    lightboxImages: [],
   };
 
   componentDidMount() {
     if (this.props.detail.images.length > 0) {
       let lightboxImages = [];
 
-      this.props.detail.images.forEach(item => {
+      this.props.detail.images.forEach((item) => {
         lightboxImages.push(item.url);
       });
 
       this.setState({
-        lightboxImages
+        lightboxImages,
       });
     }
   }
 
-  handleLightBoxOpen = pos => {
+  handleLightBoxOpen = (pos) => {
     if (this.state.lightboxImages.length > 0) {
       this.setState({
         lightbox: true,
-        imagePos: pos
+        imagePos: pos,
       });
     }
   };
 
   handleLightBoxClose = () => {
     this.setState({
-      lightbox: false
+      lightbox: false,
     });
   };
 
-  showThumbs = () =>
+  handleShowThumbs = () =>
     this.state.lightboxImages.map((item, i) =>
       i > 0 ? (
         <div
@@ -49,7 +49,7 @@ class ProdImg extends Component {
       ) : null
     );
 
-  renderCardImage = images => {
+  renderCardImage = (images) => {
     if (images.length > 0) {
       return images[0].url;
     } else {
@@ -59,7 +59,7 @@ class ProdImg extends Component {
 
   render() {
     const { detail } = this.props;
-   
+
     return (
       <div className="product_image_container">
         <div className="main_pic">
@@ -70,7 +70,7 @@ class ProdImg extends Component {
             onClick={() => this.handleLightBoxOpen(0)}
           />
         </div>
-        <div className="main_thumbs">{this.showThumbs(detail)}</div>
+        <div className="main_thumbs">{this.handleShowThumbs(detail)}</div>
         {this.state.lightbox ? (
           <ImageLightBox
             id={detail._id}

@@ -162,14 +162,10 @@ export const editComment = (postId, commentId, editCommentData) => (
     );
 };
 
-export const setPostLoading = () => {
-  return {
-    type: POST_LOADING,
-  };
-};
+export const setPostLoading = () => ({
+  type: POST_LOADING,
+});
 
-export const clearErrors = () => {
-  return {
-    type: CLEAR_ERRORS,
-  };
-};
+export const clearErrors = () => ({
+  type: CLEAR_ERRORS,
+});
