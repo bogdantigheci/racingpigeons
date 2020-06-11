@@ -20,7 +20,7 @@ const Breed = (props) => {
 
               <div className="view overlay">
                 <img
-                  className="card-img-top rounded-0 breed_image"
+                  className="card-img-top breed_image"
                   src={_.get(
                     breed,
                     'images[0].url',
