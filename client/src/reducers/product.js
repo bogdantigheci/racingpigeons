@@ -22,7 +22,6 @@ import {
   GET_PAYMENT,
 } from '../constants/types';
 
-
 const product = (state = { breeders: [] }, action) => {
   switch (action.type) {
     case GET_PRODUCTS_BY_ARRIVAL:

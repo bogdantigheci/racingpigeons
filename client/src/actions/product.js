@@ -25,163 +25,227 @@ import {
 } from '../constants/types';
 import { PRODUCT_SERVER } from '../components/utils/misc';
 
-export function getProductsByArrival() {
-  const request = axios
+export const getErrors = (err) => ({
+  type: GET_ERRORS,
+  payload: err,
+});
+
+export const getProductsByArrivalSuccess = (products) => ({
+  type: GET_PRODUCTS_BY_ARRIVAL,
+  payload: products,
+});
+
+export const getBreedersSuccess = (breeders) => ({
+  type: GET_BREEDERS,
+  payload: breeders,
+});
+
+export const getBreedsSuccess = (breeds) => ({
+  type: GET_BREEDS,
+  payload: breeds,
+});
+
+export const getProductsToShopSuccess = (products) => ({
+  type: GET_PRODUCTS_TO_SHOP,
+  payload: products,
+});
+
+export const addProductSuccess = (product) => ({
+  type: ADD_PRODUCT,
+  payload: product,
+});
+
+export const sellRequestSuccess = (request) => ({
+  type: SELL_REQUEST,
+  payload: request,
+});
+
+export const getSellRequestsSuccess = (requests) => ({
+  type: GET_SELL_REQUESTS,
+  payload: requests,
+});
+
+export const getSellRequestSuccess = (request) => ({
+  type: GET_SELL_REQUEST,
+  payload: request,
+});
+
+export const approveSellRequestSuccess = (request) => ({
+  type: GET_SELL_REQUEST,
+  payload: request,
+});
+
+export const declineSellRequestSuccess = (request) => ({
+  type: GET_SELL_REQUEST,
+  payload: request,
+});
+
+export const getPaymentsSuccess = (payments) => ({
+  type: GET_PAYMENTS,
+  payload: payments,
+});
+
+export const getPaymentSuccess = (payment) => ({
+  type: GET_PAYMENT,
+  payload: payment,
+});
+
+export const reviewPaymentSuccess = (payment) => ({
+  type: GET_PAYMENT,
+  payload: payment,
+});
+
+export const addBreedSuccess = (breed) => ({
+  type: ADD_BREED,
+  payload: breed,
+});
+export const addBreederSuccess = (breeder) => ({
+  type: ADD_BREEDER,
+  payload: breeder,
+});
+
+export const getProductDetailSuccess = (product) => ({
+  type: GET_PRODUCT_DETAIL,
+  payload: product,
+});
+
+export const getBreederSuccess = (breeder) => ({
+  type: GET_BREEDER,
+  payload: breeder,
+});
+
+export const addCommentToProductSuccess = (comment) => ({
+  type: GET_PRODUCT_DETAIL,
+  payload: comment,
+});
+
+export const deleteCommentFromProductSuccess = (comment) => ({
+  type: GET_PRODUCT_DETAIL,
+  payload: comment,
+});
+
+export const editCommentFromProductSuccess = (comment) => ({
+  type: GET_PRODUCT_DETAIL,
+  payload: comment,
+});
+
+export const addRaceSuccess = (race) => ({
+  type: ADD_RACE,
+  payload: race,
+});
+
+export const getRacesSuccess = (races) => ({
+  type: GET_RACES,
+  payload: races,
+});
+
+export const getRaceSuccess = (race) => ({
+  type: GET_RACE,
+  payload: race,
+});
+
+export const getProductsByArrival = () => (dispatch) =>
+  axios
     .get(`${PRODUCT_SERVER}/articles?sortBy=createdAt&order=desc&limit=4`)
-    .then((response) => response.data);
+    .then((res) => dispatch(getProductsByArrivalSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-  return {
-    type: GET_PRODUCTS_BY_ARRIVAL,
-    payload: request,
-  };
-}
-
-export function getBreeders() {
-  const request = axios
+export const getBreeders = () => (dispatch) =>
+  axios
     .get(`${PRODUCT_SERVER}/breeders`)
-    .then((response) => response.data);
-  return {
-    type: GET_BREEDERS,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getBreedersSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-export function getBreeds() {
-  const request = axios
+export const getBreeds = () => (dispatch) =>
+  axios
     .get(`${PRODUCT_SERVER}/breeds`)
-    .then((response) => response.data);
-  return {
-    type: GET_BREEDS,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getBreedsSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-export function getProductsToShop(
+export const getProductsToShop = (
   skip,
   limit,
   filters = [],
   previousState = []
-) {
+) => (dispatch) => {
   const data = {
     limit,
     skip,
     filters,
   };
 
-  const request = axios
+  return axios
     .post(`${PRODUCT_SERVER}/shop`, data)
-    .then((response) => {
-      let newState = [...previousState, ...response.data.articles];
-      return {
-        size: response.data.size,
+    .then((res) => {
+      let newState = [...previousState, ...res.data.articles];
+      const result = {
+        size: res.data.size,
         articles: newState,
       };
-    });
+      return dispatch(getProductsToShopSuccess(result));
+    })
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-  return {
-    type: GET_PRODUCTS_TO_SHOP,
-    payload: request,
-  };
-}
-
-export function addProduct(dataToSubmit) {
-  const request = axios
+export const addProduct = (dataToSubmit) => (dispatch) => {
+  return axios
     .post(`${PRODUCT_SERVER}/article`, dataToSubmit)
-    .then((response) => response.data);
-  return {
-    type: ADD_PRODUCT,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(addProductSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function sellRequest(dataToSubmit) {
-  const request = axios
+export const sellRequest = (dataToSubmit) => (dispatch) => {
+  return axios
     .post(`${PRODUCT_SERVER}/sell_request`, dataToSubmit)
-    .then((response) => response.data);
-  return {
-    type: SELL_REQUEST,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(sellRequestSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function getSellRequests() {
-  const request = axios
+export const getSellRequests = () => (dispatch) =>
+  axios
     .get(`${PRODUCT_SERVER}/requests`)
-    .then((response) => response.data);
-  return {
-    type: GET_SELL_REQUESTS,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getSellRequestsSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-export function getSellRequest(id) {
-  const request = axios
+export const getSellRequest = (id) => (dispatch) =>
+  axios
     .get(`${PRODUCT_SERVER}/requests/${id}`)
-    .then((response) => {
-      return response.data;
-    });
-  return {
-    type: GET_SELL_REQUEST,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getSellRequestSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-export function approveSellRequest(id) {
-  const request = axios
+export const approveSellRequest = (id) => (dispatch) => {
+  return axios
     .post(`${PRODUCT_SERVER}/requests/${id}/approve`)
-    .then((response) => {
-      return response.data;
-    });
-  return {
-    type: GET_SELL_REQUEST,
-    payload: request,
-  };
-}
-export function declineSellRequest(id) {
-  const request = axios
+    .then((res) => dispatch(approveSellRequestSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
+export const declineSellRequest = (id) => (dispatch) => {
+  return axios
     .post(`${PRODUCT_SERVER}/requests/${id}/decline`)
-    .then((response) => {
-      return response.data;
-    });
-  return {
-    type: GET_SELL_REQUEST,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(declineSellRequestSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function getPayments() {
-  const request = axios
+export const getPayments = () => (dispatch) => {
+  return axios
     .get(`${PRODUCT_SERVER}/payments`)
-    .then((response) => response.data);
-  return {
-    type: GET_PAYMENTS,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getPaymentsSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function getPayment(id) {
-  const request = axios
+export const getPayment = (id) => (dispatch) => {
+  return axios
     .get(`${PRODUCT_SERVER}/payments/${id}`)
-    .then((response) => {
-      return response.data;
-    });
-  return {
-    type: GET_PAYMENT,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getPaymentSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function reviewPayment(id) {
-  const request = axios
+export const reviewPayment = (id) => (dispatch) => {
+  return axios
     .post(`${PRODUCT_SERVER}/payments/${id}`)
-    .then((response) => {
-      return response.data;
-    });
-  return {
-    type: GET_PAYMENT,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(reviewPaymentSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
 export const clearProduct = () => {
   return {
@@ -190,61 +254,47 @@ export const clearProduct = () => {
   };
 };
 
-export function addBreed(dataToSubmit, existingBreeds) {
-  const request = axios
+export const addBreed = (dataToSubmit, existingBreeds) => (dispatch) => {
+  return axios
     .post(`${PRODUCT_SERVER}/breeds`, dataToSubmit)
-    .then((response) => {
-      let breeds = [...existingBreeds, response.data.breed];
-      return {
-        success: response.data.success,
+    .then((res) => {
+      let breeds = [...existingBreeds, res.data.breed];
+      const result = {
+        success: res.data.success,
         breeds,
       };
-    });
-  return {
-    type: ADD_BREED,
-    payload: request,
-  };
-}
+      return dispatch(addBreedSuccess(result));
+    })
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function addBreeder(dataToSubmit, existingBreeders) {
-  const request = axios
+export const addBreeder = (dataToSubmit, existingBreeders) => (dispatch) => {
+  return axios
     .post(`${PRODUCT_SERVER}/breeders`, dataToSubmit)
     .then((response) => {
       let breeders = [...existingBreeders, response.data.breeder];
-      return {
+      const result = {
         success: response.data.success,
         breeders,
       };
-    });
-  return {
-    type: ADD_BREEDER,
-    payload: request,
-  };
-}
+      return dispatch(addBreederSuccess(result));
+    })
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function getProductDetail(id) {
-  const request = axios
+export const getProductDetail = (id) => (dispatch) => {
+  return axios
     .get(`${PRODUCT_SERVER}/articles_by_id?id=${id}&type=single`)
-    .then((response) => {
-      return response.data[0];
-    });
-  return {
-    type: GET_PRODUCT_DETAIL,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getProductDetailSuccess(res.data[0])))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function getBreeder(id) {
-  const request = axios
+export const getBreeder = (id) => (dispatch) => {
+  return axios
     .get(`${PRODUCT_SERVER}/breeders/${id}`)
-    .then((response) => {
-      return response.data;
-    });
-  return {
-    type: GET_BREEDER,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getBreederSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
 export function clearProductDetail() {
   return {
@@ -254,37 +304,17 @@ export function clearProductDetail() {
 }
 
 export const addCommentToProduct = (prodId, commentData) => (dispatch) => {
-  axios
+  return axios
     .post(`${PRODUCT_SERVER}/comment/${prodId}`, commentData)
-    .then((res) =>
-      dispatch({
-        type: GET_PRODUCT_DETAIL,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
+    .then((res) => dispatch(addCommentToProductSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 };
 
 export const deleteCommentFromProduct = (prodId, commentId) => (dispatch) => {
-  axios
+  return axios
     .get(`${PRODUCT_SERVER}/comment/${prodId}/${commentId}`)
-    .then((res) =>
-      dispatch({
-        type: GET_PRODUCT_DETAIL,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
+    .then((res) => dispatch(deleteCommentFromProductSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 };
 
 export const editCommentFromProduct = (prodId, commentId, editCommentData) => (
@@ -295,51 +325,37 @@ export const editCommentFromProduct = (prodId, commentId, editCommentData) => (
       `${PRODUCT_SERVER}/comment/${prodId}/${commentId}/edit`,
       editCommentData
     )
-    .then((res) =>
-      dispatch({
-        type: GET_PRODUCT_DETAIL,
-        payload: res.data,
-      })
-    );
+    .then((res) => dispatch(editCommentFromProductSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 };
 
-export function addRace(dataToSubmit, existingRaces) {
-  const request = axios
+export const addRace = (dataToSubmit, existingRaces) => (dispatch) => {
+  return axios
     .post(`${PRODUCT_SERVER}/races`, dataToSubmit)
     .then((response) => {
       let races = [...existingRaces, response.data.race];
-      return {
+      const result = {
         success: response.data.success,
         races,
       };
-    });
-  return {
-    type: ADD_RACE,
-    payload: request,
-  };
-}
+      return dispatch(addRaceSuccess(result));
+    })
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function getRaces() {
-  const request = axios
+export const getRaces = () => (dispatch) => {
+  return axios
     .get(`${PRODUCT_SERVER}/races`)
-    .then((response) => response.data);
-  return {
-    type: GET_RACES,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getRacesSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-export function getRace(id) {
-  const request = axios
+export const getRace = (id) => (dispatch) => {
+  return axios
     .get(`${PRODUCT_SERVER}/races/${id}`)
-    .then((response) => {
-      return response.data;
-    });
-  return {
-    type: GET_RACE,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(getRaceSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
 export const clearErrors = () => {
   return {

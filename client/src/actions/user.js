@@ -10,127 +10,134 @@ import {
   ON_SUCCESS_BUY,
   UPDATE_USER_DATA,
   CLEAR_UPDATE_USER_DATA,
+  GET_ERRORS,
 } from '../constants/types';
 
 import { USER_SERVER, PRODUCT_SERVER } from '../components/utils/misc';
 
-export function registerUser(dataToSubmit) {
-  const request = axios
+export const getErrors = (err) => ({
+  type: GET_ERRORS,
+  payload: err,
+});
+
+export const registerUserSuccess = (user) => ({
+  type: REGISTER_USER,
+  payload: user,
+});
+
+export const loginUserSuccess = (user) => ({
+  type: LOGIN_USER,
+  payload: user,
+});
+
+export const authSuccess = (user) => ({
+  type: AUTH_USER,
+  payload: user,
+});
+
+export const logoutSuccess = (user) => ({
+  type: LOGOUT_USER,
+  payload: user,
+});
+
+export const addToCartSuccess = (item) => ({
+  type: ADD_TO_CART,
+  payload: item,
+});
+
+export const getCartItemsSuccess = (items) => ({
+  type: GET_CART_ITEMS,
+  payload: items,
+});
+
+export const removeCartItemSuccess = (item) => ({
+  type: REMOVE_CART_ITEM,
+  payload: item,
+});
+
+export const onSuccessBuySuccess = (buyRequest) => ({
+  type: ON_SUCCESS_BUY,
+  payload: buyRequest,
+});
+
+export const updateUserDataSuccess = (userData) => ({
+  type: UPDATE_USER_DATA,
+  payload: userData,
+});
+
+export const registerUser = (dataToSubmit) => (dispatch) =>
+  axios
     .post(`${USER_SERVER}/register`, dataToSubmit)
-    .then((response) => response.data);
+    .then((res) => dispatch(registerUserSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-  return {
-    type: REGISTER_USER,
-    payload: request,
-  };
-}
-
-export function loginUser(dataToSubmit) {
-  const request = axios
+export const loginUser = (dataToSubmit) => (dispatch) =>
+  axios
     .post(`${USER_SERVER}/login`, dataToSubmit)
-    .then((response) => response.data);
+    .then((res) => dispatch(loginUserSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-  return {
-    type: LOGIN_USER,
-    payload: request,
-  };
-}
-
-export function auth() {
-  const request = axios
+export const auth = () => (dispatch) =>
+  axios
     .get(`${USER_SERVER}/auth`)
-    .then((response) => response.data);
+    .then((res) => dispatch(authSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-  return {
-    type: AUTH_USER,
-    payload: request,
-  };
-}
-
-export function logoutUser() {
-  const request = axios
+export const logoutUser = () => (dispatch) =>
+  axios
     .get(`${USER_SERVER}/logout`)
-    .then((response) => response.data);
+    .then((res) => dispatch(logoutSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-  return {
-    type: LOGOUT_USER,
-    payload: request,
-  };
-}
-
-export function addToCart(_id) {
-  const request = axios
+export const addToCart = (_id) => (dispatch) =>
+  axios
     .post(`${USER_SERVER}/addToCart?productId=${_id}`)
-    .then((response) => response.data);
-  return {
-    type: ADD_TO_CART,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(addToCartSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-export function getCartItems(cartItems, userCart) {
-  const request = axios
+export const getCartItems = (cartItems, userCart) => (dispatch) => {
+  return axios
     .get(`${PRODUCT_SERVER}/articles_by_id?id=${cartItems}&type=array`)
-    .then((response) => {
+    .then((res) => {
       userCart.forEach((item) => {
-        response.data.forEach((k, i) => {
+        res.data.forEach((k, i) => {
           if (item.id === k._id) {
-            response.data[i].quantity = item.quantity;
+            res.data[i].quantity = item.quantity;
           }
         });
       });
-      return response.data;
-    });
+      return dispatch(getCartItemsSuccess(res.data));
+    })
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-  return {
-    type: GET_CART_ITEMS,
-    payload: request,
-  };
-}
-
-export function removeCartItem(id) {
-  const request = axios
+export const removeCartItem = (id) => (dispatch) => {
+  return axios
     .get(`${USER_SERVER}/removeFromCart?_id=${id}`)
-    .then((response) => {
-      response.data.cart.forEach((item) => {
-        response.data.cartDetail.forEach((k, i) => {
+    .then((res) => {
+      res.data.cart.forEach((item) => {
+        res.data.cartDetail.forEach((k, i) => {
           if (item.id === k._id) {
-            response.data.cartDetail[i].quantity = item.quantity;
+            res.data.cartDetail[i].quantity = item.quantity;
           }
         });
       });
-      return response.data;
-    });
+      return dispatch(removeCartItemSuccess(res.data));
+    })
+    .catch((err) => dispatch(getErrors(err.res.data)));
+};
 
-  return {
-    type: REMOVE_CART_ITEM,
-    payload: request,
-  };
-}
-
-export function onSuccessBuy(data) {
-  const request = axios
+export const onSuccessBuy = (data) => (dispatch) =>
+  axios
     .post(`${USER_SERVER}/successBuy`, data)
-    .then((response) => response.data);
+    .then((res) => dispatch(onSuccessBuySuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-  return {
-    type: ON_SUCCESS_BUY,
-    payload: request,
-  };
-}
-
-export function updateUserData(dataToSubmit) {
-  const request = axios
+export const updateUserData = (dataToSubmit) => (dispatch) =>
+  axios
     .post(`${USER_SERVER}/update_profile`, dataToSubmit)
-    .then((response) => {
-      return response.data;
-    });
-
-  return {
-    type: UPDATE_USER_DATA,
-    payload: request,
-  };
-}
+    .then((res) => dispatch(updateUserDataSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
 export function clearUpdateUser() {
   return {

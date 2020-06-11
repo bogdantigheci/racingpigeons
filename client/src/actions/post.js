@@ -10,157 +10,108 @@ import {
   DELETE_POST,
 } from '../constants/types';
 
+export const getErrors = (err) => ({
+  type: GET_ERRORS,
+  payload: err,
+});
+
+export const addPostSuccess = (post) => ({
+  type: ADD_POST,
+  payload: post,
+});
+
+export const getPostsSuccess = (posts) => ({
+  type: GET_POSTS,
+  payload: posts,
+});
+export const getPostSuccess = (post) => ({
+  type: GET_POST,
+  payload: post,
+});
+
+export const deletePostSuccess = (id) => ({
+  type: DELETE_POST,
+  payload: id,
+});
+
+export const addCommentSuccess = (comment) => ({
+  type: GET_POST,
+  payload: comment,
+});
+
+export const deleteCommentSuccess = (comment) => ({
+  type: GET_POST,
+  payload: comment,
+});
+export const editCommentSuccess = (comment) => ({
+  type: GET_POST,
+  payload: comment,
+});
+
 export const addPost = (postData) => (dispatch) => {
   dispatch(clearErrors());
-  axios
+  return axios
     .post(`${FORUM_SERVER}/posts`, postData)
-    .then((res) =>
-      dispatch({
-        type: ADD_POST,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
+    .then((res) => dispatch(addPostSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 };
 
 export const getPosts = () => (dispatch) => {
   dispatch(setPostLoading());
-  axios
+  return axios
     .get(`${FORUM_SERVER}/posts`)
-    .then((res) =>
-      dispatch({
-        type: GET_POSTS,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
+    .then((res) => dispatch(getPostsSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 };
 
 export const getPost = (id) => (dispatch) => {
   dispatch(setPostLoading());
-  axios
+  return axios
     .get(`${FORUM_SERVER}/posts/${id}`)
-    .then((res) =>
-      dispatch({
-        type: GET_POST,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_POST,
-        payload: null,
-      })
-    );
+    .then((res) => dispatch(getPostSuccess(res.data)))
+    .catch((err) => dispatch(getPostSuccess(null)));
 };
 
-export const deletePost = (id) => (dispatch) => {
+export const deletePost = (id) => (dispatch) =>
   axios
     .get(`${FORUM_SERVER}/posts/remove/${id}`)
-    .then((res) =>
-      dispatch({
-        type: DELETE_POST,
-        payload: id,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
-};
+    .then((res) => dispatch(deletePostSuccess(id)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-export const addLike = (id) => (dispatch) => {
+export const addLike = (id) => (dispatch) =>
   axios
     .get(`${FORUM_SERVER}/posts/like/${id}`)
     .then((res) => dispatch(getPosts()))
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
-};
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-export const removeLike = (id) => (dispatch) => {
+export const removeLike = (id) => (dispatch) =>
   axios
     .get(`${FORUM_SERVER}/posts/unlike/${id}`)
     .then((res) => dispatch(getPosts()))
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
-};
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
 export const addComment = (postId, commentData) => (dispatch) => {
   dispatch(clearErrors());
-  axios
+  return axios
     .post(`${FORUM_SERVER}/posts/comment/${postId}`, commentData)
-    .then((res) =>
-      dispatch({
-        type: GET_POST,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
+    .then((res) => dispatch(addCommentSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 };
 
-export const deleteComment = (postId, commentId) => (dispatch) => {
+export const deleteComment = (postId, commentId) => (dispatch) =>
   axios
     .get(`${FORUM_SERVER}/posts/comment/${postId}/${commentId}`)
-    .then((res) =>
-      dispatch({
-        type: GET_POST,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
-};
+    .then((res) => dispatch(deleteCommentSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-export const editComment = (postId, commentId, editCommentData) => (
-  dispatch
-) => {
+export const editComment = (postId, commentId, editCommentData) => (dispatch) =>
   axios
     .post(
       `${FORUM_SERVER}/posts/comment/${postId}/${commentId}/edit`,
       editCommentData
     )
-    .then((res) =>
-      dispatch({
-        type: GET_POST,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
-};
+    .then((res) => dispatch(editCommentSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
 export const setPostLoading = () => ({
   type: POST_LOADING,

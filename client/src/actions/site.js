@@ -1,26 +1,35 @@
 import axios from 'axios';
-import { GET_SITE_DATA, UPDATE_SITE_DATA } from '../constants/types';
+import {
+  GET_SITE_DATA,
+  UPDATE_SITE_DATA,
+  GET_ERRORS,
+} from '../constants/types';
 
 import { SITE_SERVER } from '../components/utils/misc';
 
-export function getSiteData() {
-  const request = axios
+export const getErrors = (err) => ({
+  type: GET_ERRORS,
+  payload: err,
+});
+
+export const getSiteDataSucces = (siteData) => ({
+  type: GET_SITE_DATA,
+  payload: siteData,
+});
+
+export const updateSiteDataSuccess = (siteData) => ({
+  type: UPDATE_SITE_DATA,
+  payload: siteData,
+});
+
+export const getSiteData = () => (dispatch) =>
+  axios
     .get(`${SITE_SERVER}/site_data`)
-    .then(response => response.data);
+    .then((res) => dispatch(getSiteDataSucces(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
 
-  return {
-    type: GET_SITE_DATA,
-    payload: request
-  };
-}
-
-export function updateSiteData(dataToSubmit) {
-  const request = axios
+export const updateSiteData = (dataToSubmit) => (dispatch) =>
+  axios
     .post(`${SITE_SERVER}/site_data`, dataToSubmit)
-    .then(response => response.data);
-
-  return {
-    type: UPDATE_SITE_DATA,
-    payload: request
-  };
-}
+    .then((res) => dispatch(updateSiteDataSuccess(res.data)))
+    .catch((err) => dispatch(getErrors(err.res.data)));
