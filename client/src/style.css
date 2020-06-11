@@ -1014,7 +1014,8 @@ select {
 
 .cardrow {
   width: 100%;
-  margin-right: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
 #breeder_card_layout .card {
