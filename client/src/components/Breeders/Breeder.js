@@ -12,7 +12,7 @@ const Breeder = (props) => {
         <div className="breeders_display flex-wrap">
           {props.breeders
             ? props.breeders.map((breeder, i) => (
-                <div key={i} id="breeder_card_layout" className="mx-auto">
+                <div key={i} id="breeder_card_layout" className="ml-0">
                   <div className="cardrow">
                     <div className="image-flip">
                       <div className="mainflip">

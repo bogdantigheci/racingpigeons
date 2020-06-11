@@ -7,7 +7,10 @@ const Races = (props) => {
     <div className="container d-flex flex-wrap">
       {props.races &&
         props.races.map((race, i) => (
-          <div key={i} className="mr-5 mx-auto mb-5 club_race_card">
+          <div
+            key={i}
+            className="mr-3 ml-2 mb-5 club_race_card club_race_card_mobile"
+          >
             <Link to={`/product/races/${race._id}`}>
               <img
                 className="club_race_card_image"

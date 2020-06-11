@@ -96,6 +96,11 @@ body {
   height: 15rem;
 }
 
+.club_race_card_mobile {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 .no_like_allowed {
   color: red !important;
 }
@@ -1607,6 +1612,11 @@ select {
   .image_prod_detail {
     width: 30rem;
     height: 25rem;
+  }
+
+  .club_race_card_mobile {
+    margin-left: 0.5rem !important;
+    margin-right: 1rem !important;
   }
 
   .card_link,
