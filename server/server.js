@@ -808,35 +808,30 @@ app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
     .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
 });
 
-app.post(
-  '/api/product/comment/:id/:comment_id/edit',
-  auth,
-  admin,
-  (req, res) => {
-    Product.findOne({ _id: req.params.id })
-      .then((product) => {
-        if (
-          product.comments.filter(
-            (comment) => comment._id.toString() === req.params.comment_id
-          ).length === 0
-        ) {
-          return res
-            .status(404)
-            .json({ commentnotexists: 'Comment does not exist' });
-        }
-        const editIndex = product.comments
-          .map((item) => item._id.toString())
-          .indexOf(req.params.comment_id);
+app.post('/api/product/comment/:id/:comment_id/edit', auth, (req, res) => {
+  Product.findOne({ _id: req.params.id })
+    .then((product) => {
+      if (
+        product.comments.filter(
+          (comment) => comment._id.toString() === req.params.comment_id
+        ).length === 0
+      ) {
+        return res
+          .status(404)
+          .json({ commentnotexists: 'Comment does not exist' });
+      }
+      const editIndex = product.comments
+        .map((item) => item._id.toString())
+        .indexOf(req.params.comment_id);
 
-        product.comments[editIndex] = req.body;
+      product.comments[editIndex] = req.body;
 
-        product.save().then((product) => res.json(product));
-      })
-      .catch((err) =>
-        res.status(404).json({ productnotfound: 'No product found' })
-      );
-  }
-);
+      product.save().then((product) => res.json(product));
+    })
+    .catch((err) =>
+      res.status(404).json({ productnotfound: 'No product found' })
+    );
+});
 
 app.post(
   '/api/forum/posts/comment/:id/:comment_id/edit',
