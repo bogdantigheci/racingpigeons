@@ -737,7 +737,7 @@ app.post('/api/forum/posts/comment/:id', auth, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get('/api/forum/posts/comment/:id/:comment_id', auth, admin, (req, res) => {
+app.get('/api/forum/posts/comment/:id/:comment_id', auth, (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
       if (
@@ -784,7 +784,7 @@ app.post('/api/product/comment/:id', auth, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get('/api/product/comment/:id/:comment_id', auth, admin, (req, res) => {
+app.get('/api/product/comment/:id/:comment_id', auth, (req, res) => {
   Product.findOne({ _id: req.params.id })
     .then((product) => {
       if (
