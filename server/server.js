@@ -833,34 +833,29 @@ app.post('/api/product/comment/:id/:comment_id/edit', auth, (req, res) => {
     );
 });
 
-app.post(
-  '/api/forum/posts/comment/:id/:comment_id/edit',
-  auth,
-  admin,
-  (req, res) => {
-    Post.findOne({ _id: req.params.id })
-      .then((post) => {
-        if (
-          post.comments.filter(
-            (comment) => comment._id.toString() === req.params.comment_id
-          ).length === 0
-        ) {
-          return res
-            .status(404)
-            .json({ commentnotexists: 'Comment does not exist' });
-        }
+app.post('/api/forum/posts/comment/:id/:comment_id/edit', auth, (req, res) => {
+  Post.findOne({ _id: req.params.id })
+    .then((post) => {
+      if (
+        post.comments.filter(
+          (comment) => comment._id.toString() === req.params.comment_id
+        ).length === 0
+      ) {
+        return res
+          .status(404)
+          .json({ commentnotexists: 'Comment does not exist' });
+      }
 
-        const editIndex = post.comments
-          .map((item) => item._id.toString())
-          .indexOf(req.params.comment_id);
+      const editIndex = post.comments
+        .map((item) => item._id.toString())
+        .indexOf(req.params.comment_id);
 
-        post.comments[editIndex] = req.body;
+      post.comments[editIndex] = req.body;
 
-        post.save().then((post) => res.json(post));
-      })
-      .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
-  }
-);
+      post.save().then((post) => res.json(post));
+    })
+    .catch((err) => res.status(404).json({ postnotfound: 'No post found' }));
+});
 
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
