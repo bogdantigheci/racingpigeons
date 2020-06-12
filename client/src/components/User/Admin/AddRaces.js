@@ -229,7 +229,9 @@ class ManageBreeders extends Component {
                   label={t('Race details')}
                   placeholder={t('Race details')}
                 />
-
+                {this.state.formSuccess ? (
+                  <div className="form_success">{t('Success')}</div>
+                ) : null}
                 {this.state.formError ? (
                   <div className="error_label">
                     {t('Please check your data')}
