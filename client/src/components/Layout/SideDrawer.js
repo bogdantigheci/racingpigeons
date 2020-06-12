@@ -8,7 +8,7 @@ class sideDrawer extends Component {
   logoutHandler = () => {
     this.props.dispatch(logoutUser()).then((response) => {
       if (response.payload.success) {
-        this.props.history.push('/');
+        this.props.history.push('/register_login');
       }
     });
   };
@@ -24,7 +24,7 @@ class sideDrawer extends Component {
   };
 
   defaultLink = (item, i) =>
-    item.name === 'Log out' ? (
+    item.linkTo === '/user/logout' ? (
       <div
         className="log_out_link"
         key={i}
@@ -48,7 +48,7 @@ class sideDrawer extends Component {
             list.push(item);
           }
         } else {
-          if (item.name !== 'Log in') {
+          if (item.linkTo !== '/register_login') {
             list.push(item);
           }
         }
@@ -56,7 +56,7 @@ class sideDrawer extends Component {
     }
 
     return list.map((item, i) => {
-      if (item.name !== 'My cart') {
+      if (item.linkTo !== '/user/cart') {
         return this.defaultLink(item, i);
       } else {
         return this.cartLink(item, i);
