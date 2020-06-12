@@ -91,14 +91,13 @@ class ProductDetail extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.product,
-    cartDetail: state.user.userData.cart,
-    auth: state.user.userData.isAuth,
-    rateRON: getRateRON(state),
-  };
-};
+const mapStateToProps = (state) => ({
+  products: state.product,
+  cartDetail: state.user.userData.cart,
+  auth: state.user.userData.isAuth,
+  rateRON: getRateRON(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   getProductDetail: (id) => dispatch(getProductDetail(id)),
   clearProductDetail: () => dispatch(clearProductDetail()),
