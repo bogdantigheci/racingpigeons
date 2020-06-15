@@ -1,37 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { getBreeders } from '../../actions/product';
+import { selectBreeders } from '../../selectors/product';
 import Breeder from './Breeder';
-import _ from 'lodash';
 import { withNamespaces } from 'react-i18next';
 
-class Breeders extends Component {
-  componentDidMount() {
-    this.props.getBreeders();
-  }
+const Breeders = ({ breeders, t }) => {
+  return (
+    <div>
+      <h5 className="page-title h1">{t('Breeders')}</h5>
+      <Breeder breeders={breeders} />
+    </div>
+  );
+};
 
-  handlePlacements = (placements) => {
-    placements = placements.split(',');
-    return placements;
-  };
-
-  render() {
-    const { t } = this.props;
-    return (
-      <div>
-        <h5 className="page-title h1">{t('Breeders')}</h5>
-        <Breeder breeders={_.get(this.props.products, 'breeders', [])} />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({ products: state.product });
-
-const mapDispatchToProps = (dispatch) => ({
-  getBreeders: () => dispatch(getBreeders()),
+const mapStateToProps = (state) => ({
+  breeders: selectBreeders(state),
 });
 
-export default withNamespaces()(
-  connect(mapStateToProps, mapDispatchToProps)(Breeders)
-);
+export default withNamespaces()(connect(mapStateToProps)(Breeders));

@@ -37,13 +37,13 @@ const HomeSlider = (props) => {
       ? slides.map((item, i) => (
           <div key={i}>
             <div
-              className="featured_image"
+              className="current_promotion_img"
               style={{
                 background: `url(${item.img})`,
                 height: `${window.innerHeight}px`,
               }}
             >
-              <div className="featured_action">
+              <div className="current_promotion_action">
                 <div className="tag title">{item.lineOne}</div>
                 <div className="tag second_title">{item.lineTwo}</div>
                 <div>
@@ -63,7 +63,7 @@ const HomeSlider = (props) => {
       : null;
 
   return (
-    <div className="featured_container">
+    <div className="current_promotion">
       <Slider {...settings}>{generateSlides()}</Slider>
     </div>
   );

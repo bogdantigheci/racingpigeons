@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HomeSlider from './HomeSlider';
 import HomePromotion from './HomePromotion';
 import { connect } from 'react-redux';
@@ -6,30 +6,28 @@ import { getProductsByArrival } from '../../actions/product';
 import CardBlock from '../utils/cardBlock';
 import { withNamespaces } from 'react-i18next';
 
-class Home extends Component {
-  componentDidMount() {
-    this.props.dispatch(getProductsByArrival());
-  }
+const Home = ({ getProductsByArrival, t, products }) => {
+  React.useEffect(() => {
+    getProductsByArrival();
+  }, [getProductsByArrival]);
 
-  render() {
-    const { t } = this.props;
-    return (
-      <div>
-        <HomeSlider />
-        <CardBlock
-          list={this.props.product.byArrival}
-          title={t('New Pigeons on SALE!')}
-        />
-        <HomePromotion />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    product: state.product,
-  };
+  return (
+    <div>
+      <HomeSlider />
+      <CardBlock list={products.byArrival} title={t('New Pigeons on SALE!')} />
+      <HomePromotion />
+    </div>
+  );
 };
 
-export default withNamespaces()(connect(mapStateToProps)(Home));
+const mapStateToProps = (state) => ({
+  products: state.product,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getProductsByArrival: () => dispatch(getProductsByArrival()),
+});
+
+export default withNamespaces()(
+  connect(mapStateToProps, mapDispatchToProps)(Home)
+);

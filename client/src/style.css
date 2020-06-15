@@ -615,19 +615,19 @@ footer .business_nfo .nfo {
   text-transform: uppercase;
 }
 
-.featured_container .featured_image {
+.current_promotion .current_promotion_img {
   position: relative;
   background-size: 100% 100% !important;
   background-position: center left !important;
 }
 
-.featured_container .featured_action {
+.current_promotion .current_promotion_action {
   position: absolute;
   top: 45%;
   left: 8%;
 }
 
-.featured_container .featured_action .tag {
+.current_promotion .current_promotion_action .tag {
   background: #82828287;
   color: #ffffff;
   padding: 0px 20px;
@@ -635,24 +635,24 @@ footer .business_nfo .nfo {
   display: table;
 }
 
-.featured_container .featured_action .tag.title {
+.current_promotion .current_promotion_action .tag.title {
   font-size: 4.6rem;
   font-weight: 700;
 }
 
-.featured_container .featured_action .tag.second_title {
+.current_promotion .current_promotion_action .tag.second_title {
   font-size: 3rem;
   font-weight: 300;
   margin-top: 10px;
 }
 
 @media (max-width: 640px) {
-  .featured_container .featured_action .tag.title {
+  .current_promotion .current_promotion_action .tag.title {
     font-size: 3rem;
     font-weight: 700;
   }
 
-  .featured_container .featured_action .tag.second_title {
+  .current_promotion .current_promotion_action .tag.second_title {
     font-size: 3rem;
     font-weight: 300;
     margin-top: 10px;

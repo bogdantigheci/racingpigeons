@@ -13,6 +13,7 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import './i18n';
 import { getExchangeRate } from './actions/exchangeRate';
+import { getBreeders, getBreeds } from './actions/product';
 
 const store = createStore(
   Reducer,
@@ -20,6 +21,8 @@ const store = createStore(
 );
 
 store.dispatch(getExchangeRate());
+store.dispatch(getBreeders());
+store.dispatch(getBreeds());
 
 ReactDOM.render(
   <Provider store={store}>
