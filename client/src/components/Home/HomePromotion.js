@@ -7,7 +7,7 @@ const HomePromotion = (props) => {
   const promotion = {
     img: '/images/racinghomer.jpg',
     lineOne: t('Free Shipping'),
-    lineTwo: t('Untill September 1st 2020'),
+    lineTwo: t('Until September 1st 2020'),
     linkTitle: t('Shop now'),
     linkTo: '/shop',
   };
