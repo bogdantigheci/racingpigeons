@@ -21,6 +21,15 @@ const Races = (props) => {
                 )}
                 alt="race"
               />
+              <p
+                style={{
+                  textAlign: 'center',
+                  marginTop: '5px',
+                  marginBottom: '5px',
+                }}
+              >
+                {race.county}
+              </p>
             </Link>
           </div>
         ))}

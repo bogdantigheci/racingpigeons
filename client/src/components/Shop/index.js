@@ -18,7 +18,7 @@ import { withNamespaces } from 'react-i18next';
 class Shop extends Component {
   state = {
     grid: '',
-    limit: 6,
+    limit: 8,
     skip: 0,
     filters: {
       breed: [],

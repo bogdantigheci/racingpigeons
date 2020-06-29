@@ -16,19 +16,37 @@ const Club = ({ getRaces, selectRaces, t, races }) => {
       <h1 className="text-center mt-2 mb-3 page-title">{t('About')}</h1>
       <div>
         <p>
-          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-          ab illo inventore veritatis et quasi architecto beatae vitae dicta
-          sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-          aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-          qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-          dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
-          quia non numquam eius modi tempora incidunt ut labore et dolore magnam
-          aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-          exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
-          ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in
-          ea voluptate velit esse quam nihil molestiae consequatur, vel illum
-          qui dolorem eum fugiat quo voluptas nulla pariatur?"
+          Membrii columbofili participă la concursuri în asociaţia proprie sau
+          dacă sunt primiţi de conducerea altei asociaţii la concursurile
+          acesteia. Rezultatele obţinute de aceştia vor fi centralizate în
+          cadrul Asociaţiei cu care au concurat în anul respectiv (coduri ale
+          judetului respectiv) la toate categoriile de zbor. Membrii columbofili
+          trebuie să participe pe acelaşi plan de zbor la următoarele categorii
+          de concursuri: Viteza – Demifond (sau Mare Demifond), Fond (sau Mare
+          Fond) respectiv Maraton. Aceştia trebuie să ţină cont de faptul ca
+          schimbarea Asociaţiei de la o categorie de concursuri la alta atrage
+          participarea sub mai multe coduri de judeţ si automat pierderea unor
+          categorii. Din punct de vedere al tipului, concursurile se împart în
+          următoarele tipuri:
+        </p>
+        <p>
+          <strong>Viteză 100 – 300 km</strong> distanţe până în 300 km
+        </p>
+        <p>
+          <strong>Viteză + Demifond 300 – 400 km</strong> distanţe între 300 şi
+          400 km
+        </p>
+        <p>
+          <strong>Demifond 400 – 600 km </strong>distanţe între 400 şi 600 km
+        </p>
+        <p>
+          <strong>Demifond + Fond </strong>distanţe între 500 şi 600 km
+        </p>
+        <p>
+          <strong>Fond </strong>distanţe peste 600 km
+        </p>
+        <p>
+          <strong>Maraton </strong>distanţe peste 800 km
         </p>
       </div>
       <div>
