@@ -19,7 +19,7 @@
   "Comments": "Comments",
   "Create a post": "Create a post",
   "New Pigeons on SALE!": "New Pigeons on SALE!",
- 
+  "Post must be between 5 and 300 characters": "Post must be between 5 and 300 characters",
   "Until September 1st 2020": "Until September 1st 2020",
   "Shop now": "Shop now",
   "Racing Homer": "Racing Homer",
@@ -157,5 +157,6 @@
   "Decline": "Decline",
   "There are no races in this county!": "There are no races in this county!",
   "Enter location...": "Enter location...",
-  "Enter county": "Enter county"
+  "Enter county": "Enter county",
+  "Comment must be between 5 and 300 characters": "Comment must be between 5 and 300 characters"
 }

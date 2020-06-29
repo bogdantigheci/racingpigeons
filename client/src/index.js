@@ -7,7 +7,6 @@ import Routes from './routes';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
-import logger from 'redux-logger';
 import Reducer from './reducers';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -17,7 +16,7 @@ import { getBreeders, getBreeds } from './actions/product';
 
 const store = createStore(
   Reducer,
-  composeWithDevTools(applyMiddleware(thunk, logger, promiseMiddleware))
+  composeWithDevTools(applyMiddleware(thunk, promiseMiddleware))
 );
 
 store.dispatch(getExchangeRate());

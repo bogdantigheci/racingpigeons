@@ -40,15 +40,11 @@ const CommentForm = (props) => {
                 value={text}
                 onChange={onChange}
               />
-              {props.post.errors && (
-                <div>
-                  {props.post.errors.map((error, i) => (
-                    <p key={i} className="form_error">
-                      {error.text}
-                    </p>
-                  ))}
+              {props.post.errors.length > 0 ? (
+                <div className="error_label">
+                  {t('Comment must be between 5 and 10000 characters')}
                 </div>
-              )}
+              ) : null}
             </div>
             <button type="submit" className="btn btn-primary">
               {t('Submit')}

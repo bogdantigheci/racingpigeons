@@ -48,13 +48,11 @@ class ProdCommentForm extends Component {
                   value={this.state.text}
                   onChange={this.onChange}
                 />
-                {this.props.product && this.props.product.errors
-                  ? this.props.product.errors.map((error, i) => (
-                      <div className="form_error" key={i}>
-                        {error.text}
-                      </div>
-                    ))
-                  : null}
+                {this.props.product && this.props.product.errors ? (
+                  <div className="form_error">
+                    {t('Comment must be between 2 and 10000 characters')}
+                  </div>
+                ) : null}
               </div>
               <button type="submit" className="btn btn-primary">
                 {t('Submit')}

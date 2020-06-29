@@ -10,9 +10,9 @@ import {
   DELETE_POST,
 } from '../constants/types';
 
-export const getErrors = (err) => ({
+export const getErrors = (errors) => ({
   type: GET_ERRORS,
-  payload: err,
+  payload: errors,
 });
 
 export const addPostSuccess = (post) => ({
@@ -53,11 +53,12 @@ export const addPost = (postData) => (dispatch) => {
   return axios
     .post(`${FORUM_SERVER}/posts`, postData)
     .then((res) => dispatch(addPostSuccess(res.data)))
-    .catch((err) => dispatch(getErrors(err.res.data)));
+    .catch((err) => dispatch(getErrors(err)));
 };
 
 export const getPosts = () => (dispatch) => {
   dispatch(setPostLoading());
+  dispatch(clearErrors());
   return axios
     .get(`${FORUM_SERVER}/posts`)
     .then((res) => dispatch(getPostsSuccess(res.data)))
@@ -66,10 +67,11 @@ export const getPosts = () => (dispatch) => {
 
 export const getPost = (id) => (dispatch) => {
   dispatch(setPostLoading());
+  dispatch(clearErrors());
   return axios
     .get(`${FORUM_SERVER}/posts/${id}`)
     .then((res) => dispatch(getPostSuccess(res.data)))
-    .catch((err) => dispatch(getPostSuccess(null)));
+    .catch((err) => dispatch(getErrors(err)));
 };
 
 export const deletePost = (id) => (dispatch) =>
@@ -95,7 +97,7 @@ export const addComment = (postId, commentData) => (dispatch) => {
   return axios
     .post(`${FORUM_SERVER}/posts/comment/${postId}`, commentData)
     .then((res) => dispatch(addCommentSuccess(res.data)))
-    .catch((err) => dispatch(getErrors(err.res.data)));
+    .catch((err) => dispatch(getErrors(err)));
 };
 
 export const deleteComment = (postId, commentId) => (dispatch) =>

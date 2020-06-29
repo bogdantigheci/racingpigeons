@@ -49,15 +49,11 @@ class PostForm extends Component {
                   onChange={this.onChange}
                 />
               </div>
-              {this.props.post.errors && (
-                <div>
-                  {this.props.post.errors.map((error, i) => (
-                    <p key={i} className="form_error">
-                      {error.text}
-                    </p>
-                  ))}
+              {this.props.post.errors.length > 0 ? (
+                <div className="error_label">
+                  {t('Post must be between 5 and 300 characters')}
                 </div>
-              )}
+              ) : null}
               <button type="submit" className="btn btn-primary">
                 {t('Submit')}
               </button>

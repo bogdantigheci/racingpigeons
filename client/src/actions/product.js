@@ -307,7 +307,7 @@ export const addCommentToProduct = (prodId, commentData) => (dispatch) => {
   return axios
     .post(`${PRODUCT_SERVER}/comment/${prodId}`, commentData)
     .then((res) => dispatch(addCommentToProductSuccess(res.data)))
-    .catch((err) => dispatch(getErrors(err.res.data)));
+    .catch((err) => dispatch(getErrors(err)));
 };
 
 export const deleteCommentFromProduct = (prodId, commentId) => (dispatch) => {
