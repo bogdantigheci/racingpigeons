@@ -545,6 +545,10 @@ footer .business_nfo .nfo {
   display: table;
   margin: 0 auto;
 }
+.load_more_container span:hover {
+  color: #fa923f;
+  text-decoration: none;
+}
 
 .no_result {
   font-size: 3rem;
