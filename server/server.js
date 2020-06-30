@@ -643,7 +643,7 @@ app.post('/api/forum/posts', auth, (req, res) => {
 
 app.get('/api/forum/posts', (req, res) => {
   Post.find()
-    .sort({ date: -1 })
+    .sort({ date: 'desc' })
     .then((posts) => res.json(posts))
     .catch((err) => res.status(404).json({ nopostsfound: 'No posts found' }));
 });
