@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next';
 const HomePromotion = (props) => {
   const { t } = props;
   const promotion = {
-    img: '/images/racinghomer.jpg',
+    img: '/images/racinghomerpromo.jpg',
     lineOne: t('Free Shipping'),
     lineTwo: t('Until September 1st 2020'),
     linkTitle: t('Shop now'),

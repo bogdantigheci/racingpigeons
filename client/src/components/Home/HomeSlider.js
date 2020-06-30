@@ -7,14 +7,14 @@ const HomeSlider = (props) => {
   const { t } = props;
   const slides = [
     {
-      img: '/images/racinghomer.jpg',
+      img: '/images/121316.jpg',
       lineOne: t('Racing Homer'),
       lineTwo: t('Best Racing Pigeon'),
       linkTitle: t('Shop now'),
       linkTo: '/shop',
     },
     {
-      img: '/images/tippler.jpg',
+      img: '/images/121358.jpg',
       lineOne: t('Tippler'),
       lineTwo: t('An amazing racing pigeon'),
       linkTitle: t('Shop now'),
