@@ -258,82 +258,87 @@ class AddProduct extends Component {
 
   render() {
     const { t } = this.props;
+
     return (
       <UserLayout>
-        <div>
-          <h1>{t('Add product')}</h1>
-          <form onSubmit={(event) => this.submitForm(event)}>
-            <FileUpload
-              imagesHandler={(images) => this.imagesHandler(images)}
-              reset={this.state.formSuccess}
-            />
-            <FormField
-              id={'ringId'}
-              formdata={this.state.formdata.ringId}
-              change={(element) => this.updateForm(element)}
-              placeholder={t('Enter ring ID')}
-              label={t('Ring ID')}
-            />
-            <FormField
-              id={'description'}
-              formdata={this.state.formdata.description}
-              change={(element) => this.updateForm(element)}
-              placeholder={t('Enter your description')}
-              label={t('Pigeon description')}
-            />
-            <FormField
-              id={'price'}
-              formdata={this.state.formdata.price}
-              change={(element) => this.updateForm(element)}
-              placeholder={t('Enter price')}
-              label={t('Price')}
-            />
-            <div className="form_devider"></div>
-            <FormField
-              id={'breed'}
-              formdata={this.state.formdata.breed}
-              change={(element) => this.updateForm(element)}
-              label={t('Breed')}
-            />
-            <FormField
-              id={'breeder'}
-              formdata={this.state.formdata.breeder}
-              change={(element) => this.updateForm(element)}
-              label={t('Breeder')}
-            />
-            <div className="form_devider"></div>
-            <FormField
-              id={'available'}
-              formdata={this.state.formdata.available}
-              change={(element) => this.updateForm(element)}
-              label={t('Available, in stock')}
-            />
-            <FormField
-              id={'shipping'}
-              formdata={this.state.formdata.shipping}
-              change={(element) => this.updateForm(element)}
-              label={t('Shipping')}
-            />
+        {this.props.user.userData.isAdmin ? (
+          <div>
+            <h1>{t('Add product')}</h1>
+            <form onSubmit={(event) => this.submitForm(event)}>
+              <FileUpload
+                imagesHandler={(images) => this.imagesHandler(images)}
+                reset={this.state.formSuccess}
+              />
+              <FormField
+                id={'ringId'}
+                formdata={this.state.formdata.ringId}
+                change={(element) => this.updateForm(element)}
+                placeholder={t('Enter ring ID')}
+                label={t('Ring ID')}
+              />
+              <FormField
+                id={'description'}
+                formdata={this.state.formdata.description}
+                change={(element) => this.updateForm(element)}
+                placeholder={t('Enter your description')}
+                label={t('Pigeon description')}
+              />
+              <FormField
+                id={'price'}
+                formdata={this.state.formdata.price}
+                change={(element) => this.updateForm(element)}
+                placeholder={t('Enter price')}
+                label={t('Price')}
+              />
+              <div className="form_devider"></div>
+              <FormField
+                id={'breed'}
+                formdata={this.state.formdata.breed}
+                change={(element) => this.updateForm(element)}
+                label={t('Breed')}
+              />
+              <FormField
+                id={'breeder'}
+                formdata={this.state.formdata.breeder}
+                change={(element) => this.updateForm(element)}
+                label={t('Breeder')}
+              />
+              <div className="form_devider"></div>
+              <FormField
+                id={'available'}
+                formdata={this.state.formdata.available}
+                change={(element) => this.updateForm(element)}
+                label={t('Available, in stock')}
+              />
+              <FormField
+                id={'shipping'}
+                formdata={this.state.formdata.shipping}
+                change={(element) => this.updateForm(element)}
+                label={t('Shipping')}
+              />
 
-            <FormField
-              id={'publish'}
-              formdata={this.state.formdata.publish}
-              change={(element) => this.updateForm(element)}
-              label={t('Publish')}
-            />
+              <FormField
+                id={'publish'}
+                formdata={this.state.formdata.publish}
+                change={(element) => this.updateForm(element)}
+                label={t('Publish')}
+              />
 
-            {this.state.formSuccess ? (
-              <div className="form_success">{t('Success')}</div>
-            ) : null}
+              {this.state.formSuccess ? (
+                <div className="form_success">{t('Success')}</div>
+              ) : null}
 
-            {this.state.formError ? (
-              <div className="error_label">{t('Please check your data')}</div>
-            ) : null}
-            <button onClick={(event) => this.submitForm(event)}>
-              {t('Add product')}
-            </button>
-          </form>
-        </div>
+              {this.state.formError ? (
+                <div className="error_label">{t('Please check your data')}</div>
+              ) : null}
+              <button onClick={(event) => this.submitForm(event)}>
+                {t('Add product')}
+              </button>
+            </form>
+          </div>
+        ) : (
+          <div className='not_allowed_here'>{t('You are not allowed here')}</div>
+        )}
       </UserLayout>
     );
   }
@@ -341,6 +346,7 @@ class AddProduct extends Component {
 
 const mapStateToProps = (state) => ({
   products: state.product,
+  user: state.user,
 });
 const mapDispatchToProps = (dispatch) => ({
   getBreeders: () => dispatch(getBreeders()),

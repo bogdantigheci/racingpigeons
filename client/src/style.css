@@ -2,6 +2,13 @@ body {
   background: linear-gradient(-50deg, #587ff3, white, #587ff3);
 }
 
+.not_allowed_here {
+  text-align: center;
+  margin-top: 15rem;
+  font-size: 2rem;
+  color: red;
+}
+
 .form_error {
   color: red;
 }

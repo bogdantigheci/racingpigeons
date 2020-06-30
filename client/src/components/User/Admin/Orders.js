@@ -14,18 +14,27 @@ class SellRequest extends Component {
     const { t } = this.props;
     return (
       <UserLayout>
-        {this.props.products && this.props.products.payments ? (
+        {this.props.products &&
+        this.props.products.payments &&
+        this.props.user.userData.isAdmin ? (
           <div className="user_nfo_panel">
             <h4 className="page-title">{t('Orders')}</h4>
             <PaymentHistory payments={this.props.products.payments.payments} />
           </div>
-        ) : null}
+        ) : (
+          <div className="not_allowed_here">
+            {t('You are not allowed here')}
+          </div>
+        )}
       </UserLayout>
     );
   }
 }
 
-const mapStateToProps = (state) => ({ products: state.product });
+const mapStateToProps = (state) => ({
+  products: state.product,
+  user: state.user,
+});
 const mapDispatchToProps = (dispatch) => ({
   getPayments: () => dispatch(getPayments()),
 });

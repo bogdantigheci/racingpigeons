@@ -182,68 +182,76 @@ class ManageBreeders extends Component {
     const { t } = this.props;
     return (
       <UserLayout>
-        <div className="admin_category_wrapper">
-          <h1>{t('Races')}</h1>
-          <div className="admin_two_column">
-            <div className="left">
-              <div className="breeds_container">{this.showCategoryItems()}</div>
-            </div>
-            <div className="right">
-              <form onSubmit={(event) => this.submitForm(event)}>
-                <FileUpload
-                  imagesHandler={(images) => this.imagesHandler(images)}
-                  reset={this.state.formSuccess}
-                />
-                <FormField
-                  id={'name'}
-                  formdata={this.state.formdata.name}
-                  change={(element) => this.updateForm(element)}
-                  placeholder={t('Full name')}
-                  label={t('Full name')}
-                />
-                <FormField
-                  id={'county'}
-                  formdata={this.state.formdata.county}
-                  change={(element) => this.updateForm(element)}
-                  placeholder={t('Enter county')}
-                  label={t('County')}
-                />
-                <FormField
-                  id={'club'}
-                  formdata={this.state.formdata.club}
-                  change={(element) => this.updateForm(element)}
-                  placeholder={t('Club')}
-                  label={t('Club')}
-                />
-                <FormField
-                  id={'contestants'}
-                  formdata={this.state.formdata.contestants}
-                  change={(element) => this.updateForm(element)}
-                  placeholder={t('Enter contestants split by comma')}
-                  label={t('Contestants')}
-                />
-                <FormField
-                  id={'details'}
-                  formdata={this.state.formdata.details}
-                  change={(element) => this.updateForm(element)}
-                  label={t('Race details')}
-                  placeholder={t('Race details')}
-                />
-                {this.state.formSuccess ? (
-                  <div className="form_success">{t('Success')}</div>
-                ) : null}
-                {this.state.formError ? (
-                  <div className="error_label">
-                    {t('Please check your data')}
-                  </div>
-                ) : null}
-                <button onClick={(event) => this.submitForm(event)}>
-                  {t('Add Race')}
-                </button>
-              </form>
+        {this.props.user.userData.isAdmin ? (
+          <div className="admin_category_wrapper">
+            <h1>{t('Races')}</h1>
+            <div className="admin_two_column">
+              <div className="left">
+                <div className="breeds_container">
+                  {this.showCategoryItems()}
+                </div>
+              </div>
+              <div className="right">
+                <form onSubmit={(event) => this.submitForm(event)}>
+                  <FileUpload
+                    imagesHandler={(images) => this.imagesHandler(images)}
+                    reset={this.state.formSuccess}
+                  />
+                  <FormField
+                    id={'name'}
+                    formdata={this.state.formdata.name}
+                    change={(element) => this.updateForm(element)}
+                    placeholder={t('Full name')}
+                    label={t('Full name')}
+                  />
+                  <FormField
+                    id={'county'}
+                    formdata={this.state.formdata.county}
+                    change={(element) => this.updateForm(element)}
+                    placeholder={t('Enter county')}
+                    label={t('County')}
+                  />
+                  <FormField
+                    id={'club'}
+                    formdata={this.state.formdata.club}
+                    change={(element) => this.updateForm(element)}
+                    placeholder={t('Club')}
+                    label={t('Club')}
+                  />
+                  <FormField
+                    id={'contestants'}
+                    formdata={this.state.formdata.contestants}
+                    change={(element) => this.updateForm(element)}
+                    placeholder={t('Enter contestants split by comma')}
+                    label={t('Contestants')}
+                  />
+                  <FormField
+                    id={'details'}
+                    formdata={this.state.formdata.details}
+                    change={(element) => this.updateForm(element)}
+                    label={t('Race details')}
+                    placeholder={t('Race details')}
+                  />
+                  {this.state.formSuccess ? (
+                    <div className="form_success">{t('Success')}</div>
+                  ) : null}
+                  {this.state.formError ? (
+                    <div className="error_label">
+                      {t('Please check your data')}
+                    </div>
+                  ) : null}
+                  <button onClick={(event) => this.submitForm(event)}>
+                    {t('Add Race')}
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="not_allowed_here">
+            {t('You are not allowed here')}
+          </div>
+        )}
       </UserLayout>
     );
   }
