@@ -585,6 +585,11 @@ footer .business_nfo .nfo {
   left: 8%;
 }
 
+.current_promotion .current_promotion_action a:hover {
+  color: #fa923f;
+  text-decoration: none;
+}
+
 .current_promotion .current_promotion_action .tag {
   background: #82828287;
   color: #ffffff;
@@ -648,6 +653,11 @@ footer .business_nfo .nfo {
 
 .home_promotion .my_link a {
   margin: 10px auto;
+}
+
+.home_promotion .my_link a:hover {
+  color: #fa923f !important;
+  text-decoration: none;
 }
 
 input {
@@ -743,6 +753,11 @@ select {
   color: #ffff;
 }
 
+.link_default:hover {
+  color: #fa923f;
+  text-decoration: none;
+}
+
 .card_link,
 .bag_link,
 .add_to_cart_link {
@@ -761,11 +776,13 @@ select {
   transition: all 200ms ease-in;
   cursor: pointer;
 }
+
 .card_link:hover,
 .bag_link:hover,
 .add_to_cart_link:hover {
   background: blue;
-  color: #ffff;
+  color: #fa923f;
+  text-decoration: none;
 }
 .add_to_cart_link {
   color: white;
@@ -803,6 +820,10 @@ select {
 .register_login_container button {
   width: 100%;
   margin: 0.4rem;
+}
+.register_login_container button:hover {
+  color: #fa923f;
+  text-decoration: none;
 }
 .register_login_container .my_link {
   width: 100%;
@@ -843,6 +864,10 @@ select {
   margin-right: 1rem;
   cursor: pointer;
   color: #fff;
+}
+.login_button:hover {
+  color: #fa923f;
+  text-decoration: none;
 }
 
 .reset_pass {
@@ -1070,6 +1095,11 @@ select {
 .backside .card a {
   font-size: 1rem;
   color: #587ff3 !important;
+}
+.backside .card a:hover {
+  font-size: 1rem;
+  color: #fa923f !important;
+  text-decoration: none;
 }
 
 .frontside .card .card-title,

@@ -79,7 +79,10 @@ class ResetUser extends Component {
           {this.state.formError ? (
             <div className="error_label">{t('Please check your data')}</div>
           ) : null}
-          <button onClick={(event) => this.submitForm(event)}>
+          <button
+            className="btn btn-primary"
+            onClick={(event) => this.submitForm(event)}
+          >
             {t('Send request')}
           </button>
         </form>
