@@ -78,8 +78,10 @@ class ModalDetails extends Component {
               <div className="user_cart_sum">
                 <div className="total_amount">
                   {t('Total amount')}: € {this.state.total}
-                  {t('Total amount')}:
-                  {(this.state.total * this.props.rateRON).toFixed(2)} Lei
+                  <p>
+                    {t('Total amount')}:
+                    {(this.state.total * this.props.rateRON).toFixed(2)} Lei
+                  </p>
                 </div>
               </div>
             </div>
