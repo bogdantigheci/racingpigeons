@@ -57,7 +57,11 @@ class PostForm extends Component {
               <button type="submit" className="btn btn-primary">
                 {t('Submit')}
               </button>
-              <a href="http://localhost:3001/login" className="float-right">
+              <a
+                href="http://localhost:3001/login"
+                className="float-right"
+                target="_blank"
+              >
                 {t('Try Racing Pigeons Chat Beta')}
               </a>
             </form>
