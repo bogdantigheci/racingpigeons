@@ -53,9 +53,13 @@ class PostForm extends Component {
                   {t('Post must be between 5 and 300 characters')}
                 </div>
               ) : null}
+
               <button type="submit" className="btn btn-primary">
                 {t('Submit')}
               </button>
+              <a href="http://localhost:3001/login" className="float-right">
+                {t('Try Racing Pigeons Chat Beta')}
+              </a>
             </form>
           </div>
         </div>

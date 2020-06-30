@@ -84,14 +84,14 @@ export const deletePost = (id) => (dispatch) =>
 export const addLike = (id) => (dispatch) =>
   axios
     .get(`${FORUM_SERVER}/posts/like/${id}`)
-    .then((res) => dispatch(getPosts()))
-    .catch((err) => dispatch(getErrors(err.res.data)));
+    .then((res) => dispatch(getPosts()));
+// .catch((err) => dispatch(getErrors(err)));
 
 export const removeLike = (id) => (dispatch) =>
   axios
     .get(`${FORUM_SERVER}/posts/unlike/${id}`)
-    .then((res) => dispatch(getPosts()))
-    .catch((err) => dispatch(getErrors(err.res.data)));
+    .then((res) => dispatch(getPosts()));
+// .catch((err) => dispatch(getErrors(err)));
 
 export const addComment = (postId, commentData) => (dispatch) => {
   dispatch(clearErrors());
