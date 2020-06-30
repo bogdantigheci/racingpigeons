@@ -1464,6 +1464,11 @@ select {
   color: #4169e1;
 }
 
+.user_container .user_left_nav .links a:hover {
+  color: blue;
+  text-decoration: none;
+}
+
 .user_container .user_right {
   padding: 0;
 }
