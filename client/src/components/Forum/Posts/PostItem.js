@@ -76,8 +76,7 @@ class PostItem extends Component {
                 >
                   {t('Comments')}
                 </Link>
-                {this.props.post.user === this.props.user.userData.id ||
-                this.props.user.userData.isAdmin ? (
+                {this.props.user.userData.isAdmin ? (
                   <button
                     onClick={this.handledeletePost.bind(
                       this,
