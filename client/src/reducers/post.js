@@ -23,7 +23,6 @@ export default function (state = initialState, action) {
         loading: true,
       };
     case GET_POSTS:
-      console.log('get poooooooooooooooooosts', action.payload);
       return {
         ...state,
         posts: action.payload,
@@ -36,7 +35,6 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case ADD_POST:
-      console.log('aaaad possst', action.payload);
       return {
         ...state,
         posts: [...state.posts, action.payload],
