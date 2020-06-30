@@ -25,7 +25,6 @@ class PostForm extends Component {
 
     this.props.addPost(newPost);
     this.setState({ text: '' });
-    this.props.getPosts();
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });

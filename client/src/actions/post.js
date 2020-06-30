@@ -53,6 +53,7 @@ export const addPost = (postData) => (dispatch) => {
   return axios
     .post(`${FORUM_SERVER}/posts`, postData)
     .then((res) => dispatch(addPostSuccess(res.data)))
+    .then(dispatch(getPosts()))
     .catch((err) => dispatch(getErrors(err)));
 };
 
