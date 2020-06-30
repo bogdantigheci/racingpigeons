@@ -40,6 +40,7 @@ class SellRequestInfo extends Component {
             <div>
               <img
                 className="img-fluid rounded"
+                style={{ maxWidth: '15rem' }}
                 src={_.get(
                   this.props.products.request,
                   'images[0].url',

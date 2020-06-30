@@ -3,55 +3,19 @@ const purchase = (data) => {
     let template = '';
     data.product.forEach((item) => {
       template += `
-      <tr
-      style="
-        font-family: 'Courier New', Courier,
-          monospace;
-        box-sizing: border-box;
-        font-size: 16px;
-        margin: 0;
-      "
-    >
-      <td
-        style="
-          font-family: 'Courier New', Courier,
-            monospace;
-          box-sizing: border-box;
-          font-size: 16px;
-          vertical-align: top;
-          border-top-width: 1px;
-          border-top-color: #eee;
-          border-top-style: solid;
-          margin: 0;
-          padding: 5px 0;
-          border-bottom-color: #333;
-          border-bottom-width: 2px;
-          border-bottom-style: solid;
-        "
-        valign="top"
-      >
-<div><div>Breed: ${item.breed}</div>
-<div>RingId: ${item.ringId}</div>
-<div>Purchase order: ${item.porder}</div>
-</div>                                  </td>
-    
-    </tr>
-  
-   
-  </table>
-</td>
-</tr>
-</table>
-</td>
-</tr>
+      <div>
+      <div>Breed: ${item.breed}</div>
+      <div>RingId: ${item.ringId}</div>
+      <div>Purchase order: ${item.porder}</div>
+      <hr></hr>
+          </div>    
 `;
     });
 
     return template;
   };
 
-  return `
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html
     xmlns="http://www.w3.org/1999/xhtml"
     style="
@@ -349,7 +313,44 @@ const purchase = (data) => {
                                     margin: 0;
                                   "
                                 >
-                       ${getItems()}
+                                  <tr
+                                    style="
+                                      font-family: 'Courier New', Courier,
+                                        monospace;
+                                      box-sizing: border-box;
+                                      font-size: 16px;
+                                      margin: 0;
+                                    "
+                                  >
+                                    <td
+                                      style="
+                                        font-family: 'Courier New', Courier,
+                                          monospace;
+                                        box-sizing: border-box;
+                                        font-size: 16px;
+                                        vertical-align: top;
+                                        border-top-width: 1px;
+                                        border-top-color: #eee;
+                                        border-top-style: solid;
+                                        margin: 0;
+                                        padding: 5px 0;
+                                        border-bottom-color: #333;
+                                        border-bottom-width: 2px;
+                                        border-bottom-style: solid;
+                                      "
+                                      valign="top"
+                                    >
+                                    ${getItems()}                               
+                                      </td>
+                                    </tr>
+                                
+                                 
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
                       <tr
                         style="
                           font-family: 'Courier New', Courier, monospace;
@@ -432,7 +433,8 @@ const purchase = (data) => {
               >
               
     </body>
-  </html>`;
+  </html>
+  `;
 };
 
 module.exports = { purchase };
