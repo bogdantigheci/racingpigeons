@@ -67,7 +67,12 @@ body {
   border-radius: 4px;
 }
 
-.revised {
+.revised_approved {
+  color: rgb(4, 160, 4);
+  margin-top: 10px;
+  font-size: 1.3rem;
+}
+.revised_rejected {
   color: red;
   margin-top: 10px;
   font-size: 1.3rem;
@@ -360,7 +365,7 @@ header {
 }
 
 header .logo {
-  font-family: 'Monoton', cursive;
+  font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
   font-size: 40px;
   padding: 11px 0px;
@@ -465,7 +470,7 @@ footer .social_links .social_link {
 
 footer .logo {
   text-align: center;
-  font-family: 'Monoton', cursive;
+  font-family: Arial, Helvetica, sans-serif;
   color: #ffffff;
   font-size: 2rem;
   padding: 0.8rem 0px;
@@ -473,7 +478,7 @@ footer .logo {
 }
 
 footer h3 {
-  font-family: 'Monoton', cursive;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .copyr {
@@ -879,7 +884,7 @@ select {
 
 .breed_card_title {
   color: #2196f3;
-  font-family: 'Monoton', cursive;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .breed_image {
@@ -945,7 +950,7 @@ select {
   display: flex;
 }
 .breeder_club_name {
-  font-family: 'Monoton', cursive;
+  font-family: Arial, Helvetica, sans-serif;
   color: #587ff3;
   font-weight: 700;
   font-size: 2rem;
@@ -957,7 +962,7 @@ select {
   margin-top: 1rem;
   margin-bottom: 3rem;
   text-transform: uppercase;
-  font-family: 'Monoton', cursive;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .card_footer {
@@ -1079,7 +1084,7 @@ select {
 }
 .placements-title {
   color: #587ff3;
-  font-family: 'Monoton', cursive;
+  font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
 .placements_detail {
@@ -1106,7 +1111,7 @@ select {
   }
   .placements-title {
     color: #587ff3;
-    font-family: 'Monoton', cursive;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
   }
   .placements_detail {
@@ -1310,7 +1315,7 @@ select {
   margin-bottom: 1rem;
   color: #4169e1;
   font-size: 1rem;
-  font-family: 'Monoton', cursive;
+  font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
 

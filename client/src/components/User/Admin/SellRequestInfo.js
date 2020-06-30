@@ -98,7 +98,15 @@ class SellRequestInfo extends Component {
                     </button>
                   </div>
                 ) : (
-                  <div className="revised">
+                  <div
+                    className={
+                      this.props.products.request.reviewed === 'Approved'
+                        ? 'revised_approved'
+                        : this.props.products.request.reviewed === 'Declined'
+                        ? 'revised_rejected'
+                        : ''
+                    }
+                  >
                     {t('This sell request has been')}{' '}
                     {t(this.props.products.request.reviewed)}!
                   </div>
