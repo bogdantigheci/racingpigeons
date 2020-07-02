@@ -61,6 +61,7 @@ class PostForm extends Component {
                 href="http://localhost:3001/login"
                 className="float-right"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 {t('Try Racing Pigeons Chat Beta')}
               </a>
