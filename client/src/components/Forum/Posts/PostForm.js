@@ -58,7 +58,7 @@ class PostForm extends Component {
                 {t('Submit')}
               </button>
               <a
-                href="http://localhost:3001/login"
+                href="https://racingpigeonschat.web.app/"
                 className="float-right"
                 target="_blank"
                 rel="noopener noreferrer"
