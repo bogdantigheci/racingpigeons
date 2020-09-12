@@ -6,9 +6,10 @@ const ChangeLanguage = ({ i18n }) => {
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
+
   return (
     <React.Fragment>
-      {i18n.language === 'en' ? (
+      {i18n.language === 'en' || i18n.language === undefined ? (
         <Flag
           className="lang-button"
           onClick={() => changeLanguage('ro')}
